@@ -456,10 +456,10 @@ html .note-fullscreen-body, body .note-fullscreen-body {
   fixes 
 **/
 .dropdown-menu > .note-palette {
-  float: right; }
+  float: left; }
 
 .dropdown-menu > .note-palette:first-child {
-  margin-left: 15px; }
+  margin-right: 15px; }
 
 .note-palette-title {
   padding-left: 8px;

@@ -62,7 +62,11 @@ div.datepicker.datepicker-dropdown {
   position: absolute;
   bottom: 4px;
   right: 4px;
-  border-width: 0 7px 7px 0; }
+  border-width: 0 0 7px 7px; }
+
+.daterangepicker .calendar-table .next span,
+.daterangepicker .calendar-table .prev span {
+  border-width: 2px 0 0 2px !important; }
 
 .daterangepicker .ranges li {
   font-size: 13px !important;

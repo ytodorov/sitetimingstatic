@@ -1619,7 +1619,7 @@ be a descendant of the grid when it is being dragged.
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  padding: .30rem 2rem .30rem .30rem; }
+  padding: .30rem .30rem .30rem 2rem; }
 
 .fc-bootstrap .fc-popover .fc-header .fc-close {
   font-size: 1em;
@@ -1640,7 +1640,7 @@ be a descendant of the grid when it is being dragged.
   top: 10px;
   border-radius: 50%;
   background: #f9fbfd;
-  right: .66rem; }
+  left: .66rem; }
 
 .fc-bootstrap .bg-primary .fc-content:before,
 .fc-bootstrap .bg-primary-soft .fc-content:before {

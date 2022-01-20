@@ -411,8 +411,8 @@
   height: 24px;
   padding: 3px 5px;
   width: 28px;
-  float: right;
-  margin-right: 2px;
+  float: left;
+  margin-left: 2px;
   background-color: none !important;
   border-radius: 0.35rem; }
 
@@ -650,8 +650,8 @@
   height: 24px;
   position: relative;
   vertical-align: middle;
-  float: right;
-  margin-right: 2px;
+  float: left;
+  margin-left: 2px;
   background-color: none !important;
   border-radius: 0.35rem; }
 

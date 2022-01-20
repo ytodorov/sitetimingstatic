@@ -1227,7 +1227,8 @@ table.dataTable tbody > tr > .selected {
 
 .dt-button-collection .dropdown-menu {
   padding: 3px 3px 2px 3px;
-  top: 100%; }
+  top: 100%;
+  right: 0; }
 
 .dt-button-collection .dropdown-menu a {
   color: #121212;
@@ -1243,7 +1244,7 @@ table.dataTable .btn i {
   margin: 0 !important; }
 
 .dataTables_filter {
-  margin-left: 15px; }
+  margin-right: 15px; }
 
 @media only screen and (min-width: 992px) {
   table.dataTable:not(.fixedHeader-floating) {

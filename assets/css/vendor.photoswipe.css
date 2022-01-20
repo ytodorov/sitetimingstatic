@@ -197,7 +197,7 @@
   border: 0;
   padding: 0;
   margin: 0;
-  float: left;
+  float: right;
   opacity: 0.75;
   transition: opacity 0.2s;
   box-shadow: none; }
@@ -233,10 +233,10 @@
   position: absolute; }
 
 .pswp__button--arrow--left {
-  right: 0; }
+  left: 0; }
 
 .pswp__button--arrow--right {
-  left: 0; }
+  right: 0; }
 
 /*
 
@@ -255,7 +255,7 @@
   width: 100%;
   height: 100%;
   top: 0;
-  right: 0;
+  left: 0;
   padding: 10px;
   position: absolute;
   z-index: 100099;
@@ -275,7 +275,7 @@
   border-radius: 2px;
   display: block;
   width: auto;
-  left: 44px;
+  right: 44px;
   box-shadow: 0 0 35px rgba(140, 152, 164, 0.15);
   transform: translateY(6px);
   transition: transform 0.25s;
@@ -331,7 +331,7 @@
  */
 .pswp__counter {
   position: absolute;
-  right: 0;
+  left: 0;
   top: 0;
   height: 44px;
   font-size: 13px;
@@ -347,7 +347,7 @@
  */
 .pswp__caption {
   position: absolute;
-  right: 0;
+  left: 0;
   bottom: 0;
   width: 100%;
   min-height: 44px; }
@@ -386,7 +386,7 @@
 /* top black bar with buttons and "1 of X" indicator */
 .pswp__top-bar {
   position: absolute;
-  right: 0;
+  left: 0;
   top: 0;
   height: 44px;
   width: 100%; }
