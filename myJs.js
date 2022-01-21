@@ -20,7 +20,7 @@ $(function () {
         $.getJSON(url, function (data) {
             console.info(data);
             var template = $.templates("#theTmpl");
-            var htmlOutput = template.render(data.$values);
+            var htmlOutput = template.render(data);
             $("#sitesRow").html(htmlOutput);
         });
     }
