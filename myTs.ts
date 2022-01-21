@@ -1,3 +1,6 @@
 $(function() {
-    $( "p" ).text( "The DOM is now loaded and can be manipulated.1" );
+    console.info(document.location);
+    console.info(document.location.pathname);
+
+    $("h1").text("Hello " + document.location.pathname);
     });
