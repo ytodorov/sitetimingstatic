@@ -21,11 +21,25 @@ $(function () {
     var urlToGetDataForAllProbes = "https://y-pl.azurewebsites.net/probes?siteurl=" + url;
 
     var urlToGetDataForOneProbe = "https://y-pl.azurewebsites.net/probe?url=" + url;
-
+    var urlToGetDataForSitePreview = "https://y-pl.azurewebsites.net/sites?take=1";
     $.getJSON(urlToGetDataForAllProbes, function (data) {
+
       RenderProbesInGrid(data);
+
       $.getJSON(urlToGetDataForOneProbe, function (data) {
+
         RenderProbesInGrid(data);
+
+        $.getJSON(urlToGetDataForSitePreview, function (data) {
+          console.info(data);
+    
+          var template = ($ as any).templates("#theTmpl");
+    
+          var htmlOutput = template.render(data);
+    
+          $("#sitesRow").html(htmlOutput);
+    
+        });
       });
     });
 
