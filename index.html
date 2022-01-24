@@ -301,29 +301,29 @@
 		<div class="col-6 col-lg-4 mb-5">
 
 			<div class="bg-white p-2 shadow-primary-xs transition-hover-top transition-all-ease-250">
-				<a href="/{{:Url}}" class="d-block overflow-hidden overlay-dark-hover overlay-opacity-2 text-decoration-none text-dark">
-					<img class="img-fluid lazy rounded" src="{{:ScreenshotBase64}}" alt="{{:Name}}" data-loaded="true">
+				<a href="/{{:url}}" class="d-block overflow-hidden overlay-dark-hover overlay-opacity-2 text-decoration-none text-dark">
+					<img class="img-fluid lazy rounded" src="{{:screenshotBase64}}" alt="{{:name}}" data-loaded="true">
 				</a>
 
 				<div class="p-3">
 
 					<h5 class="m-0">
 						{{if LastProbe}}
-							{{:Probes.$values[0].DomContentLoadedEventInChrome}}
+							{{:lastProbe.domContentLoadedEventInChrome}}
 						{{/if}}
 					</h5>
 
 					<ul class="list-inline small m-0">
 						<li class="list-inline-item">
 							<a href="#" class="text-gray-500">
-								{{if LastProbe}}
-									{{:LastProbe.LoadEventInChrome}}
+								{{if lastProbe}}
+									{{:lastProbe.loadEventInChrome}}
 								{{/if}}
 							</a>
 						</li>
 
 						<li class="list-inline-item">
-							<a href="#" class="text-gray-500"><img class="img-fluid lazy rounded" src="{{:FaviconBase64}}" alt="{{:Title}}" data-loaded="true">{{:Name}}</a>
+							<a href="#" class="text-gray-500"><img class="img-fluid lazy rounded" src="{{:faviconBase64}}" alt="{{:title}}" data-loaded="true">{{:name}}</a>
 						</li>
 					</ul>
 
