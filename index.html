@@ -170,6 +170,124 @@
 						</div>
 						<!-- /PAGE TITLE -->
 
+						<div class="section">
+							<div class="container">
+			
+								<div class="row g-xl-5">
+			
+									<div class="col-12 col-lg-12 mb-4">
+			
+			
+										<!-- 
+											CONTACT FORM : AJAX [TESTED|WORKING AS IT IS]
+			
+												Plugin required: SOW Ajax Forms
+			
+												In order to work as ajax form, SOW Ajax Forms should be available/enabled
+												Else, SOW Form Validation plugin is used.
+												If none of them are available, normal submit is used and you can remove:
+													.js-ajax
+													.bs-validate
+													novalidate
+													any data-ajax-*
+													any data-error-*
+			
+												** Remove data-error-toast-* for no error toast notifications
+			
+			
+			
+			
+											Ajax will control success/fail alerts according to server response:
+												
+												1. unexpected error: 		if server response is this string: {:err:unexpected:}
+												2. mising mandatory:		if server response is this string: {:err:required:}
+												3. success:					if server response is this string: {:success:}
+												
+												data-ajax-control-alerts="true"
+												data-ajax-control-alert-succes="#contactSuccess" 
+												data-ajax-control-alert-unexpected="#contactErrorUnexpected" 
+												data-ajax-control-alert-mandaroty="#contactErrorMandatory" 
+			
+											+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+												WORKING CONTACT! Edit your php/config.inc.php
+											+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+										-->
+			
+			
+											<!-- 1. 
+												optional, hidden action for your backend
+			
+												PHP Basic Example
+												if($_POST['action'] == 'contact_form_submit') {
+													... send message
+												}
+											-->
+											<input type="hidden" name="action" value="contact_form_submit" tabindex="-1"> 
+											<!-- -->
+			
+			
+											<!-- 2. 
+												A very small optional trick (using .hide class instead of type="hidden") for some low spam robots. 
+												If this is not empty, the process should stop. A normal user/visitor should not be able to see this field.
+			
+												PHP Basic Example
+												if($_POST['norobot'] != '') {
+													exit;
+												}
+											-->
+											<input type="text" name="norobot" value="" class="hide" tabindex="-1"> 
+											<!-- -->
+			
+											<div class="form-floating mb-3">
+												<input required="" placeholder="Name" id="tbCheckWebSite" name="tbCheckWebSite" type="text" class="form-control">
+												<label for="contact_name">Domain or page URL ex. <i>google.com</i> or <i>facebook.com/terms</i> </label>
+											</div>
+											
+			
+			
+			
+											<!-- 
+												Server detailed error
+												!ONLY! If debug is enabled!
+												Else, shown ony "Server Error!"
+											-->
+											<div id="ajax_dd_contact_response_container"></div>
+			
+											<!-- {:err:unexpected:} internal server error -->
+											<div id="contactErrorUnexpected" class="hide alert alert-danger p-3">
+												Unexpected Error!
+											</div>
+			
+											<!-- {:err:required:} mandatory fields -->
+											<div id="contactErrorMandatory" class="hide alert alert-danger p-3">
+												Please, review your data and try again!
+											</div>
+			
+											<!-- {:success:} message sent -->
+											<div id="contactSuccess" class="hide alert alert-success p-3">
+												Thank you for your message!
+											</div>
+			
+			
+			
+			
+											<button type="button" id="btnCheckWebSite" class="btn btn-primary w-100">
+												Check Website
+											</button>
+			
+										<!-- /CONTACT FORM : AJAX -->
+			
+			
+									</div>
+			
+			
+			
+								</div>
+			
+							</div>
+						</div>
+
+
 			<!-- hello world section -->
 			<div class="section">
 				<div class="container">

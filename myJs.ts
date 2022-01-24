@@ -1,16 +1,24 @@
 $(function () {
-  console.info(document.location);
-  console.info(document.location.pathname);
+
+  $('#tbCheckWebSite').on("keypress", function(event){
+    if(event.key == 'Enter'){
+      $("#btnCheckWebSite").trigger("click");
+    }
+});
+  $("#btnCheckWebSite").on("click", function (data) {
+    data.preventDefault();
+    var url = $("#tbCheckWebSite").val();
+    if (url) {
+      document.location = "/" + url;
+    }
+  });
 
   if (document.location.pathname != "/") {
-
-
     var url = document.location.pathname.substring(1);
 
     $("h1").text(url);
 
     var urlToGetDataForAllProbes = "https://y-pl.azurewebsites.net/probes?siteurl=" + url;
-    
 
     var urlToGetDataForOneProbe = "https://y-pl.azurewebsites.net/probe?url=" + url;
     $.getJSON(urlToGetDataForOneProbe, function (data) {
@@ -55,7 +63,6 @@ function RenderProbesInGrid(data: any): void {
   <tbody>`;
 
 
-  debugger;
   var template = ($ as any).templates("#templateProbeRow");
   var htmlOutput = template.render(data);
 
@@ -65,13 +72,11 @@ function RenderProbesInGrid(data: any): void {
 
   $("#singleSiteRow").html(htmlToRender);
 
-  debugger;
-  if (data[0] && data[0].site && data[0].site.lastProbe)
-{
-  var template = ($ as any).templates("#theTmpl");
+  if (data[0] && data[0].site && data[0].site.lastProbe) {
+    var template = ($ as any).templates("#theTmpl");
 
-  var htmlOutput = template.render(data.site);
+    var htmlOutput = template.render(data.site);
 
-  $("#sitesRow").html(htmlOutput);
-}
+    $("#sitesRow").html(htmlOutput);
+  }
 }

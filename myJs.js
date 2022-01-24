@@ -1,7 +1,17 @@
 "use strict";
 $(function () {
-    console.info(document.location);
-    console.info(document.location.pathname);
+    $('#tbCheckWebSite').on("keypress", function (event) {
+        if (event.key == 'Enter') {
+            $("#btnCheckWebSite").trigger("click");
+        }
+    });
+    $("#btnCheckWebSite").on("click", function (data) {
+        data.preventDefault();
+        var url = $("#tbCheckWebSite").val();
+        if (url) {
+            document.location = "/" + url;
+        }
+    });
     if (document.location.pathname != "/") {
         var url = document.location.pathname.substring(1);
         $("h1").text(url);
@@ -36,14 +46,12 @@ function RenderProbesInGrid(data) {
     </tr>
   </thead>
   <tbody>`;
-    debugger;
     var template = $.templates("#templateProbeRow");
     var htmlOutput = template.render(data);
     htmlToRender += htmlOutput;
     htmlToRender += `</tbody>
   </table>`;
     $("#singleSiteRow").html(htmlToRender);
-    debugger;
     if (data[0] && data[0].site && data[0].site.lastProbe) {
         var template = $.templates("#theTmpl");
         var htmlOutput = template.render(data.site);
