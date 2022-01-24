@@ -49,7 +49,7 @@ $(function () {
     $("#mainBreadcrumb").hide();
     //$("h1").text("Hello " + document.location.pathname);
 
-    var url = "https://y-pl.azurewebsites.net/sites?take=4";
+    var url = "https://y-pl.azurewebsites.net/sites?take=3";
     $.getJSON(url, function (data) {
       console.info(data);
 
