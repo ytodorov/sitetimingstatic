@@ -288,10 +288,13 @@
 		<script	src="/myJs.js"></script>
 	</body>
 	<script id="templateProbeRow" type="text/x-jsrender">
-		<th scope="row">{{:id}}</th>
-      <td>{{:latencyInChrome}}</td>
-      <td>{{:domContentLoadedEventInChrome}}</td>
-      <td>{{:loadEventInChrome}}</td>
+		<tr>
+			<th scope="row">{{:id}}</th>
+      		<td>{{:latencyInChrome}}</td>
+      		<td>{{:domContentLoadedEventInChrome}}</td>
+      		<td>{{:loadEventInChrome}}</td>
+		    <td>{{:dateCreated}}</td>
+		</tr>
 	</script>
 	<script id="theTmpl" type="text/x-jsrender">
 

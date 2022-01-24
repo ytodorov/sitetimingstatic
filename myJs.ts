@@ -4,8 +4,12 @@ $(function () {
 
   if (document.location.pathname != "/") {
 
+
     var url = document.location.pathname.substring(1);
-    var urlToGetData = "https://y-pl.azurewebsites.net/probe?url=" + "google.com";
+
+    $("h1").text(url);
+
+    var urlToGetData = "https://y-pl.azurewebsites.net/probes?siteurl=" + url;
     $.getJSON(urlToGetData, function (data) {
 
       var htmlToRender = `<table class="table">
@@ -15,9 +19,10 @@ $(function () {
           <th scope="col">Latency</th>
           <th scope="col">Dom Load</th>
           <th scope="col">Load</th>
+          <th scope="col">Date Created</th>
         </tr>
       </thead>
-      <tbody><tr>`;
+      <tbody>`;
 
       
       debugger;
@@ -25,7 +30,7 @@ $(function () {
       var htmlOutput = template.render(data);
 
       htmlToRender += htmlOutput;
-      htmlToRender += `</tr></tbody>
+      htmlToRender += `</tbody>
       </table>`;
 
       $("#singleSiteRow").html(htmlToRender);
@@ -38,7 +43,7 @@ $(function () {
 
     var url = "https://y-pl.azurewebsites.net/sites?take=19";
     $.getJSON(url, function (data) {
-      console.info(data);
+      console.info(data); 
 
       var template = ($ as any).templates("#theTmpl");
 
