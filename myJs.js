@@ -17,19 +17,25 @@ $(function () {
         $("h1").text(url);
         var urlToGetDataForAllProbes = "https://y-pl.azurewebsites.net/probes?siteurl=" + url;
         var urlToGetDataForOneProbe = "https://y-pl.azurewebsites.net/probe?url=" + url;
+        var urlToGetDataForSitePreview = "https://y-pl.azurewebsites.net/sites?take=1";
         $.getJSON(urlToGetDataForAllProbes, function (data) {
             RenderProbesInGrid(data);
             $.getJSON(urlToGetDataForOneProbe, function (data) {
                 RenderProbesInGrid(data);
+                $.getJSON(urlToGetDataForSitePreview, function (data) {
+                    console.info(data);
+                    var template = $.templates("#theTmpl");
+                    var htmlOutput = template.render(data);
+                    $("#sitesRow").html(htmlOutput);
+                });
             });
         });
     }
     else {
         $("#mainBreadcrumb").hide();
         //$("h1").text("Hello " + document.location.pathname);
-        var url = "https://y-pl.azurewebsites.net/sites?take=4";
+        var url = "https://y-pl.azurewebsites.net/probes?take=9";
         $.getJSON(url, function (data) {
-            console.info(data);
             var template = $.templates("#theTmpl");
             var htmlOutput = template.render(data);
             $("#sitesRow").html(htmlOutput);

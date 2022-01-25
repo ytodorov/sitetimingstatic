@@ -3,16 +3,17 @@
 
 <head>
 	<title>SiteTiming</title>
-	<meta name="description" content="...">
+	<meta name="description" content="SiteTiming is a free service for cheking availability, measure performance and
+	collecting statistics over time for any website">
 
 	<meta name="viewport" content="width=device-width, maximum-scale=5, initial-scale=1">
 	<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
 
 	<!-- up to 10% speed up for external res -->
-	<link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+	<!--<link rel="dns-prefetch" href="https://fonts.googleapis.com/">
 	<link rel="dns-prefetch" href="https://fonts.gstatic.com/">
 	<link rel="preconnect" href="https://fonts.googleapis.com/">
-	<link rel="preconnect" href="https://fonts.gstatic.com/">
+	<link rel="preconnect" href="https://fonts.gstatic.com/"> -->
 	<!-- preloading icon font is helping to speed up a little bit -->
 	<!--<link rel="preload" href="assets/fonts/flaticon/Flaticon.woff2" as="font" type="font/woff2" crossorigin>-->
 
@@ -131,12 +132,15 @@
 		<!-- /Header -->
 
 		<!-- PAGE TITLE -->
-		<div class="section bg-gradient py-2">
-			<div class="container">
+		<div class="section bg-gradient py-1">
+			<div class="container text-center">
 
-				<h1 class="h2 fw-bold">
-					Page Title
-				</h1>
+				<h1 class="h4 fw-bold d-inline">
+					SiteTiming
+				</h1> -
+				<h2 class="h4 d-inline">
+					Free service for cheking availability, measure performance and collecting statistics over time for any website
+				</h2>
 
 				<nav id="mainBreadcrumb" aria-label="breadcrumb">
 					<ol class="breadcrumb small">
@@ -299,8 +303,8 @@
 						</div>
 
 						<p class="fst-italic text-indigo-900 col-xl-10">
-							SiteTiming is a free service for cheking website availability, measure performance and
-							collecting statistics over time.
+							SiteTiming is a free service for cheking availability, measure performance and
+							collecting statistics over time for any website
 						</p>
 
 						<p class="text-indigo-900">
@@ -401,29 +405,22 @@
 		<div class="col-6 col-lg-4 mb-5">
 
 			<div class="bg-white p-2 shadow-primary-xs transition-hover-top transition-all-ease-250">
-				<a href="/{{:url}}" class="d-block overflow-hidden overlay-dark-hover overlay-opacity-2 text-decoration-none text-dark">
-					<img class="img-fluid lazy rounded" src="{{:screenshotBase64}}" alt="{{:name}}" data-loaded="true">
+				<a href="/{{:site.url}}" class="d-block overflow-hidden overlay-dark-hover overlay-opacity-2 text-decoration-none text-dark">
+					<img class="img-fluid lazy rounded" src="{{:site.screenshotBase64}}" alt="{{:site.name}}" data-loaded="true">
 				</a>
 
 				<div class="p-3">
 
 					<h5 class="m-0">
-						{{if LastProbe}}
-							{{:lastProbe.domContentLoadedEventInChrome}}
-						{{/if}}
+				
+							Latency: {{:[latencyInChrome]}} Dom loaded: {{:domContentLoadedEventInChrome}}
+					
 					</h5>
 
 					<ul class="list-inline small m-0">
+						
 						<li class="list-inline-item">
-							<a href="#" class="text-gray-500">
-								{{if lastProbe}}
-									{{:lastProbe.loadEventInChrome}}
-								{{/if}}
-							</a>
-						</li>
-
-						<li class="list-inline-item">
-							<a href="#" class="text-gray-500"><img class="img-fluid lazy rounded" src="{{:faviconBase64}}" alt="{{:url}}" data-loaded="true">{{:url}}</a>
+							<a href="/{{:site.url}}" class="text-gray-500"><img class="img-fluid lazy rounded" src="{{:site.faviconBase64}}" alt="{{:site.url}}" data-loaded="true">{{:site.url}}</a>
 						</li>
 					</ul>
 
