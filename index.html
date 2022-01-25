@@ -392,6 +392,14 @@
 
 	<!-- Your custom javascripts -->
 	<script src="/myJs.js"></script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-XPZFMJN51X"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-XPZFMJN51X');
+    </script>
 </body>
 <script id="templateProbeRow" type="text/x-jsrender">
 		<tr>
@@ -421,7 +429,7 @@
 					<ul class="list-inline small m-0">
 						
 						<li class="list-inline-item">
-							<a href="/{{:site.url}}" class="text-gray-500"><img class="img-fluid lazy rounded" src="{{:site.faviconBase64}}" alt="{{:site.url}}" data-loaded="true">{{:site.url}}</a>
+							<a href="/{{:site.url}}" title="{{:site.title}}" class="text-gray-500">{{:site.url}}</a>
 						</li>
 					</ul>
 
