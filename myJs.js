@@ -15,9 +15,9 @@ $(function () {
     if (document.location.pathname != "/") {
         var url = document.location.pathname.substring(1);
         $("h1").text(url);
-        var urlToGetDataForAllProbes = "https://y-pl.azurewebsites.net/probes?siteurl=" + url;
-        var urlToGetDataForOneProbe = "https://y-pl.azurewebsites.net/probe?url=" + url;
-        var urlToGetDataForSitePreview = "https://y-pl.azurewebsites.net/sites?take=1";
+        var urlToGetDataForAllProbes = "https://st-westus3.azurewebsites.net/probes?siteurl=" + url;
+        var urlToGetDataForOneProbe = "https://st-westus3.azurewebsites.net/probe?url=" + url;
+        var urlToGetDataForSitePreview = "https://st-westus3.azurewebsites.net/sites?take=1";
         $.getJSON(urlToGetDataForAllProbes, function (data) {
             RenderProbesInGrid(data);
             $.getJSON(urlToGetDataForOneProbe, function (data) {
@@ -34,7 +34,7 @@ $(function () {
     else {
         $("#mainBreadcrumb").hide();
         //$("h1").text("Hello " + document.location.pathname);
-        var url = "https://y-pl.azurewebsites.net/probes?take=9";
+        var url = "https://st-westus3.azurewebsites.net/probes?take=9";
         $.getJSON(url, function (data) {
             var template = $.templates("#theTmpl");
             var htmlOutput = template.render(data);
