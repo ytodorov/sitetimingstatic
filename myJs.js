@@ -12,33 +12,38 @@ $(function () {
             document.location = "/" + url;
         }
     });
-    if (document.location.pathname != "/") {
+    if (document.location.pathname != "/" && document.location.pathname != "") {
         var url = document.location.pathname.substring(1);
         $("h1").text(url);
         var urlToGetDataForAllProbes = "https://st-westus3.azurewebsites.net/probes?siteurl=" + url;
         var urlToGetDataForOneProbe = "https://st-westus3.azurewebsites.net/probe?url=" + url;
         var urlToGetDataForSitePreview = "https://st-westus3.azurewebsites.net/sites?take=1";
-        $.getJSON(urlToGetDataForAllProbes, function (data) {
-            RenderProbesInGrid(data);
-            $.getJSON(urlToGetDataForOneProbe, function (data) {
-                RenderProbesInGrid(data);
-                $.getJSON(urlToGetDataForSitePreview, function (data) {
-                    console.info(data);
-                    var template = $.templates("#theTmpl");
-                    var htmlOutput = template.render(data);
-                    $("#sitesRow").html(htmlOutput);
-                });
-            });
-        });
     }
     else {
         $("#mainBreadcrumb").hide();
         //$("h1").text("Hello " + document.location.pathname);
-        var url = "https://st-westus3.azurewebsites.net/probes?take=9";
-        $.getJSON(url, function (data) {
-            var template = $.templates("#theTmpl");
-            var htmlOutput = template.render(data);
-            $("#sitesRow").html(htmlOutput);
+        /*
+            $.post("https://st-westus3.azurewebsites.net/graphql",
+             `
+             {"operationName":null,"variables":{},"query":"{  probes(take: 11) {    id    sourceIpAddress    destinationIpAddress    latencyInChrome    siteId    site {      dateCreated    }  }}"}
+            `,
+              function( data ) {
+              RenderProbesInGrid( data );
+            }, "json");
+          */
+        $.ajax({
+            type: "POST",
+            url: "https://st-westus3.azurewebsites.net/graphql",
+            data: `
+    {"operationName":null,"variables":{},"query":"{  probes(take: 6) {    id uniqueGuid   sourceIpAddress    destinationIpAddress    latencyInChrome    siteId    site {      url title    }  }}"}
+   `,
+            success: function (data) {
+                var template = $.templates("#theTmpl");
+                var htmlOutput = template.render(data.data.probes);
+                $("#sitesRow").html(htmlOutput);
+            },
+            dataType: "json",
+            contentType: "application/json"
         });
     }
 });
