@@ -51,6 +51,7 @@ $(function () {
     
       var htmlOutput = template.render(data.data.probes);
 
+      
       $("#sitesRow").html(htmlOutput);
   },
     dataType: "json",
