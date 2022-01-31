@@ -31,19 +31,25 @@ $(function () {
               RenderProbesInGrid( data );
             }, "json");
           */
-        $.ajax({
-            type: "POST",
-            url: "https://st-westus3.azurewebsites.net/graphql",
-            data: `
-    {"operationName":null,"variables":{},"query":"{  probes(take: 6) {    id uniqueGuid   sourceIpAddress    destinationIpAddress    latencyInChrome    siteId    site {      url title    }  }}"}
-   `,
-            success: function (data) {
-                var template = $.templates("#theTmpl");
-                var htmlOutput = template.render(data.data.probes);
-                $("#sitesRow").html(htmlOutput);
-            },
-            dataType: "json",
-            contentType: "application/json"
+        $(window).on("scroll", function () {
+            var mainSection = $("#mainSection");
+            if (mainSection.is(":visible") && mainSection.hasClass("loadingMarker")) {
+                mainSection.removeClass("loadingMarker");
+                $.ajax({
+                    type: "POST",
+                    url: "https://st-westus3.azurewebsites.net/graphql",
+                    data: `
+      {"operationName":null,"variables":{},"query":"{  probes(take: 6) {    id uniqueGuid   sourceIpAddress    destinationIpAddress    latencyInChrome    siteId    site {      url title    }  }}"}
+     `,
+                    success: function (data) {
+                        var template = $.templates("#theTmpl");
+                        var htmlOutput = template.render(data.data.probes);
+                        $("#sitesRow").html(htmlOutput);
+                    },
+                    dataType: "json",
+                    contentType: "application/json"
+                });
+            }
         });
     }
 });

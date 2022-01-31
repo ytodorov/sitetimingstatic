@@ -1,10 +1,10 @@
 $(function () {
 
-  $('#tbCheckWebSite').on("keypress", function(event){
-    if(event.key == 'Enter'){
+  $('#tbCheckWebSite').on("keypress", function (event) {
+    if (event.key == 'Enter') {
       $("#btnCheckWebSite").trigger("click");
     }
-});
+  });
   $("#btnCheckWebSite").on("click", function (data) {
     data.preventDefault();
     var url = $("#tbCheckWebSite").val();
@@ -23,42 +23,52 @@ $(function () {
     var urlToGetDataForOneProbe = "https://st-westus3.azurewebsites.net/probe?url=" + url;
     var urlToGetDataForSitePreview = "https://st-westus3.azurewebsites.net/sites?take=1";
 
-   
+
 
   }
   else {
 
     $("#mainBreadcrumb").hide();
     //$("h1").text("Hello " + document.location.pathname);
-/*
-    $.post("https://st-westus3.azurewebsites.net/graphql",
-     `
-     {"operationName":null,"variables":{},"query":"{  probes(take: 11) {    id    sourceIpAddress    destinationIpAddress    latencyInChrome    siteId    site {      dateCreated    }  }}"}
-    `,
-      function( data ) {
-      RenderProbesInGrid( data ); 
-    }, "json");
-  */
+    /*
+        $.post("https://st-westus3.azurewebsites.net/graphql",
+         `
+         {"operationName":null,"variables":{},"query":"{  probes(take: 11) {    id    sourceIpAddress    destinationIpAddress    latencyInChrome    siteId    site {      dateCreated    }  }}"}
+        `,
+          function( data ) {
+          RenderProbesInGrid( data ); 
+        }, "json");
+      */
 
-  $.ajax({
-    type: "POST",
-    url: "https://st-westus3.azurewebsites.net/graphql",
-    data:  `
-    {"operationName":null,"variables":{},"query":"{  probes(take: 6) {    id uniqueGuid   sourceIpAddress    destinationIpAddress    latencyInChrome    siteId    site {      url title    }  }}"}
-   `,
-    success: function( data ) {
-      var template = ($ as any).templates("#theTmpl");
-    
-      var htmlOutput = template.render(data.data.probes);
-
+    $(window).on("scroll", function () { 
       
-      $("#sitesRow").html(htmlOutput);
-  },
-    dataType: "json",
-    contentType: "application/json"
-  });
+      var mainSection = $("#mainSection");
+      if (mainSection.is(":visible") && mainSection.hasClass("loadingMarker")) {
+        mainSection.removeClass("loadingMarker");
+        $.ajax({
+          type: "POST",
+          url: "https://st-westus3.azurewebsites.net/graphql",
+          data: `
+      {"operationName":null,"variables":{},"query":"{  probes(take: 6) {    id uniqueGuid   sourceIpAddress    destinationIpAddress    latencyInChrome    siteId    site {      url title    }  }}"}
+     `,
+          success: function (data) {
+            var template = ($ as any).templates("#theTmpl");
 
-}
+            var htmlOutput = template.render(data.data.probes);
+
+
+            $("#sitesRow").html(htmlOutput);
+          },
+          dataType: "json",
+          contentType: "application/json"
+        });
+      }
+    }
+    );
+
+
+
+  }
 });
 
 function RenderProbesInGrid(data: any): void {
