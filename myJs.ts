@@ -23,7 +23,7 @@ $(function () {
         type: "POST",
         url: "https://st-westus3.azurewebsites.net/graphql",
         data: `
-    {"operationName":null,"variables":{},"query":"{  probes(take: 6) {    id uniqueGuid   sourceIpAddress    destinationIpAddress    latencyInChrome    siteId    site {      url title    }  }}"}
+    {"operationName":null,"variables":{},"query":"{  probes(take: 6) {    id uniqueGuid   sourceIpAddress    destinationIpAddress exceptionMessage    latencyInChrome    siteId    site {      url title    }  }}"}
    `,
         success: function (data) {
           var template = ($ as any).templates("#theTmpl");
