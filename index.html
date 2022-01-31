@@ -166,7 +166,7 @@
 		</div>
 		<!-- /PAGE TITLE -->
 
-		<div class="section">
+		<div class="section" id="sectionWithSearchTextbox">
 			<div class="container">
 
 				<div class="row g-xl-5">
@@ -264,7 +264,7 @@
 		</div>
 
 			<!-- similar to services -->
-			<div class="section">
+			<div class="section" id="sectionWithServices">
 				<div class="container">
 		
 				  <div class="row g-4 text-center">
@@ -351,7 +351,7 @@
 		<!-- /similar to services -->
 		
 			<!-- COUNTER -->
-			<div class="section pt-5 p-0">
+			<div class="section pt-5 p-0" id="sectionWithCounter">
 				<div class="container">
 	
 					<div class="row col-border text-center text-muted">
@@ -736,10 +736,10 @@
 </body>
 <script id="templateProbeRow" type="text/x-jsrender">
 		<tr>
-			<th scope="row">{{:dateCreatedAgo}}</th>
+			<th scope="row">{{:dateCreated}}</th>
       		<td>{{:latencyInChrome}}</td>
-      		<td>{{:domContentLoadedEventInChrome}}</td>
-      		<td>{{:loadEventInChrome}}</td>
+      		<td>{{:sourceIpAddress}}</td>
+      		<td>{{:destinationIpAddress}}</td>
 		</tr>
 	</script>
 <script id="theTmpl" type="text/x-jsrender">
