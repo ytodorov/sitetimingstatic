@@ -63,8 +63,6 @@ $(function () {
     {"operationName":null,"variables":{},"query":"{  probes(where: \\"site.url = \\\\\\"${url}\\\\\\"\\") {    id dateCreated sourceIpAddress  destinationIpAddress    latencyInChrome   }}"}
    `,
         success: function (probesData) {
-          debugger;
-
           RenderProbesInGrid(probesData.data.probes);          
         },
         dataType: "json",
