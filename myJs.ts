@@ -30,7 +30,6 @@ $(function () {
 
           var htmlOutput = template.render(data.data.probes);
 
-
           $("#sitesRow").html(htmlOutput);
         },
         dataType: "json",
@@ -42,12 +41,18 @@ $(function () {
 
   if (document.location.pathname != "/" && document.location.pathname != "") {
     var url = document.location.pathname.substring(1);
+    url = url.toLowerCase();
+    if (!url.startsWith("http://") && !url.startsWith("https://"))
+    {
+      url = `http://${url}`;
+    }
 
     //url = "http://apple.com";
     $("h1").text(url);
 
     var urlToGetDataForOneProbe = "https://st-westus3.azurewebsites.net/probe?url=" + url;
 
+    $("#pageTitle").removeClass("invisible");
     $("#liSiteName").text(url);
     $("#sectionWithSearchTextbox").remove();
     $("#sectionWithServices").remove();
