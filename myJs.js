@@ -35,11 +35,12 @@ $(function () {
     if (document.location.pathname != "/" && document.location.pathname != "") {
         var url = document.location.pathname.substring(1);
         url = url.toLowerCase();
-        if (!url.startsWith("http://") && !url.startsWith("https://")) {
-            url = `http://${url}`;
-            document.location = "/" + url;
+        if (document.location.hostname.toLowerCase().indexOf("localhost") == 0) {
+            if (!url.startsWith("http://") && !url.startsWith("https://")) {
+                url = `http://${url}`;
+                document.location = "/" + url;
+            }
         }
-        //url = "http://apple.com";
         $("h1").text(url);
         var urlToGetDataForOneProbe = "https://st-westus3.azurewebsites.net/probe?url=" + url;
         $("#pageTitle").removeClass("invisible");
@@ -48,24 +49,86 @@ $(function () {
         $("#sectionWithServices").remove();
         $("#sectionWithCounter").remove();
         $("#sitesRow").remove();
-        $.get(urlToGetDataForOneProbe, function (data) {
-            $.ajax({
-                type: "POST",
-                url: "https://st-westus3.azurewebsites.net/graphql",
-                data: `
-    {"operationName":null,"variables":{},"query":"{  probes(where: \\"site.url = \\\\\\"${url}\\\\\\"\\") {    id dateCreated sourceIpAddress  destinationIpAddress    latencyInChrome   }}"}
-   `,
-                success: function (probesData) {
-                    RenderProbesInGrid(probesData.data.probes);
-                },
-                dataType: "json",
-                contentType: "application/json"
-            });
-        });
+        //   $.get(urlToGetDataForOneProbe, function (data) {
+        //     $.ajax({
+        //       type: "POST",
+        //       url: "https://st-westus3.azurewebsites.net/graphql",
+        //       data: `
+        //   {"operationName":null,"variables":{},"query":"{  probes(where: \\"site.url = \\\\\\"${url}\\\\\\"\\") {    id dateCreated sourceIpAddress  destinationIpAddress    latencyInChrome   }}"}
+        //  `,
+        //       success: function (probesData) {
+        //         //RenderProbesInGrid(probesData.data.probes);
+        //       },
+        //       dataType: "json",
+        //       contentType: "application/json"
+        //     });
+        //   })
     }
     else {
         $("#mainBreadcrumb").hide();
     }
+});
+$(document).ready(function () {
+    var currentUrl = document.location.pathname.substring(1);
+    currentUrl = "https://google.com";
+    var q = `probes(take:100) {    id dateCreated sourceIpAddress  destinationIpAddress    latencyInChrome   }`;
+    var READ_PRODUCTS_QUERY = "query {" +
+        q +
+        "}";
+    var dataSource = new kendo.data.DataSource({
+        transport: {
+            read: {
+                contentType: "application/json",
+                url: "https://st-westus3.azurewebsites.net/graphql",
+                type: "POST",
+                data: function () {
+                    return { query: READ_PRODUCTS_QUERY };
+                }
+            },
+            parameterMap: function (options, operation) {
+                return kendo.stringify({
+                    query: options.query,
+                    variables: options.variables
+                });
+            }
+        },
+        schema: {
+            data: function (response) {
+                var data = response.data;
+                if (data.probes) {
+                    return data.probes;
+                }
+            },
+            total: function (response) {
+                return response.data.probes.length;
+            },
+            model: {
+                id: "id",
+                fields: {
+                    id: { type: "number", editable: false },
+                    latencyInChrome: { type: "number" }
+                }
+            }
+        },
+        pageSize: 20
+    });
+    $("#grid").kendoGrid({
+        dataSource: dataSource,
+        height: 550,
+        groupable: true,
+        sortable: true,
+        pageable: true,
+        toolbar: ["create"],
+        editable: "inline",
+        columns: [{
+                field: "id",
+                title: "id"
+            },
+            {
+                field: "latencyInChrome",
+                title: "latencyInChrome"
+            }]
+    });
 });
 function RenderProbesInGrid(data) {
     var htmlToRender = `<table class="table">
@@ -84,9 +147,4 @@ function RenderProbesInGrid(data) {
     htmlToRender += `</tbody>
   </table>`;
     $("#singleSiteRow").html(htmlToRender);
-    // if (data[0] && data[0].site && data[0].site.lastProbe) {
-    //   var template = ($ as any).templates("#theTmpl");
-    //   var htmlOutput = template.render(data.site);
-    //   $("#sitesRow").html(htmlOutput);
-    // }
 }
