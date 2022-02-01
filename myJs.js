@@ -37,6 +37,7 @@ $(function () {
         url = url.toLowerCase();
         if (!url.startsWith("http://") && !url.startsWith("https://")) {
             url = `http://${url}`;
+            document.location = "/" + url;
         }
         //url = "http://apple.com";
         $("h1").text(url);

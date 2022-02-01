@@ -45,6 +45,7 @@ $(function () {
     if (!url.startsWith("http://") && !url.startsWith("https://"))
     {
       url = `http://${url}`;
+      document.location = "/" + url;
     }
 
     //url = "http://apple.com";
