@@ -2,7 +2,6 @@
 /// <reference types="kendo-ui" />
 var url = document.location.pathname.substring(1);
 url = url.toLowerCase();
-debugger;
 if (document.location.hostname.toLowerCase().includes("127.0.0.1") == false) {
     if (!url.startsWith("http://") && !url.startsWith("https://")) {
         url = `http://${url}`;
@@ -58,7 +57,7 @@ function createChart() {
             }
         },
         title: {
-            text: "Latency"
+            text: `Latency of ${url}`
         },
         legend: {
             position: "top"
@@ -100,3 +99,16 @@ function createChart() {
     });
 }
 $(document).ready(createChart);
+$(window).resize(function () {
+    debugger;
+    var kendoChart = $("#chart").data("kendoChart");
+    if (kendoChart) {
+        kendoChart.refresh();
+    }
+});
+var urlwestus3 = `https://st-westus3.azurewebsites.net/probe?url=${url}`;
+var urleastus2 = `https://st-eastus2.azurewebsites.net/probe?url=${url}`;
+var urlsoutheastasia = `https://st-southeastasia.azurewebsites.net/probe?url=${url}`;
+$.get(urlwestus3, function (data) { console.log(data); });
+$.get(urleastus2, function (data) { console.log(data); });
+$.get(urlsoutheastasia, function (data) { console.log(data); });
