@@ -106,9 +106,45 @@ $(window).resize(function () {
         kendoChart.refresh();
     }
 });
+$("#skeletonwestus3").kendoSkeletonContainer({
+    animation: "pulse",
+    template: `<div class="k-card">
+                        <div class="k-card-header">
+                            <div>
+                                <span data-shape-circle class="k-card-image avatar"></span>
+                            </div>
+                            <div class="user-info" style="width: 100%;">
+                                <span data-shape-text class='k-card-title'></span>
+                                <span data-shape-text class='k-card-subtitle' style="width: 35%;"></span>
+                            </div>
+                        </div>
+                        <span data-shape-rectangle style="width: 340px; height: 100%;"></span>
+                        <div class="k-card-body">
+                            <span data-shape-text></span>
+                        </div>
+                    </div>`
+});
 var urlwestus3 = `https://st-westus3.azurewebsites.net/probe?url=${url}`;
 var urleastus2 = `https://st-eastus2.azurewebsites.net/probe?url=${url}`;
 var urlsoutheastasia = `https://st-southeastasia.azurewebsites.net/probe?url=${url}`;
-$.get(urlwestus3, function (data) { console.log(data); });
+$.get(urlwestus3, function (data) {
+    $("#skeletonwestus3").remove();
+    $("#cards").html(` <div class="k-card">
+        <div class="k-card-header">
+            <div>
+                <img class="k-card-image avatar" src="https://demos.telerik.com/kendo-ui/content/web/skeleton/avatar.jpg" />
+            </div>
+            <div class="user-info">
+                <h5 class="k-card-title">latencyInChrome: ${data.latencyInChrome}</h5>
+                <h6 class="k-card-subtitle">${data.dateCreatedAgo}</h6>
+            </div>
+        </div>
+        <img class="k-card-image" src="https://sitetiming.blob.core.windows.net/images/short5_${data.uniqueGuid}.jpeg?sv=2020-08-04&st=2012-01-27T12%3A30%3A00Z&se=2032-01-28T12%3A30%3A00Z&sr=c&sp=rl&sig=jvKd8yqdiz42u28l4oPYHVFWUSCaeLYmeKMMCgwtn1Y%3D" />
+        <div class="k-card-body">
+            <p>dOMContentLoadedEventInChrome: ${data.dOMContentLoadedEventInChrome}</p>
+        </div>
+    </div>`);
+    console.log(data);
+});
 $.get(urleastus2, function (data) { console.log(data); });
 $.get(urlsoutheastasia, function (data) { console.log(data); });
