@@ -15,8 +15,59 @@
 <body>
 
     <nav id="breadcrumb"></nav>
+	<div id="loader-large"></div>
+
+
+	<div class="cards-container">
+        <div class="k-card">
+            <div class="k-card-header">
+                <h5 class="k-card-title">Rome</h5>
+                <h6 class="k-card-subtitle">Capital of Italy</h6>
+            </div>
+            <img class="k-card-image" src="https://demos.telerik.com/kendo-ui/content/web/cards/rome.jpg" />
+            <div class="k-card-body">
+                <p>Rome is a sprawling, cosmopolitan city with nearly 3,000 years of globally influential art, architecture and culture on display.</p>
+                <p>Ancient ruins such as the Forum and the Colosseum evoke the power of the former Roman Empire. </p>
+            </div>
+            <div class="k-card-footer">
+                <a class="k-button k-button-flat-base k-button-flat k-button-rectangle k-button-md k-rounded-md k-icon-button"><span class="k-button-icon k-icon k-i-facebook"></span></a>
+                <a class="k-button k-button-flat-base k-button-flat k-button-rectangle k-button-md k-rounded-md k-icon-button"><span class="k-button-icon k-icon k-i-pinterest"></span></a>
+                <a class="k-button k-button-flat-base k-button-flat k-button-rectangle k-button-md k-rounded-md k-icon-button"><span class="k-button-icon k-icon k-i-twitter"></span></a>
+            </div>
+            <div class="k-card-actions k-card-actions-stretched">
+                <span class="k-card-action"><span class="k-button k-button-flat-primary k-button-flat k-button-rectangle k-button-md k-rounded-md">Map</span></span>
+                <span class="k-card-action"><span class="k-button k-button-flat-primary k-button-flat k-button-rectangle k-button-md k-rounded-md">Weather</span></span>
+            </div>
+        </div>
+	</div>
+
+      
+
+
 
 	<div id="grid"></div>
+
+
+	<style>
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .k-card {
+            width: 285px;
+            margin: 5%;
+        }
+
+        .k-card-footer {
+            text-align: center;
+        }
+
+        .k-card-action>.k-button {
+            width:100%;
+        }
+    </style>
 
 	<!-- Core javascripts-->
 
