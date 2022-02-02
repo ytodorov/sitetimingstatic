@@ -2,7 +2,7 @@
 /// <reference types="kendo-ui" />
 var url = document.location.pathname.substring(1);
 url = url.toLowerCase();
-if (document.location.hostname.toLowerCase().indexOf("localhost") == -1) {
+if (document.location.hostname.toLowerCase().indexOf("localhost") == 0) {
     if (!url.startsWith("http://") && !url.startsWith("https://")) {
         url = `http://${url}`;
         document.location = "/" + url;
