@@ -77,10 +77,7 @@ function createChart() {
             }],
         categoryAxis: {
             labels: {
-                rotation: -45,
-                dateFormats: {
-                    days: "M/d"
-                }
+                rotation: -90
             },
             crosshair: {
                 visible: true
@@ -129,54 +126,56 @@ $(".skeletonMarker").each(function (index) {
 var urlwestus3 = `https://st-westus3.azurewebsites.net/probe?url=${url}`;
 var urleastus2 = `https://st-eastus2.azurewebsites.net/probe?url=${url}`;
 var urlsoutheastasia = `https://st-southeastasia.azurewebsites.net/probe?url=${url}`;
-$.get(urlwestus3, function (data) {
+$.when($.get(urlwestus3, function (data) {
     $("#skeletonwestus3").remove();
     $("#cards").append(` <div class="k-card">
         <img class="k-card-image" onerror="if (this.src != 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg') this.src = 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg';" src="https://sitetiming.blob.core.windows.net/images/short5_${data.uniqueGuid}.jpeg?sv=2020-08-04&st=2012-01-27T12%3A30%3A00Z&se=2032-01-28T12%3A30%3A00Z&sr=c&sp=rl&sig=jvKd8yqdiz42u28l4oPYHVFWUSCaeLYmeKMMCgwtn1Y%3D" />
         <div class="k-card-body">
             <h6 class="k-card-subtitle">Latency: ${data.latencyInChrome}</h6>
             <h6 class="k-card-subtitle">DOM Loaded: ${data.domContentLoadedEventInChrome}</h6>
-            <h6 class="k-card-subtitle">Latency: ${data.sourceIpAddress}</h6>
-            <h6 class="k-card-subtitle">Latency: ${data.destinationIpAddress}</h6>
+            <h6 class="k-card-subtitle">SourceIpAddress: ${data.sourceIpAddress}</h6>
+            <h6 class="k-card-subtitle">DestinationIpAddress: ${data.destinationIpAddress}</h6>
             <h6 class="k-card-subtitle">Error: ${data.exceptionMessage}</h6>
         </div>
     </div>`);
-    var kendoChart = $("#chart").data("kendoChart");
-    kendoChart === null || kendoChart === void 0 ? void 0 : kendoChart.dataSource.read();
+    //var kendoChart = $("#chart").data("kendoChart");
+    //kendoChart?.dataSource.read();
     console.log("urlwestus3");
     console.log(data);
-});
-$.get(urleastus2, function (data) {
+}), $.get(urleastus2, function (data) {
     $("#skeletoneastus2").remove();
     $("#cards").append(` <div class="k-card">
         <img class="k-card-image" onerror="if (this.src != 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg') this.src = 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg';" src="https://sitetiming.blob.core.windows.net/images/short5_${data.uniqueGuid}.jpeg?sv=2020-08-04&st=2012-01-27T12%3A30%3A00Z&se=2032-01-28T12%3A30%3A00Z&sr=c&sp=rl&sig=jvKd8yqdiz42u28l4oPYHVFWUSCaeLYmeKMMCgwtn1Y%3D" />
         <div class="k-card-body">
             <h6 class="k-card-subtitle">Latency: ${data.latencyInChrome}</h6>
             <h6 class="k-card-subtitle">DOM Loaded: ${data.domContentLoadedEventInChrome}</h6>
-            <h6 class="k-card-subtitle">Latency: ${data.sourceIpAddress}</h6>
-            <h6 class="k-card-subtitle">Latency: ${data.destinationIpAddress}</h6>
+            <h6 class="k-card-subtitle">SourceIpAddress: ${data.sourceIpAddress}</h6>
+            <h6 class="k-card-subtitle">DestinationIpAddress: ${data.destinationIpAddress}</h6>
             <h6 class="k-card-subtitle">Error: ${data.exceptionMessage}</h6>
         </div>
     </div>`);
-    var kendoChart = $("#chart").data("kendoChart");
-    kendoChart === null || kendoChart === void 0 ? void 0 : kendoChart.dataSource.read();
+    //var kendoChart = $("#chart").data("kendoChart");
+    //kendoChart?.dataSource.read();
     console.log("urleastus2");
     console.log(data);
-});
-$.get(urlsoutheastasia, function (data) {
+}), $.get(urlsoutheastasia, function (data) {
     $("#skeletonsoutheastasia").remove();
     $("#cards").append(` <div class="k-card">
         <img class="k-card-image" onerror="if (this.src != 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg') this.src = 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg';" src="https://sitetiming.blob.core.windows.net/images/short5_${data.uniqueGuid}.jpeg?sv=2020-08-04&st=2012-01-27T12%3A30%3A00Z&se=2032-01-28T12%3A30%3A00Z&sr=c&sp=rl&sig=jvKd8yqdiz42u28l4oPYHVFWUSCaeLYmeKMMCgwtn1Y%3D" />
         <div class="k-card-body">
             <h6 class="k-card-subtitle">Latency: ${data.latencyInChrome}</h6>
             <h6 class="k-card-subtitle">DOM Loaded: ${data.domContentLoadedEventInChrome}</h6>
-            <h6 class="k-card-subtitle">Latency: ${data.sourceIpAddress}</h6>
-            <h6 class="k-card-subtitle">Latency: ${data.destinationIpAddress}</h6>
+            <h6 class="k-card-subtitle">SourceIpAddress: ${data.sourceIpAddress}</h6>
+            <h6 class="k-card-subtitle">DestinationIpAddress: ${data.destinationIpAddress}</h6>
             <h6 class="k-card-subtitle">Error: ${data.exceptionMessage}</h6>
         </div>
     </div>`);
-    var kendoChart = $("#chart").data("kendoChart");
-    kendoChart === null || kendoChart === void 0 ? void 0 : kendoChart.dataSource.read();
+    //var kendoChart = $("#chart").data("kendoChart");
+    //kendoChart?.dataSource.read();
     console.log("urlsoutheastasia");
     console.log(data);
+})).done(function () {
+    var kendoChart = $("#chart").data("kendoChart");
+    kendoChart === null || kendoChart === void 0 ? void 0 : kendoChart.dataSource.read();
+    console.log("done");
 });

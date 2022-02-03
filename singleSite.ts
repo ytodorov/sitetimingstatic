@@ -76,14 +76,11 @@ function createChart() {
         {
             field: "dOMContentLoadedEventInChrome",
             categoryField: "dateCreated",
-            name: "dom loaded",
+            name: "dom loaded",          
         }],
         categoryAxis: {
             labels: {
-                rotation: -45,     
-                dateFormats: {
-                    days: "M/d"
-                }    
+                rotation: -90                
             },
             crosshair: {
                 visible: true
@@ -143,7 +140,7 @@ var urlwestus3 = `https://st-westus3.azurewebsites.net/probe?url=${url}`;
 var urleastus2 = `https://st-eastus2.azurewebsites.net/probe?url=${url}`;
 var urlsoutheastasia = `https://st-southeastasia.azurewebsites.net/probe?url=${url}`;
 
-$.get(urlwestus3, function (data) {
+$.when($.get(urlwestus3, function (data) {
     $("#skeletonwestus3").remove();
     $("#cards").append(
         ` <div class="k-card">
@@ -151,18 +148,18 @@ $.get(urlwestus3, function (data) {
         <div class="k-card-body">
             <h6 class="k-card-subtitle">Latency: ${data.latencyInChrome}</h6>
             <h6 class="k-card-subtitle">DOM Loaded: ${data.domContentLoadedEventInChrome}</h6>
-            <h6 class="k-card-subtitle">Latency: ${data.sourceIpAddress}</h6>
-            <h6 class="k-card-subtitle">Latency: ${data.destinationIpAddress}</h6>
+            <h6 class="k-card-subtitle">SourceIpAddress: ${data.sourceIpAddress}</h6>
+            <h6 class="k-card-subtitle">DestinationIpAddress: ${data.destinationIpAddress}</h6>
             <h6 class="k-card-subtitle">Error: ${data.exceptionMessage}</h6>
         </div>
     </div>`
     );
 
-    var kendoChart = $("#chart").data("kendoChart");
-    kendoChart?.dataSource.read();
+    //var kendoChart = $("#chart").data("kendoChart");
+    //kendoChart?.dataSource.read();
     console.log("urlwestus3");
     console.log(data);
-});
+}),
 $.get(urleastus2, function (data) {
     $("#skeletoneastus2").remove();
     $("#cards").append(
@@ -171,19 +168,19 @@ $.get(urleastus2, function (data) {
         <div class="k-card-body">
             <h6 class="k-card-subtitle">Latency: ${data.latencyInChrome}</h6>
             <h6 class="k-card-subtitle">DOM Loaded: ${data.domContentLoadedEventInChrome}</h6>
-            <h6 class="k-card-subtitle">Latency: ${data.sourceIpAddress}</h6>
-            <h6 class="k-card-subtitle">Latency: ${data.destinationIpAddress}</h6>
+            <h6 class="k-card-subtitle">SourceIpAddress: ${data.sourceIpAddress}</h6>
+            <h6 class="k-card-subtitle">DestinationIpAddress: ${data.destinationIpAddress}</h6>
             <h6 class="k-card-subtitle">Error: ${data.exceptionMessage}</h6>
         </div>
     </div>`
     );
 
-    var kendoChart = $("#chart").data("kendoChart");
-    kendoChart?.dataSource.read();
+    //var kendoChart = $("#chart").data("kendoChart");
+    //kendoChart?.dataSource.read();
     console.log("urleastus2");
     console.log(data);
     
-});
+}),
 $.get(urlsoutheastasia, function (data) {
     $("#skeletonsoutheastasia").remove();
     $("#cards").append(
@@ -192,15 +189,20 @@ $.get(urlsoutheastasia, function (data) {
         <div class="k-card-body">
             <h6 class="k-card-subtitle">Latency: ${data.latencyInChrome}</h6>
             <h6 class="k-card-subtitle">DOM Loaded: ${data.domContentLoadedEventInChrome}</h6>
-            <h6 class="k-card-subtitle">Latency: ${data.sourceIpAddress}</h6>
-            <h6 class="k-card-subtitle">Latency: ${data.destinationIpAddress}</h6>
+            <h6 class="k-card-subtitle">SourceIpAddress: ${data.sourceIpAddress}</h6>
+            <h6 class="k-card-subtitle">DestinationIpAddress: ${data.destinationIpAddress}</h6>
             <h6 class="k-card-subtitle">Error: ${data.exceptionMessage}</h6>
         </div>
     </div>`
     );
 
-    var kendoChart = $("#chart").data("kendoChart");
-    kendoChart?.dataSource.read();
+    //var kendoChart = $("#chart").data("kendoChart");
+    //kendoChart?.dataSource.read();
     console.log("urlsoutheastasia");
     console.log(data);
+})).done(function(){
+    var kendoChart = $("#chart").data("kendoChart");
+    kendoChart?.dataSource.read();
+    console.log("done");
+    
 });
