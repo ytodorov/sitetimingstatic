@@ -35,10 +35,10 @@ if (document.location.hostname.toLowerCase().includes("127.0.0.1") == false) {
 });
 
 
-var largeLoader = $('#loader-large').kendoLoader({visible:true,
-    type: "pulsing",
-    size: 'large'
-}).data("kendoLoader");
+//var largeLoader = $('#loader-large').kendoLoader({visible:true,
+//    type: "pulsing",
+//    size: 'large'
+//}).data("kendoLoader");
 
 function createChart() {
     $("#chart").kendoChart({
@@ -152,13 +152,14 @@ $.get(urlwestus3, function (data) {
             <h6 class="k-card-subtitle">Latency: ${data.latencyInChrome}</h6>
             <h6 class="k-card-subtitle">DOM Loaded: ${data.domContentLoadedEventInChrome}</h6>
             <h6 class="k-card-subtitle">Latency: ${data.sourceIpAddress}</h6>
+            <h6 class="k-card-subtitle">Latency: ${data.destinationIpAddress}</h6>
             <h6 class="k-card-subtitle">Error: ${data.exceptionMessage}</h6>
         </div>
     </div>`
     );
 
     var kendoChart = $("#chart").data("kendoChart");
-    kendoChart?.dataSource.fetch();
+    kendoChart?.dataSource.read();
     console.log("urlwestus3");
     console.log(data);
 });
@@ -171,13 +172,14 @@ $.get(urleastus2, function (data) {
             <h6 class="k-card-subtitle">Latency: ${data.latencyInChrome}</h6>
             <h6 class="k-card-subtitle">DOM Loaded: ${data.domContentLoadedEventInChrome}</h6>
             <h6 class="k-card-subtitle">Latency: ${data.sourceIpAddress}</h6>
+            <h6 class="k-card-subtitle">Latency: ${data.destinationIpAddress}</h6>
             <h6 class="k-card-subtitle">Error: ${data.exceptionMessage}</h6>
         </div>
     </div>`
     );
 
     var kendoChart = $("#chart").data("kendoChart");
-    kendoChart?.dataSource.fetch();
+    kendoChart?.dataSource.read();
     console.log("urleastus2");
     console.log(data);
     
@@ -191,13 +193,14 @@ $.get(urlsoutheastasia, function (data) {
             <h6 class="k-card-subtitle">Latency: ${data.latencyInChrome}</h6>
             <h6 class="k-card-subtitle">DOM Loaded: ${data.domContentLoadedEventInChrome}</h6>
             <h6 class="k-card-subtitle">Latency: ${data.sourceIpAddress}</h6>
+            <h6 class="k-card-subtitle">Latency: ${data.destinationIpAddress}</h6>
             <h6 class="k-card-subtitle">Error: ${data.exceptionMessage}</h6>
         </div>
     </div>`
     );
 
     var kendoChart = $("#chart").data("kendoChart");
-    kendoChart?.dataSource.fetch();
+    kendoChart?.dataSource.read();
     console.log("urlsoutheastasia");
     console.log(data);
 });
