@@ -115,20 +115,17 @@ $(".skeletonMarker").each(function( index )
 {
     $(this).kendoSkeletonContainer({
         animation: "pulse",
-        template: `<div class="k-card">
-                            <div class="k-card-header">
-                                <div>
-                                    <span data-shape-circle class="k-card-image avatar"></span>
-                                </div>
-                                <div class="user-info" style="width: 100%;">
-                                    <span data-shape-text class='k-card-title'></span>
-                                    <span data-shape-text class='k-card-subtitle' style="width: 35%;"></span>
-                                </div>
-                            </div>
+        template: `<div class="k-card">                         
                             <span data-shape-rectangle style="width: 340px; height: 100%;"></span>
                             <div class="k-card-body">
                                 <span data-shape-text></span>
                             </div>
+                            <div class="k-card-body">
+                            <span data-shape-text></span>
+                        </div>
+                        <div class="k-card-body">
+                        <span data-shape-text></span>
+                    </div>
                         </div>`
     });
 });
@@ -148,7 +145,7 @@ $.when($.get(urlwestus3, function (data) {
         <div class="k-card-body">
             <h6 class="k-card-subtitle">Latency: ${data.latencyInChrome}</h6>
             <h6 class="k-card-subtitle">DOM Loaded: ${data.domContentLoadedEventInChrome}</h6>
-            <h6 class="k-card-subtitle">SourceIpAddress: ${data.sourceIpAddress}</h6>
+            <h6 class="k-card-subtitle">SourceIpAddress: ${data.sourceIpAddress} (West US)</h6>
             <h6 class="k-card-subtitle">DestinationIpAddress: ${data.destinationIpAddress}</h6>
             <h6 class="k-card-subtitle">Error: ${data.exceptionMessage}</h6>
         </div>
@@ -168,7 +165,7 @@ $.get(urleastus2, function (data) {
         <div class="k-card-body">
             <h6 class="k-card-subtitle">Latency: ${data.latencyInChrome}</h6>
             <h6 class="k-card-subtitle">DOM Loaded: ${data.domContentLoadedEventInChrome}</h6>
-            <h6 class="k-card-subtitle">SourceIpAddress: ${data.sourceIpAddress}</h6>
+            <h6 class="k-card-subtitle">SourceIpAddress: ${data.sourceIpAddress} (East US)</h6>
             <h6 class="k-card-subtitle">DestinationIpAddress: ${data.destinationIpAddress}</h6>
             <h6 class="k-card-subtitle">Error: ${data.exceptionMessage}</h6>
         </div>
@@ -189,7 +186,7 @@ $.get(urlsoutheastasia, function (data) {
         <div class="k-card-body">
             <h6 class="k-card-subtitle">Latency: ${data.latencyInChrome}</h6>
             <h6 class="k-card-subtitle">DOM Loaded: ${data.domContentLoadedEventInChrome}</h6>
-            <h6 class="k-card-subtitle">SourceIpAddress: ${data.sourceIpAddress}</h6>
+            <h6 class="k-card-subtitle">SourceIpAddress: ${data.sourceIpAddress} (Southeast Asia)</h6>
             <h6 class="k-card-subtitle">DestinationIpAddress: ${data.destinationIpAddress}</h6>
             <h6 class="k-card-subtitle">Error: ${data.exceptionMessage}</h6>
         </div>
