@@ -1,9 +1,9 @@
 function navigateToUrl(url:string) {
     if (document.location.hostname.toLowerCase().indexOf("127.0.0.1") == -1) {
       if (!url.startsWith("http://") && !url.startsWith("https://")) {
-        url = `http://${url}`;
-        document.location = "/" + url; 
+        url = `http://${url}`;        
       }
+      document.location = "/" + url; 
     }    
   }
   
