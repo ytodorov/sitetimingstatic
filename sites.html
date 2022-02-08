@@ -2,6 +2,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="UTF-8" />
+    <title>SiteTiming - Sites</title>
     <style>
       html {
         font-size: 16px;
@@ -50,7 +51,7 @@
                 showIcon: false,
               },
               {
-                type: "rootitem",
+                type: "item",
                 href: "/sites",
                 text: "Sites",
                 showText: true,
@@ -120,8 +121,10 @@
               },
             ],
           });
+
           $(".k-spacer").remove();
           $(".k-searchbox").width("96%");
+          $(".k-searchbox").addClass("k-textbox").removeClass("k-searchbox");
         });
       </script>
     </section>
