@@ -25,26 +25,26 @@ function navigateToUrl(url:string) {
   $(function () {
   
     
-  ($("#breadcrumb") as any).kendoBreadcrumb({
-    navigational: true,
-    items: [
-        {
-            type: "rootitem",
-            href: "/",
-            text: "SiteTiming",
-            showText: true,
-            icon: "home",
-            showIcon: true
-        },
-        {
-            type: "item",
-            href: "/sites",
-            text: "Sites",
-            showText: true
-        }
+  // ($("#breadcrumb") as any).kendoBreadcrumb({
+  //   navigational: true,
+  //   items: [
+  //       {
+  //           type: "rootitem",
+  //           href: "/",
+  //           text: "SiteTiming",
+  //           showText: true,
+  //           icon: "home",
+  //           showIcon: true
+  //       },
+  //       {
+  //           type: "item",
+  //           href: "/sites",
+  //           text: "Sites",
+  //           showText: true
+  //       }
        
-    ]
-  });
+  //   ]
+  // });
   
   //   $("#btnCheckWebSite").kendoButton({
   //     themeColor: "primary"
