@@ -7,8 +7,8 @@ function navigateToUrl(url) {
         document.location = "/" + url;
     }
 }
-$('#sites').on("keypress", function (event) {
-    if (event.key == 'Enter') {
+$("#sites").on("keypress", function (event) {
+    if (event.key == "Enter") {
         $("#btnCheckWebSite").trigger("click");
     }
 });
@@ -42,11 +42,11 @@ $(function () {
     //   $("#btnCheckWebSite").kendoButton({
     //     themeColor: "primary"
     // });
-    var dataSource = new kendo.data.DataSource({
+    const dataSource = new kendo.data.DataSource({
         schema: {
             data: function (response) {
                 return response.data.sites;
-            }
+            },
         },
         serverFiltering: true,
         transport: {
@@ -62,10 +62,10 @@ $(function () {
                     error: function (result) {
                         // notify the data source that the request failed
                         options.error(result);
-                    }
+                    },
                 });
-            }
-        }
+            },
+        },
     });
     function onSelect(e) {
         var url = e.dataItem.url.toLowerCase();
@@ -76,7 +76,7 @@ $(function () {
         minLength: 3,
         dataSource: dataSource,
         size: "large",
-        noDataTemplate: 'Website not found. Press enter to add it.',
-        select: onSelect
+        noDataTemplate: "Website not found. Press enter to add it.",
+        select: onSelect,
     });
 });

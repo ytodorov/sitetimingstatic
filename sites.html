@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base href="https://demos.telerik.com/kendo-ui/grid/graphql" />
+    <style>
+      html {
+        font-size: 14px;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+    </style>
+    <title>Sites</title>
+    <link
+      rel="stylesheet"
+      href="https://kendo.cdn.telerik.com/2022.1.119/styles/kendo.common-nova.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://kendo.cdn.telerik.com/2022.1.119/styles/kendo.nova.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://kendo.cdn.telerik.com/2022.1.119/styles/kendo.nova.mobile.min.css"
+    />
+
+    <script src="https://kendo.cdn.telerik.com/2022.1.119/js/jquery.min.js"></script>
+
+    <script src="https://kendo.cdn.telerik.com/2022.1.119/js/kendo.all.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <ul
+        id="menu"
+        data-role="menu"
+        class="k-widget k-reset k-menu k-menu-horizontal"
+        aria-orientation="horizontal"
+        tabindex="0"
+        role="menubar"
+        aria-activedescendant="menu_mn_active"
+      >
+        <li
+          class="k-item k-menu-item k-first"
+          role="menuitem"
+          id="menu_mn_active"
+        >
+          <span class="k-link k-menu-link"
+            ><span class="k-menu-link-text"> SiteTiming </span></span
+          >
+        </li>
+        <li class="k-item k-menu-item k-last" role="menuitem">
+          <span class="k-link k-menu-link"
+            ><span class="k-menu-link-text"> Sites </span></span
+          >
+        </li>
+      </ul>
+    </header>
+
+    <section>
+      <div id="grid"></div>
+      <script>
+        var READ_PRODUCTS_QUERY =
+          "query {" + "sites(take:100000) { url }" + "}";
+
+        $(document).ready(function () {
+          var dataSource = new kendo.data.DataSource({
+            transport: {
+              read: {
+                contentType: "application/json",
+                url: "https://st-westus3.azurewebsites.net/graphql",
+                type: "POST",
+                data: function () {
+                  return { query: READ_PRODUCTS_QUERY };
+                },
+              },
+              parameterMap: function (options, operation) {
+                return kendo.stringify({
+                  query: options.query,
+                  variables: options.variables,
+                });
+              },
+            },
+            schema: {
+              data: function (response) {
+                var data = response.data;
+
+                if (data.sites) {
+                  return data.sites;
+                } else if (data.createProduct) {
+                  return data.createProduct;
+                } else if (data.updateProduct) {
+                  return data.updateProduct;
+                } else if (data.deleteProduct) {
+                  return data.deleteProduct;
+                }
+              },
+              total: function (response) {
+                return response.data.sites.length;
+              },
+              model: {
+                id: "id",
+                fields: {
+                  id: { type: "number", editable: false },
+                  url: { type: "string" },
+                },
+              },
+            },
+            pageSize: 10,
+          });
+
+          $("#grid").kendoGrid({
+            dataSource: dataSource,
+
+            groupable: false,
+            sortable: true,
+            pageable: true,
+            filterable: {
+              mode: "row",
+            },
+            columns: [
+              {
+                field: "url",
+                title: "url",
+                template:
+                  "<a href='https://www.sitetiming.com/#: url #'>#: url #</a>",
+                filterable: {
+                  cell: {
+                    operator: "contains",
+                    suggestionOperator: "contains",
+                  },
+                },
+              },
+            ],
+          });
+        });
+      </script>
+    </section>
+  </body>
+</html>

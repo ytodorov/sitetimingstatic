@@ -1,5 +1,10 @@
 {
-  
+  "routes": [
+    {
+      "route": "/sites",
+      "rewrite": "/sites.html"
+    }
+  ], 
   "navigationFallback": {
     "rewrite": "singleSite.html"
   }
