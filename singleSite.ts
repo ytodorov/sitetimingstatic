@@ -8,6 +8,8 @@ if (document.location.hostname.toLowerCase().includes("127.0.0.1") == false) {
   }
 }
 
+$("title").val(`SiteTiming - ${url}`);
+
 ($("#breadcrumb") as any).kendoBreadcrumb({
   navigational: true,
   items: [

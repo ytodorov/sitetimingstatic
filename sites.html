@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <base href="https://demos.telerik.com/kendo-ui/grid/graphql" />
+    <meta charset="UTF-8" />
     <style>
       html {
         font-size: 16px;
@@ -106,28 +106,22 @@
 
           $("#grid").kendoGrid({
             dataSource: dataSource,
+            toolbar: ["search"],
 
             groupable: false,
             sortable: true,
             pageable: true,
-            filterable: {
-              mode: "row",
-            },
             columns: [
               {
                 field: "url",
                 title: "url",
                 template:
                   "<a href='https://www.sitetiming.com/#: url #'>#: url #</a>",
-                filterable: {
-                  cell: {
-                    operator: "contains",
-                    suggestionOperator: "contains",
-                  },
-                },
               },
             ],
           });
+          $(".k-spacer").remove();
+          $(".k-searchbox").width("96%");
         });
       </script>
     </section>
