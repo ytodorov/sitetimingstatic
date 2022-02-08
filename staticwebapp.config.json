@@ -3,6 +3,10 @@
     {
       "route": "/sites",
       "rewrite": "/sites.html"
+    },
+    {
+      "route": "/sitemap.xml",
+      "rewrite": "/sitemap.xml"
     }
   ], 
   "navigationFallback": {
