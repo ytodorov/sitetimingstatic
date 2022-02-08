@@ -14,7 +14,7 @@ if (document.location.hostname.toLowerCase().includes("127.0.0.1") == false) {
     {
       type: "rootitem",
       href: "/",
-      text: "Home",
+      text: "SiteTiming",
       showText: true,
       showIcon: false,
     },

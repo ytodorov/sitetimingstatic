@@ -1,77 +1,96 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>SiteTiming</title>
+    <meta charset="UTF-8" />
+    <meta
+      name="description"
+      content="SiteTiming is a free service for cheking availability, measure performance and
+	collecting statistics over time for any website"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, maximum-scale=5, initial-scale=1"
+    />
+    <style>
+      html {
+        font-size: 16px;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+    </style>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <!--<link rel="stylesheet" href="/css/1.css" />-->
+    <link
+      rel="stylesheet"
+      href="https://kendo.cdn.telerik.com/2022.1.119/styles/kendo.common-nova.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://kendo.cdn.telerik.com/2022.1.119/styles/kendo.nova.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://kendo.cdn.telerik.com/2022.1.119/styles/kendo.nova.mobile.min.css"
+    />
+  </head>
 
-<head>
-	<title>SiteTiming</title>
-	<meta charset="UTF-8">
-	<meta name="description" content="SiteTiming is a free service for cheking availability, measure performance and
-	collecting statistics over time for any website">
-	<meta name="viewport" content="width=device-width, maximum-scale=5, initial-scale=1">
-	<style>html { font-size: 14px; font-family: Arial, Helvetica, sans-serif; }</style>
-	<link rel="shortcut icon" href="/favicon.ico">
-	<!--<link rel="stylesheet" href="/css/1.css" />-->
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.1.119/styles/kendo.default-nordic.min.css" />
-</head>
-
-<body>
-
+  <body>
     <nav id="breadcrumb"></nav>
-	<div id="loader-large"></div>
+    <div id="loader-large"></div>
 
     <div id="chart"></div>
-	
-	<div id="cards" class="cards-container">
-        <div class="skeletonMarker" id="skeletonwestus3">
-        </div>       
-        <div class="skeletonMarker" id="skeletoneastus2">
-        </div>  
-        <div class="skeletonMarker" id="skeletonsoutheastasia">
-        </div>  
+
+    <div id="cards" class="cards-container">
+      <div class="skeletonMarker" id="skeletonwestus3"></div>
+      <div class="skeletonMarker" id="skeletoneastus2"></div>
+      <div class="skeletonMarker" id="skeletonsoutheastasia"></div>
     </div>
 
-	<style>
-        .cards-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
+    <style>
+      .cards-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
 
-        .k-card {
-            width: 285px;
-            margin: 5%;
-        }
+      .k-card {
+        width: 285px;
+        margin: 5%;
+      }
 
-        .k-card-footer {
-            text-align: center;
-        }
+      .k-card-footer {
+        text-align: center;
+      }
 
-        .k-card-action>.k-button {
-            width:100%;
-        }
+      .k-card-action > .k-button {
+        width: 100%;
+      }
     </style>
 
-	<!-- Core javascripts-->
+    <!-- Core javascripts-->
 
-	<script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
     <script src="/js/kendo.all.min.js"></script>
-	<!--<script src="/js/kendo.core.min.js"></script>
+    <!--<script src="/js/kendo.core.min.js"></script>
 	<script src="/js/kendo.breadcrumb.min.js"></script>
 	<script src="/js/kendo.loader.min.js"></script>-->
-    
 
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-XPZFMJN51X"
+    ></script>
+    <!-- Your custom javascripts -->
+    <script src="/singleSite.js"></script>
 
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-XPZFMJN51X"></script> 
-	<!-- Your custom javascripts -->
-	<script src="/singleSite.js"></script>
-
-	<!-- jquery https://www.jsviews.com/download/jsrender.min.js google -->
+    <!-- jquery https://www.jsviews.com/download/jsrender.min.js google -->
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-        gtag('config', 'G-XPZFMJN51X');
+      gtag("config", "G-XPZFMJN51X");
     </script>
-
-</body>
+  </body>
 </html>
