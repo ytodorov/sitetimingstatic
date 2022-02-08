@@ -1,4 +1,5 @@
 "use strict";
+/// <reference types="kendo-ui" />
 function navigateToUrl(url) {
     if (document.location.hostname.toLowerCase().indexOf("127.0.0.1") == -1) {
         if (!url.startsWith("http://") && !url.startsWith("https://")) {
@@ -20,25 +21,26 @@ $("#btnCheckWebSite").on("click", function (data) {
     }
 });
 $(function () {
-    // ($("#breadcrumb") as any).kendoBreadcrumb({
-    //   navigational: true,
-    //   items: [
-    //       {
-    //           type: "rootitem",
-    //           href: "/",
-    //           text: "SiteTiming",
-    //           showText: true,
-    //           icon: "home",
-    //           showIcon: true
-    //       },
-    //       {
-    //           type: "item",
-    //           href: "/sites",
-    //           text: "Sites",
-    //           showText: true
-    //       }
-    //   ]
-    // });
+    $("#breadcrumb").kendoBreadcrumb({
+        navigational: true,
+        delimiterIcon: "line111",
+        items: [
+            {
+                type: "rootitem",
+                href: "/",
+                text: "SiteTiming",
+                showText: true,
+                showIcon: false,
+            },
+            {
+                type: "rootitem",
+                href: "/sites",
+                text: "Sites",
+                showText: true,
+                showIcon: false,
+            },
+        ],
+    });
     //   $("#btnCheckWebSite").kendoButton({
     //     themeColor: "primary"
     // });

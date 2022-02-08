@@ -28,30 +28,7 @@
   </head>
   <body>
     <header>
-      <ul
-        id="menu"
-        data-role="menu"
-        class="k-widget k-reset k-menu k-menu-horizontal"
-        aria-orientation="horizontal"
-        tabindex="0"
-        role="menubar"
-        aria-activedescendant="menu_mn_active"
-      >
-        <li
-          class="k-item k-menu-item k-first"
-          role="menuitem"
-          id="menu_mn_active"
-        >
-          <span class="k-link k-menu-link"
-            ><span class="k-menu-link-text"> SiteTiming </span></span
-          >
-        </li>
-        <li class="k-item k-menu-item k-last" role="menuitem">
-          <span class="k-link k-menu-link"
-            ><span class="k-menu-link-text"> Sites </span></span
-          >
-        </li>
-      </ul>
+      <nav id="breadcrumb"></nav>
     </header>
 
     <section>
@@ -61,6 +38,27 @@
           "query {" + "sites(take:100000) { url }" + "}";
 
         $(document).ready(function () {
+          $("#breadcrumb").kendoBreadcrumb({
+            navigational: true,
+            delimiterIcon: "line111",
+            items: [
+              {
+                type: "rootitem",
+                href: "/",
+                text: "SiteTiming",
+                showText: true,
+                showIcon: false,
+              },
+              {
+                type: "rootitem",
+                href: "/sites",
+                text: "Sites",
+                showText: true,
+                showIcon: false,
+              },
+            ],
+          });
+
           var dataSource = new kendo.data.DataSource({
             transport: {
               read: {

@@ -16,22 +16,21 @@ $("#breadcrumb").kendoBreadcrumb({
             href: "/",
             text: "Home",
             showText: true,
-            icon: "home",
-            showIcon: true
+            showIcon: false,
         },
         {
             type: "item",
             href: "/sites",
             text: "Sites",
-            showText: true
+            showText: true,
         },
         {
             type: "item",
             href: `${url}`,
             text: `${url}`,
-            showText: true
-        }
-    ]
+            showText: true,
+        },
+    ],
 });
 //var largeLoader = $('#loader-large').kendoLoader({visible:true,
 //    type: "pulsing",
@@ -43,56 +42,58 @@ function createChart() {
             schema: {
                 data: function (response) {
                     return response.data.probes;
-                }
+                },
             },
             transport: {
                 read: {
                     url: `https://st-westus3.azurewebsites.net/graphql?query={probes(take:20,where:"site.url=\\\"${url}\\\""){id, latencyInChrome dateCreated dOMContentLoadedEventInChrome sourceIpAddress}}`,
-                    dataType: "json"
-                }
+                    dataType: "json",
+                },
             },
             sort: {
                 field: "id",
-                dir: "asc"
-            }
+                dir: "asc",
+            },
         },
         title: {
-            text: `Latency of ${url}`
+            text: `Latency of ${url}`,
         },
         legend: {
-            position: "top"
+            position: "top",
         },
         seriesDefaults: {
-            type: "line"
+            type: "line",
         },
-        series: [{
+        series: [
+            {
                 field: "latencyInChrome",
                 categoryField: "dateCreated",
-                name: "latency"
+                name: "latency",
             },
             {
                 field: "dOMContentLoadedEventInChrome",
                 categoryField: "dateCreated",
                 name: "dom loaded",
-            }],
+            },
+        ],
         categoryAxis: {
             labels: {
-                rotation: -90
+                rotation: -90,
             },
             crosshair: {
-                visible: true
-            }
+                visible: true,
+            },
         },
         valueAxis: {
             labels: {
-                format: "N0"
+                format: "N0",
             },
         },
         tooltip: {
             visible: true,
             shared: true,
-            format: "N0"
-        }
+            format: "N0",
+        },
     });
 }
 $(document).ready(createChart);
@@ -117,7 +118,7 @@ $(".skeletonMarker").each(function (index) {
                         <div class="k-card-body">
                         <span data-shape-text></span>
                     </div>
-                        </div>`
+                        </div>`,
     });
 });
 var urlwestus3 = `https://st-westus3.azurewebsites.net/probe?url=${url}`;
