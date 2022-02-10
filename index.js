@@ -84,7 +84,7 @@ $(function () {
 });
 $(function () {
     let READ_PRODUCTS_QUERY = "query {" +
-        'probes(take:10, order: "id desc") { uniqueGuid, latencyInChrome, dOMContentLoadedEventInChrome, sourceIpAddress, site{url}}' +
+        'probes(take:10, order: "id desc") { uniqueGuid, latencyInChrome, dOMContentLoadedEventInChrome, sourceIpAddress, siteId site{url}}' +
         "}";
     let dataSource = new kendo.data.DataSource({
         transport: {
@@ -132,11 +132,10 @@ $(function () {
         sortable: false,
         pageable: true,
         columns: [
-            // {
-            //   field: "uniqueGuid",
-            //   title: "Url",
-            //   template: `#: site.url #`,
-            // },
+            {
+                title: "Url",
+                template: `<a target="_blank" href="https://www.sitetiming.com/#: site.url #">#: site.url #</a>`,
+            },
             {
                 field: "latencyInChrome",
                 title: "Latency",
