@@ -112,9 +112,13 @@ $(window).resize(function () {
 });
 
 $(".skeletonMarker").each(function (index) {
+  var text = $(this).attr("data-location");
   $(this).kendoSkeletonContainer({
     animation: "pulse",
-    template: `<div class="k-card">                         
+    template: `<div class="k-card">      
+                                    <div class="k-card-header">
+                                           ${text}
+                                    </div>                  
                             <span data-shape-rectangle style="width: 340px; height: 100%;"></span>
                             <div class="k-card-body">
                                 <span data-shape-text></span>
@@ -183,6 +187,26 @@ $.when(
             <h6 class="k-card-subtitle">Latency: ${data.latencyInChrome}</h6>
             <h6 class="k-card-subtitle">DOM Loaded: ${data.domContentLoadedEventInChrome}</h6>
             <h6 class="k-card-subtitle">SourceIpAddress: ${data.sourceIpAddress} (Southeast Asia)</h6>
+            <h6 class="k-card-subtitle">DestinationIpAddress: ${data.destinationIpAddress}</h6>
+            <h6 class="k-card-subtitle">Error: ${data.exceptionMessage}</h6>
+        </div>
+    </div>`
+    );
+
+    //var kendoChart = $("#chart").data("kendoChart");
+    //kendoChart?.dataSource.read();
+    console.log("urlsoutheastasia");
+    console.log(data);
+  }),
+  $.get(urlsoutheastasia, function (data) {
+    $("#skeletonjapaneast").remove();
+    $("#cards").append(
+      ` <div class="k-card">
+        <img class="k-card-image" onerror="if (this.src != 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg') this.src = 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg';" src="https://sitetiming.blob.core.windows.net/images/short50_${data.uniqueGuid}.jpeg?sv=2020-08-04&st=2012-01-27T12%3A30%3A00Z&se=2032-01-28T12%3A30%3A00Z&sr=c&sp=rl&sig=jvKd8yqdiz42u28l4oPYHVFWUSCaeLYmeKMMCgwtn1Y%3D" />
+        <div class="k-card-body">
+            <h6 class="k-card-subtitle">Latency: ${data.latencyInChrome}</h6>
+            <h6 class="k-card-subtitle">DOM Loaded: ${data.domContentLoadedEventInChrome}</h6>
+            <h6 class="k-card-subtitle">SourceIpAddress: ${data.sourceIpAddress} (Japan East)</h6>
             <h6 class="k-card-subtitle">DestinationIpAddress: ${data.destinationIpAddress}</h6>
             <h6 class="k-card-subtitle">Error: ${data.exceptionMessage}</h6>
         </div>
