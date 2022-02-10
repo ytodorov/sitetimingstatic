@@ -132,13 +132,15 @@ var urlsoutheastasia = `https://st-southeastasia.azurewebsites.net/probe?url=${u
 $.when($.get(urlwestus3, function (data) {
     $("#skeletonwestus3").remove();
     $("#cards").append(` <div class="k-card">
+          <div class="k-card-header">
+                    <h5 class="k-card-title">West US</h5>
+          </div>
         <img class="k-card-image" onerror="if (this.src != 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg') this.src = 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg';" src="https://sitetiming.blob.core.windows.net/images/short50_${data.uniqueGuid}.jpeg?sv=2020-08-04&st=2012-01-27T12%3A30%3A00Z&se=2032-01-28T12%3A30%3A00Z&sr=c&sp=rl&sig=jvKd8yqdiz42u28l4oPYHVFWUSCaeLYmeKMMCgwtn1Y%3D" />
         <div class="k-card-body">
             <h6 class="k-card-subtitle">Latency: ${data.latencyInChrome}</h6>
             <h6 class="k-card-subtitle">DOM Loaded: ${data.domContentLoadedEventInChrome}</h6>
-            <h6 class="k-card-subtitle">SourceIpAddress: ${data.sourceIpAddress} (West US)</h6>
             <h6 class="k-card-subtitle">DestinationIpAddress: ${data.destinationIpAddress}</h6>
-            <h6 class="k-card-subtitle">Error: ${data.exceptionMessage}</h6>
+            <h6 class="k-card-subtitle">${data.exceptionMessage}</h6>
         </div>
     </div>`);
     //var kendoChart = $("#chart").data("kendoChart");
@@ -148,13 +150,15 @@ $.when($.get(urlwestus3, function (data) {
 }), $.get(urleastus2, function (data) {
     $("#skeletoneastus2").remove();
     $("#cards").append(` <div class="k-card">
+           <div class="k-card-header">
+                    <h5 class="k-card-title">East US</h5>
+          </div>
         <img class="k-card-image" onerror="if (this.src != 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg') this.src = 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg';" src="https://sitetiming.blob.core.windows.net/images/short50_${data.uniqueGuid}.jpeg?sv=2020-08-04&st=2012-01-27T12%3A30%3A00Z&se=2032-01-28T12%3A30%3A00Z&sr=c&sp=rl&sig=jvKd8yqdiz42u28l4oPYHVFWUSCaeLYmeKMMCgwtn1Y%3D" />
         <div class="k-card-body">
             <h6 class="k-card-subtitle">Latency: ${data.latencyInChrome}</h6>
             <h6 class="k-card-subtitle">DOM Loaded: ${data.domContentLoadedEventInChrome}</h6>
-            <h6 class="k-card-subtitle">SourceIpAddress: ${data.sourceIpAddress} (East US)</h6>
             <h6 class="k-card-subtitle">DestinationIpAddress: ${data.destinationIpAddress}</h6>
-            <h6 class="k-card-subtitle">Error: ${data.exceptionMessage}</h6>
+            <h6 class="k-card-subtitle">${data.exceptionMessage}</h6>
         </div>
     </div>`);
     //var kendoChart = $("#chart").data("kendoChart");
@@ -164,13 +168,15 @@ $.when($.get(urlwestus3, function (data) {
 }), $.get(urlsoutheastasia, function (data) {
     $("#skeletonsoutheastasia").remove();
     $("#cards").append(` <div class="k-card">
+       <div class="k-card-header">
+                    <h5 class="k-card-title">Southeast Asia</h5>
+          </div>
         <img class="k-card-image" onerror="if (this.src != 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg') this.src = 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg';" src="https://sitetiming.blob.core.windows.net/images/short50_${data.uniqueGuid}.jpeg?sv=2020-08-04&st=2012-01-27T12%3A30%3A00Z&se=2032-01-28T12%3A30%3A00Z&sr=c&sp=rl&sig=jvKd8yqdiz42u28l4oPYHVFWUSCaeLYmeKMMCgwtn1Y%3D" />
         <div class="k-card-body">
             <h6 class="k-card-subtitle">Latency: ${data.latencyInChrome}</h6>
             <h6 class="k-card-subtitle">DOM Loaded: ${data.domContentLoadedEventInChrome}</h6>
-            <h6 class="k-card-subtitle">SourceIpAddress: ${data.sourceIpAddress} (Southeast Asia)</h6>
             <h6 class="k-card-subtitle">DestinationIpAddress: ${data.destinationIpAddress}</h6>
-            <h6 class="k-card-subtitle">Error: ${data.exceptionMessage}</h6>
+            <h6 class="k-card-subtitle">${data.exceptionMessage}</h6>
         </div>
     </div>`);
     //var kendoChart = $("#chart").data("kendoChart");
@@ -180,13 +186,15 @@ $.when($.get(urlwestus3, function (data) {
 }), $.get(urlsoutheastasia, function (data) {
     $("#skeletonjapaneast").remove();
     $("#cards").append(` <div class="k-card">
+             <div class="k-card-header">
+                    <h5 class="k-card-title">Japan East</h5>
+          </div>
         <img class="k-card-image" onerror="if (this.src != 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg') this.src = 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg';" src="https://sitetiming.blob.core.windows.net/images/short50_${data.uniqueGuid}.jpeg?sv=2020-08-04&st=2012-01-27T12%3A30%3A00Z&se=2032-01-28T12%3A30%3A00Z&sr=c&sp=rl&sig=jvKd8yqdiz42u28l4oPYHVFWUSCaeLYmeKMMCgwtn1Y%3D" />
         <div class="k-card-body">
             <h6 class="k-card-subtitle">Latency: ${data.latencyInChrome}</h6>
             <h6 class="k-card-subtitle">DOM Loaded: ${data.domContentLoadedEventInChrome}</h6>
-            <h6 class="k-card-subtitle">SourceIpAddress: ${data.sourceIpAddress} (Japan East)</h6>
             <h6 class="k-card-subtitle">DestinationIpAddress: ${data.destinationIpAddress}</h6>
-            <h6 class="k-card-subtitle">Error: ${data.exceptionMessage}</h6>
+            <h6 class="k-card-subtitle">${data.exceptionMessage}</h6>
         </div>
     </div>`);
     //var kendoChart = $("#chart").data("kendoChart");
