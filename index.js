@@ -130,7 +130,9 @@ $(function () {
         dataSource: dataSource,
         groupable: false,
         sortable: false,
-        pageable: true,
+        pageable: {
+            refresh: true,
+        },
         columns: [
             {
                 title: "Url",
