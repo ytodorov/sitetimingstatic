@@ -134,7 +134,7 @@ let urlnortheurope = `https://containerappcanadacentral.happyrock-5d18c325.canad
 let urlwesteurope = `https://containerappwesteurope.nicepond-330ead69.westeurope.azurecontainerapps.io/probe?url=${url}`;
 $.when($.get(urleastus2, function (data) {
     $("#eastus2").remove();
-    $("#cards").append(` <div class="k-card">
+    $("#cards").prepend(` <div class="k-card">
            <div class="k-card-header">
                     <h5 class="k-card-title">East US</h5>
           </div>
@@ -148,7 +148,7 @@ $.when($.get(urleastus2, function (data) {
     </div>`);
 }), $.get(urlcentralcanada, function (data) {
     $("#centralcanada").remove();
-    $("#cards").append(` <div class="k-card">
+    $("#cards").prepend(` <div class="k-card">
              <div class="k-card-header">
                     <h5 class="k-card-title">Central Canada</h5>
           </div>
@@ -162,7 +162,7 @@ $.when($.get(urleastus2, function (data) {
     </div>`);
 }), $.get(urlwesteurope, function (data) {
     $("#westeurope").remove();
-    $("#cards").append(` <div class="k-card">
+    $("#cards").prepend(` <div class="k-card">
              <div class="k-card-header">
                     <h5 class="k-card-title">West Europe</h5>
           </div>
@@ -176,7 +176,7 @@ $.when($.get(urleastus2, function (data) {
     </div>`);
 }), $.get(urlnortheurope, function (data) {
     $("#northeurope").remove();
-    $("#cards").append(` <div class="k-card">
+    $("#cards").prepend(` <div class="k-card">
              <div class="k-card-header">
                     <h5 class="k-card-title">North Europe</h5>
           </div>

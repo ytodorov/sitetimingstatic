@@ -143,7 +143,7 @@ let urlwesteurope = `https://containerappwesteurope.nicepond-330ead69.westeurope
 $.when(
   $.get(urleastus2, function (data) {
     $("#eastus2").remove();
-    $("#cards").append(
+    $("#cards").prepend(
       ` <div class="k-card">
            <div class="k-card-header">
                     <h5 class="k-card-title">East US</h5>
@@ -161,7 +161,7 @@ $.when(
 
   $.get(urlcentralcanada, function (data) {
     $("#centralcanada").remove();
-    $("#cards").append(
+    $("#cards").prepend(
       ` <div class="k-card">
              <div class="k-card-header">
                     <h5 class="k-card-title">Central Canada</h5>
@@ -178,7 +178,7 @@ $.when(
   }),
   $.get(urlwesteurope, function (data) {
     $("#westeurope").remove();
-    $("#cards").append(
+    $("#cards").prepend(
       ` <div class="k-card">
              <div class="k-card-header">
                     <h5 class="k-card-title">West Europe</h5>
@@ -195,7 +195,7 @@ $.when(
   }),
   $.get(urlnortheurope, function (data) {
     $("#northeurope").remove();
-    $("#cards").append(
+    $("#cards").prepend(
       ` <div class="k-card">
              <div class="k-card-header">
                     <h5 class="k-card-title">North Europe</h5>
