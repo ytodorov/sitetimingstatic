@@ -172,4 +172,49 @@ $(function () {
       },
     ],
   });
+
+  $("#map").kendoMap({
+    center: [30.268107, -40.744821],
+    zoom: 3,
+    layers: [
+      {
+        type: "tile",
+        urlTemplate:
+          "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+        subdomains: ["a", "b", "c"],
+        attribution:
+          "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>",
+      },
+    ],
+    markers: [
+      {
+        location: [43.7001, -79.4163],
+        shape: "pinTarget",
+        tooltip: {
+          content: "Canada, Toronto",
+        },
+      },
+      {
+        location: [36.6676, -78.3875],
+        shape: "pinTarget",
+        tooltip: {
+          content: "United States, Boydton",
+        },
+      },
+      {
+        location: [53.34399, -6.26719],
+        shape: "pinTarget",
+        tooltip: {
+          content: "Ireland, Dublin",
+        },
+      },
+      {
+        location: [52.374, 4.8897],
+        shape: "pinTarget",
+        tooltip: {
+          content: "Netherlands, Amsterdam",
+        },
+      },
+    ],
+  });
 });
