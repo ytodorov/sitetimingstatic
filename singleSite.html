@@ -1,38 +1,25 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
   <head>
     <title>SiteTiming</title>
     <meta charset="UTF-8" />
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <meta
-      name="description"
-      content="SiteTiming is a free service for cheking availability, measure performance and
-	collecting statistics over time for any website"
-    />
-    <meta
-      name="viewport"
-      content="width=device-width, maximum-scale=5, initial-scale=1"
-    />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.1.119/styles/kendo.default-main.min.css" />
     <style>
       html {
         font-size: 16px;
         font-family: Arial, Helvetica, sans-serif;
       }
+
     </style>
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta name="description" content="SiteTiming is a free service for cheking availability, measure performance and
+	collecting statistics over time for any website" />
+    <meta name="viewport" content="width=device-width, maximum-scale=5, initial-scale=1" />
+
     <link rel="shortcut icon" href="/favicon.ico" />
     <!--<link rel="stylesheet" href="/css/1.css" />-->
-    <link
-      rel="stylesheet"
-      href="https://kendo.cdn.telerik.com/2022.1.119/styles/kendo.common-fiori.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://kendo.cdn.telerik.com/2022.1.119/styles/kendo.fiori.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://kendo.cdn.telerik.com/2022.1.119/styles/kendo.fiori.mobile.min.css"
-    />
   </head>
 
   <body>
@@ -42,37 +29,10 @@
     <div id="chart"></div>
 
     <div id="cards" class="cards-container">
-      <div
-        class="skeletonMarker"
-        id="centralcanada"
-        data-location="Central Canada"
-      ></div>
-      <div
-        class="skeletonMarker"
-        id="northeurope"
-        data-location="North Europe"
-      ></div>
-      <div
-        class="skeletonMarker"
-        id="westeurope"
-        data-location="West Europe"
-      ></div>
-      <!-- <div
-        class="skeletonMarker"
-        id="skeletonwestus3"
-        data-location="West US"
-      ></div> -->
+      <div class="skeletonMarker" id="centralcanada" data-location="Central Canada"></div>
+      <div class="skeletonMarker" id="northeurope" data-location="North Europe"></div>
+      <div class="skeletonMarker" id="westeurope" data-location="West Europe"></div>
       <div class="skeletonMarker" id="eastus2" data-location="East US"></div>
-      <!-- <div
-        class="skeletonMarker"
-        id="skeletonsoutheastasia"
-        data-location="Southeast Asia"
-      ></div> -->
-      <!-- <div
-        class="skeletonMarker"
-        id="skeletonjapaneast"
-        data-location="East Japan"
-      ></div> -->
     </div>
 
     <style>
@@ -91,9 +51,10 @@
         text-align: center;
       }
 
-      .k-card-action > .k-button {
+      .k-card-action>.k-button {
         width: 100%;
       }
+
     </style>
 
     <!-- Core javascripts-->
@@ -104,10 +65,7 @@
 	<script src="/js/kendo.breadcrumb.min.js"></script>
 	<script src="/js/kendo.loader.min.js"></script>-->
 
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-XPZFMJN51X"
-    ></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XPZFMJN51X"></script>
     <!-- Your custom javascripts -->
     <script src="/singleSite.js"></script>
 
@@ -122,4 +80,5 @@
       gtag("config", "G-XPZFMJN51X");
     </script>
   </body>
+
 </html>
