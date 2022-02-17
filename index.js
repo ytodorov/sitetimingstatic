@@ -126,38 +126,30 @@ $(function () {
         },
         pageSize: 10,
     });
-    $("#grid").kendoGrid({
-        dataSource: dataSource,
-        groupable: false,
-        sortable: false,
-        pageable: {
-            refresh: true,
-        },
-        columns: [
-            {
-                title: "Url",
-                template: `<a target="_blank" href="https://www.sitetiming.com/#: site.url #">#: site.url #</a>`,
-            },
-            {
-                field: "latencyInChrome",
-                title: "Latency",
-            },
-            // {
-            //   field: "dOMContentLoadedEventInChrome",
-            //   title: "DOM Loaded",
-            // },
-            // {
-            //   field: "sourceIpAddress",
-            //   title: "Load from IP",
-            // },
-            {
-                field: "uniqueGuid",
-                title: "Screenshot",
-                template: `<img class="product-photo" onerror="if (this.src != 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg') this.src = 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg';"
-         src="https://sitetiming.blob.core.windows.net/images/short50_#: uniqueGuid #.jpeg?sv=2020-08-04&st=2012-01-27T12%3A30%3A00Z&se=2032-01-28T12%3A30%3A00Z&sr=c&sp=rl&sig=jvKd8yqdiz42u28l4oPYHVFWUSCaeLYmeKMMCgwtn1Y%3D" />`,
-            },
-        ],
-    });
+    // $("#grid").kendoGrid({
+    //   dataSource: dataSource,
+    //   groupable: false,
+    //   sortable: false,
+    //   pageable: {
+    //     refresh: true,
+    //   },
+    //   columns: [
+    //     {
+    //       title: "Url",
+    //       template: `<a target="_blank" href="https://www.sitetiming.com/#: site.url #">#: site.url #</a>`,
+    //     },
+    //     {
+    //       field: "latencyInChrome",
+    //       title: "Latency",
+    //     },
+    //     {
+    //       field: "uniqueGuid",
+    //       title: "Screenshot",
+    //       template: `<img class="product-photo" onerror="if (this.src != 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg') this.src = 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg';"
+    //        src="https://sitetiming.blob.core.windows.net/images/short50_#: uniqueGuid #.jpeg?sv=2020-08-04&st=2012-01-27T12%3A30%3A00Z&se=2032-01-28T12%3A30%3A00Z&sr=c&sp=rl&sig=jvKd8yqdiz42u28l4oPYHVFWUSCaeLYmeKMMCgwtn1Y%3D" />`,
+    //     },
+    //   ],
+    // });
     $("#map").kendoMap({
         center: [30.268107, -40.744821],
         zoom: 3,
