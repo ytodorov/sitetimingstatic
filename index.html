@@ -42,15 +42,17 @@
         <script src="/js/kendo.breadcrumb.min.js"></script>
 
         <!-- grid -->
-        <script src="/js/kendo.columnsorter.min.js"></script>
-        <script src="/js/kendo.userevents.min.js"></script>
-        <script src="/js/kendo.draganddrop.min.js"></script>
-        <script src="/js/kendo.sortable.min.js"></script>
+        <!-- <script src="/js/kendo.columnsorter.min.js"></script> -->
+        <!-- <script src="/js/kendo.userevents.min.js"></script>
+        <script src="/js/kendo.draganddrop.min.js"></script> -->
+
+
+        <!-- <script src="/js/kendo.sortable.min.js"></script>
         <script src="/js/kendo.pager.min.js"></script>
-        <script src="/js/kendo.grid.min.js"></script>
+        <script src="/js/kendo.grid.min.js"></script> -->
 
         <!-- map -->
-        <script src="/js/kendo.tooltip.min.js"></script>
+        <!-- <script src="/js/kendo.tooltip.min.js"></script>
         <script src="/js/kendo.color.min.js"></script>
         <script src="/js/kendo.drawing.min.js"></script>
         <script src="/js/kendo.dataviz.core.min.js"></script>
@@ -58,7 +60,7 @@
 
         <script src="/js/kendo.mobile.scroller.min.js"></script>
 
-        <script src="/js/kendo.dataviz.map.min.js"></script>
+        <script src="/js/kendo.dataviz.map.min.js"></script> -->
     </head>
 
     <body class="container">
@@ -74,15 +76,28 @@
         </header>
 
         <section>
-            <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            <div class="row">
+                <div class="col-12">
+                    <input id="sites" placeholder="Type website here ..." />
+                </div>
+                <div class="col-12 text-center">
+                    <button id="btnCheckWebSite"
+                        class="k-button k-button-lg k-button-rectangle k-rounded-sm k-button-solid k-button-solid-primary w-50 mt-3 mb-3">
+                        Check
+                    </button>
+                </div>
+            </div>
+
+            <!-- <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
                 <p style="width: 60%;"><input id="sites" style="width: 100%;" placeholder="Type website here ..." /></p>
                 <button id="btnCheckWebSite"
                     class="k-button k-button-lg k-button-rectangle k-rounded-sm k-button-solid k-button-solid-primary"
                     style="width: 30%;">Check</button></p>
-            </div>
+            </div> -->
         </section>
         <section>
-            <div id="map"></div>
+            <img class="img-fluid" src="images/locations.png">
+            <!-- <div id="map"></div> -->
         </section>
         <section>
             <div id="grid"></div>
