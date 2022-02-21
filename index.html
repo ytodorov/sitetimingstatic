@@ -61,6 +61,16 @@
         <script src="/js/kendo.mobile.scroller.min.js"></script>
 
         <script src="/js/kendo.dataviz.map.min.js"></script> -->
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XPZFMJN51X"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+
+            gtag('config', 'G-XPZFMJN51X');
+        </script>
     </head>
 
     <body class="container">
@@ -70,8 +80,9 @@
             <h1 class="k-text-center h2">
                 SiteTiming
             </h1>
-            <h2 class="k-text-center h4">
-                Check if a website is down or up
+            <h2 class="k-text-center h4 pb-3">
+                Check if a website is down or up. Measure latency and load time from four locations across the world in
+                a single click.
             </h2>
         </header>
 
@@ -87,52 +98,21 @@
                     </button>
                 </div>
             </div>
-
-            <!-- <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                <p style="width: 60%;"><input id="sites" style="width: 100%;" placeholder="Type website here ..." /></p>
-                <button id="btnCheckWebSite"
-                    class="k-button k-button-lg k-button-rectangle k-rounded-sm k-button-solid k-button-solid-primary"
-                    style="width: 30%;">Check</button></p>
-            </div> -->
         </section>
         <section>
-            <img class="img-fluid" src="images/locations.png">
-            <!-- <div id="map"></div> -->
+            <img class="img-fluid" alt="Measure latency and load time from four locations across the world in
+                a single click." title="Measure latency and load time from four locations across the world in
+                a single click." src="images/locations.png">
         </section>
         <section>
             <div id="grid"></div>
         </section>
         <footer>
-            <nav id="bottomNavigation" style="bottom: 0; "></nav>
+            <a target="_blank" title="https://www.facebook.com/Sitetiming-112192978028139"
+                href="https://www.facebook.com/Sitetiming-112192978028139"><span class="k-icon k-i-facebook"></span></a>
         </footer>
-
-
         <script src="/index.js">
         </script>
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XPZFMJN51X"></script>
-        <!-- Your custom javascripts -->
-
-        <!-- jquery https://www.jsviews.com/download/jsrender.min.js google -->
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag() { dataLayer.push(arguments); }
-            gtag('js', new Date());
-
-            gtag('config', 'G-XPZFMJN51X');
-        </script>
-        <style>
-            .product-photo {
-                display: inline-block;
-                width: 32px;
-                height: 32px;
-                background-size: 32px 35px;
-                background-position: center center;
-                vertical-align: middle;
-                line-height: 32px;
-                box-shadow: inset 0 0 1px #999, inset 0 0 10px rgba(0, 0, 0, .2);
-            }
-
-        </style>
     </body>
 
 </html>
