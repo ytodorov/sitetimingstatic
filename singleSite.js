@@ -291,7 +291,8 @@ $.when($.get(urleastus2, function (data) {
             postal: ${urleastus2DataSourceIpAddress.postal}<br>
             timezone: ${urleastus2DataSourceIpAddress.timezone}<br>
             hostname: ${urleastus2DataSourceIpAddress.hostname}<br>
-            org: ${urleastus2DataSourceIpAddress.org}`,
+            org: ${urleastus2DataSourceIpAddress.org}<br>
+            distance: ${StaticMethods.distance(urleastus2DataSourceIpAddress.latitude, urleastus2DataSourceIpAddress.longitude, urleastus2DataDestinationIpAddress.latitude, urleastus2DataDestinationIpAddress.longitude)}`,
                     },
                 },
                 {
@@ -325,7 +326,8 @@ $.when($.get(urleastus2, function (data) {
             postal: ${urlnortheuropeDataSourceIpAddress.postal}<br>
             timezone: ${urlnortheuropeDataSourceIpAddress.timezone}<br>
             hostname: ${urlnortheuropeDataSourceIpAddress.hostname}<br>
-            org: ${urlnortheuropeDataSourceIpAddress.org}`,
+            org: ${urlnortheuropeDataSourceIpAddress.org}<br>
+            distance: ${StaticMethods.distance(urlnortheuropeDataSourceIpAddress.latitude, urlnortheuropeDataSourceIpAddress.longitude, urlnortheuropeDataDestinationIpAddress.latitude, urlnortheuropeDataDestinationIpAddress.longitude)}`,
                     },
                 },
                 {
@@ -359,7 +361,8 @@ $.when($.get(urleastus2, function (data) {
             postal: ${urlwesteuropeDataDataSourceIpAddress.postal}<br>
             timezone: ${urlwesteuropeDataDataSourceIpAddress.timezone}<br>
             hostname: ${urlwesteuropeDataDataSourceIpAddress.hostname}<br>
-            org: ${urlwesteuropeDataDataSourceIpAddress.org}`,
+            org: ${urlwesteuropeDataDataSourceIpAddress.org}<br>
+            distance: ${StaticMethods.distance(urlwesteuropeDataDataSourceIpAddress.latitude, urlwesteuropeDataDataSourceIpAddress.longitude, urlwesteuropeDataDataDestinationIpAddress.latitude, urlwesteuropeDataDataDestinationIpAddress.longitude)}`,
                     },
                 },
                 {
