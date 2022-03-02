@@ -4,7 +4,7 @@ class StaticMethods {
         debugger;
         var unit = "K"; // Kilometers
         if (lat1 == lat2 && lon1 == lon2) {
-            return 0;
+            return "0 km.";
         }
         else {
             var radlat1 = (Math.PI * lat1) / 180;
@@ -25,7 +25,8 @@ class StaticMethods {
             if (unit == "N") {
                 dist = dist * 0.8684;
             }
-            return dist;
+            var distString = `${Math.floor(dist).toString()} km.`;
+            return distString;
         }
     }
 }

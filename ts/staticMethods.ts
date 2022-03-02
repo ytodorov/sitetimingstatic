@@ -1,11 +1,16 @@
 class StaticMethods {
   static pi: number = 3.14;
 
-  static distance(lat1: number, lon1: number, lat2: number, lon2: number) {
+  static distance(
+    lat1: number,
+    lon1: number,
+    lat2: number,
+    lon2: number
+  ): string {
     debugger;
     var unit = "K"; // Kilometers
     if (lat1 == lat2 && lon1 == lon2) {
-      return 0;
+      return "0 km.";
     } else {
       var radlat1 = (Math.PI * lat1) / 180;
       var radlat2 = (Math.PI * lat2) / 180;
@@ -26,7 +31,8 @@ class StaticMethods {
       if (unit == "N") {
         dist = dist * 0.8684;
       }
-      return dist;
+      var distString = `${Math.floor(dist).toString()} km.`;
+      return distString;
     }
   }
 }
