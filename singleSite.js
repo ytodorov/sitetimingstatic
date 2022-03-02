@@ -201,16 +201,40 @@ $.when($.get(urleastus2, function (data) {
     console.log("done");
     var urlcentralcanadaDataSourceIpAddress;
     var urlcentralcanadaDataDestinationIpAddress;
+    var urleastus2DataSourceIpAddress;
+    var urleastus2DataDestinationIpAddress;
+    var urlnortheuropeDataSourceIpAddress;
+    var urlnortheuropeDataDestinationIpAddress;
+    var urlwesteuropeDataDataSourceIpAddress;
+    var urlwesteuropeDataDataDestinationIpAddress;
     $.when($.getJSON(`https://containerappcanadacentral.happyrock-5d18c325.canadacentral.azurecontainerapps.io/ip?ip=${urlcentralcanadaData.sourceIpAddress}`, function f(res) {
         console.log(res);
         urlcentralcanadaDataSourceIpAddress = new IpInfo(res);
     }), $.getJSON(`https://containerappcanadacentral.happyrock-5d18c325.canadacentral.azurecontainerapps.io/ip?ip=${urlcentralcanadaData.destinationIpAddress}`, function f(res) {
         console.log(res);
         urlcentralcanadaDataDestinationIpAddress = new IpInfo(res);
+    }), $.getJSON(`https://containerappeastus2.politeflower-c7227859.eastus2.azurecontainerapps.io/ip?ip=${urleastus2Data.sourceIpAddress}`, function f(res) {
+        console.log(res);
+        urleastus2DataSourceIpAddress = new IpInfo(res);
+    }), $.getJSON(`https://containerappeastus2.politeflower-c7227859.eastus2.azurecontainerapps.io/ip?ip=${urleastus2Data.destinationIpAddress}`, function f(res) {
+        console.log(res);
+        urleastus2DataDestinationIpAddress = new IpInfo(res);
+    }), $.getJSON(`https://containerappnortheurope.whitedune-748c223c.northeurope.azurecontainerapps.io/ip?ip=${urlnortheuropeData.sourceIpAddress}`, function f(res) {
+        console.log(res);
+        urlnortheuropeDataSourceIpAddress = new IpInfo(res);
+    }), $.getJSON(`https://containerappnortheurope.whitedune-748c223c.northeurope.azurecontainerapps.io/ip?ip=${urlnortheuropeData.destinationIpAddress}`, function f(res) {
+        console.log(res);
+        urlnortheuropeDataDestinationIpAddress = new IpInfo(res);
+    }), $.getJSON(`https://containerappwesteurope.nicepond-330ead69.westeurope.azurecontainerapps.io/ip?ip=${urlwesteuropeData.sourceIpAddress}`, function f(res) {
+        console.log(res);
+        urlwesteuropeDataDataSourceIpAddress = new IpInfo(res);
+    }), $.getJSON(`https://containerappwesteurope.nicepond-330ead69.westeurope.azurecontainerapps.io/ip?ip=${urlwesteuropeData.destinationIpAddress}`, function f(res) {
+        console.log(res);
+        urlwesteuropeDataDataDestinationIpAddress = new IpInfo(res);
     })).done(function () {
         $("#map").kendoMap({
-            center: [30.268107, -97.744821],
-            zoom: 3,
+            center: [30.268107, -37.744821],
+            zoom: 2,
             layers: [
                 {
                     type: "tile",
@@ -227,7 +251,14 @@ $.when($.get(urleastus2, function (data) {
                     ],
                     shape: "pin",
                     tooltip: {
-                        content: `city:${urlcentralcanadaDataSourceIpAddress.city}, region: ${urlcentralcanadaDataSourceIpAddress.country}, country: ${urlcentralcanadaDataSourceIpAddress.country}, postal: ${urlcentralcanadaDataSourceIpAddress.postal}, timezone: ${urlcentralcanadaDataSourceIpAddress.timezone}`,
+                        content: `
+            city:${urlcentralcanadaDataSourceIpAddress.city},
+            region: ${urlcentralcanadaDataSourceIpAddress.country},
+            country: ${urlcentralcanadaDataSourceIpAddress.country},
+            postal: ${urlcentralcanadaDataSourceIpAddress.postal},
+            timezone: ${urlcentralcanadaDataSourceIpAddress.timezone},
+            hostname: ${urlcentralcanadaDataSourceIpAddress.hostname},
+            org: ${urlcentralcanadaDataSourceIpAddress.org}`,
                     },
                 },
                 {
@@ -237,7 +268,116 @@ $.when($.get(urleastus2, function (data) {
                     ],
                     shape: "pinTarget",
                     tooltip: {
-                        content: `city:${urlcentralcanadaDataDestinationIpAddress.city}, region: ${urlcentralcanadaDataDestinationIpAddress.country}, country: ${urlcentralcanadaDataDestinationIpAddress.country}, postal: ${urlcentralcanadaDataDestinationIpAddress.postal}, timezone: ${urlcentralcanadaDataDestinationIpAddress.timezone}`,
+                        content: `
+            city:${urlcentralcanadaDataDestinationIpAddress.city},
+            region: ${urlcentralcanadaDataDestinationIpAddress.country},
+            country: ${urlcentralcanadaDataDestinationIpAddress.country},
+            postal: ${urlcentralcanadaDataDestinationIpAddress.postal},
+            timezone: ${urlcentralcanadaDataDestinationIpAddress.timezone},
+            hostname: ${urlcentralcanadaDataDestinationIpAddress.hostname},
+            org: ${urlcentralcanadaDataDestinationIpAddress.org}`,
+                    },
+                },
+                {
+                    location: [
+                        urleastus2DataSourceIpAddress.latitude,
+                        urleastus2DataSourceIpAddress.longitude,
+                    ],
+                    shape: "pin",
+                    tooltip: {
+                        content: `
+            city:${urleastus2DataSourceIpAddress.city},
+            region: ${urleastus2DataSourceIpAddress.country},
+            country: ${urleastus2DataSourceIpAddress.country},
+            postal: ${urleastus2DataSourceIpAddress.postal},
+            timezone: ${urleastus2DataSourceIpAddress.timezone},
+            hostname: ${urleastus2DataSourceIpAddress.hostname},
+            org: ${urleastus2DataSourceIpAddress.org}`,
+                    },
+                },
+                {
+                    location: [
+                        urleastus2DataDestinationIpAddress.latitude,
+                        urleastus2DataDestinationIpAddress.longitude,
+                    ],
+                    shape: "pinTarget",
+                    tooltip: {
+                        content: `
+            city:${urleastus2DataDestinationIpAddress.city},
+            region: ${urleastus2DataDestinationIpAddress.country},
+            country: ${urleastus2DataDestinationIpAddress.country},
+            postal: ${urleastus2DataDestinationIpAddress.postal},
+            timezone: ${urleastus2DataDestinationIpAddress.timezone},
+            hostname: ${urleastus2DataDestinationIpAddress.hostname},
+            org: ${urleastus2DataDestinationIpAddress.org}`,
+                    },
+                },
+                {
+                    location: [
+                        urlnortheuropeDataSourceIpAddress.latitude,
+                        urlnortheuropeDataSourceIpAddress.longitude,
+                    ],
+                    shape: "pin",
+                    tooltip: {
+                        content: `
+            city:${urlnortheuropeDataSourceIpAddress.city},
+            region: ${urlnortheuropeDataSourceIpAddress.country},
+            country: ${urlnortheuropeDataSourceIpAddress.country},
+            postal: ${urlnortheuropeDataSourceIpAddress.postal},
+            timezone: ${urlnortheuropeDataSourceIpAddress.timezone},
+            hostname: ${urlnortheuropeDataSourceIpAddress.hostname},
+            org: ${urlnortheuropeDataSourceIpAddress.org}`,
+                    },
+                },
+                {
+                    location: [
+                        urlnortheuropeDataDestinationIpAddress.latitude,
+                        urlnortheuropeDataDestinationIpAddress.longitude,
+                    ],
+                    shape: "pinTarget",
+                    tooltip: {
+                        content: `
+            city:${urlnortheuropeDataDestinationIpAddress.city},
+            region: ${urlnortheuropeDataDestinationIpAddress.country},
+            country: ${urlnortheuropeDataDestinationIpAddress.country},
+            postal: ${urlnortheuropeDataDestinationIpAddress.postal},
+            timezone: ${urlnortheuropeDataDestinationIpAddress.timezone},
+            hostname: ${urlnortheuropeDataDestinationIpAddress.hostname},
+            org: ${urlnortheuropeDataDestinationIpAddress.org}`,
+                    },
+                },
+                {
+                    location: [
+                        urlwesteuropeDataDataSourceIpAddress.latitude,
+                        urlwesteuropeDataDataSourceIpAddress.longitude,
+                    ],
+                    shape: "pin",
+                    tooltip: {
+                        content: `
+            city:${urlwesteuropeDataDataSourceIpAddress.city},
+            region: ${urlwesteuropeDataDataSourceIpAddress.country},
+            country: ${urlwesteuropeDataDataSourceIpAddress.country},
+            postal: ${urlwesteuropeDataDataSourceIpAddress.postal},
+            timezone: ${urlwesteuropeDataDataSourceIpAddress.timezone},
+            hostname: ${urlwesteuropeDataDataSourceIpAddress.hostname},
+            org: ${urlwesteuropeDataDataSourceIpAddress.org}`,
+                    },
+                },
+                {
+                    location: [
+                        urlwesteuropeDataDataDestinationIpAddress.latitude,
+                        urlwesteuropeDataDataDestinationIpAddress.longitude,
+                    ],
+                    shape: "pinTarget",
+                    tooltip: {
+                        content: `
+            city:${urlwesteuropeDataDataDestinationIpAddress.city},
+            region: ${urlwesteuropeDataDataDestinationIpAddress.country},
+            country: ${urlwesteuropeDataDataDestinationIpAddress.country},
+            postal: ${urlwesteuropeDataDataDestinationIpAddress.postal},
+            timezone: ${urlwesteuropeDataDataDestinationIpAddress.timezone},
+            hostname: ${urlwesteuropeDataDataDestinationIpAddress.hostname},
+            org: ${urlwesteuropeDataDataDestinationIpAddress.org}`,
                     },
                 },
             ],
