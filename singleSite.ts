@@ -2,10 +2,26 @@
 var url = document.location.pathname.substring(1);
 url = url.toLowerCase();
 if (document.location.hostname.toLowerCase().includes("127.0.0.1") == false) {
-  if (!url.startsWith("http://") && !url.startsWith("https://")) {
-    url = `http://${url}`;
-    document.location = "/" + url;
+  if (url.startsWith("https://www.")) {
+    url = url.substring("https://www.".length);
   }
+  if (url.startsWith("http://www.")) {
+    url = url.substring("http://www.".length);
+  }
+  if (url.startsWith("http://")) {
+    url = url.substring("http://".length);
+  }
+  if (url.startsWith("https://")) {
+    url = url.substring("https://".length);
+  }
+  if (url.startsWith("www.")) {
+    url = url.substring("www.".length);
+  }
+  document.location = "/" + url;
+  // if (!url.startsWith("http://") && !url.startsWith("https://")) {
+  //   url = `http://${url}`;
+  //   document.location = "/" + url;
+  // }
 }
 
 $("title").text(`SiteTiming - ${url}`);
