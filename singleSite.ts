@@ -104,7 +104,6 @@ function createChart() {
 $(document).ready(createChart);
 
 $(window).resize(function () {
-  debugger;
   var kendoChart = $("#chart").data("kendoChart");
   if (kendoChart) {
     kendoChart.refresh();
@@ -139,9 +138,13 @@ let urleastus2 = `https://containerappeastus2.politeflower-c7227859.eastus2.azur
 let urlcentralcanada = `https://containerappcanadacentral.happyrock-5d18c325.canadacentral.azurecontainerapps.io/probe?url=${url}`;
 let urlnortheurope = `https://containerappcanadacentral.happyrock-5d18c325.canadacentral.azurecontainerapps.io/probe?url=${url}`;
 let urlwesteurope = `https://containerappwesteurope.nicepond-330ead69.westeurope.azurecontainerapps.io/probe?url=${url}`;
-
+var urleastus2Data: any;
+var urlcentralcanadaData: any;
+var urlwesteuropeData: any;
+var urlnortheuropeData: any;
 $.when(
   $.get(urleastus2, function (data) {
+    urleastus2Data = data;
     $("#eastus2").remove();
     $("#cards").prepend(
       ` <div class="k-card">
@@ -160,6 +163,7 @@ $.when(
   }),
 
   $.get(urlcentralcanada, function (data) {
+    urlcentralcanadaData = data;
     $("#centralcanada").remove();
     $("#cards").prepend(
       ` <div class="k-card">
@@ -177,6 +181,7 @@ $.when(
     );
   }),
   $.get(urlwesteurope, function (data) {
+    urlwesteuropeData = data;
     $("#westeurope").remove();
     $("#cards").prepend(
       ` <div class="k-card">
@@ -194,6 +199,7 @@ $.when(
     );
   }),
   $.get(urlnortheurope, function (data) {
+    urlnortheuropeData = data;
     $("#northeurope").remove();
     $("#cards").prepend(
       ` <div class="k-card">
@@ -214,4 +220,62 @@ $.when(
   var kendoChart = $("#chart").data("kendoChart");
   kendoChart?.dataSource.read();
   console.log("done");
+
+  var urlcentralcanadaDataSourceIpAddress: IpInfo;
+  var urlcentralcanadaDataDestinationIpAddress: IpInfo;
+  $.when(
+    $.getJSON(
+      `https://containerappcanadacentral.happyrock-5d18c325.canadacentral.azurecontainerapps.io/ip?ip=${urlcentralcanadaData.sourceIpAddress}`,
+      function f(res) {
+        console.log(res);
+
+        urlcentralcanadaDataSourceIpAddress = new IpInfo(res);
+      }
+    ),
+    $.getJSON(
+      `https://containerappcanadacentral.happyrock-5d18c325.canadacentral.azurecontainerapps.io/ip?ip=${urlcentralcanadaData.destinationIpAddress}`,
+      function f(res) {
+        console.log(res);
+
+        urlcentralcanadaDataDestinationIpAddress = new IpInfo(res);
+      }
+    )
+  ).done(function () {
+    $("#map").kendoMap({
+      center: [30.268107, -97.744821],
+      zoom: 3,
+      layers: [
+        {
+          type: "tile",
+          urlTemplate:
+            "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+          subdomains: ["a", "b", "c"],
+          attribution:
+            "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>",
+        },
+      ],
+      markers: [
+        {
+          location: [
+            urlcentralcanadaDataSourceIpAddress.latitude,
+            urlcentralcanadaDataSourceIpAddress.longitude,
+          ],
+          shape: "pin",
+          tooltip: {
+            content: `city:${urlcentralcanadaDataSourceIpAddress.city}, region: ${urlcentralcanadaDataSourceIpAddress.country}, country: ${urlcentralcanadaDataSourceIpAddress.country}, postal: ${urlcentralcanadaDataSourceIpAddress.postal}, timezone: ${urlcentralcanadaDataSourceIpAddress.timezone}`,
+          },
+        },
+        {
+          location: [
+            urlcentralcanadaDataDestinationIpAddress.latitude,
+            urlcentralcanadaDataDestinationIpAddress.longitude,
+          ],
+          shape: "pinTarget",
+          tooltip: {
+            content: `city:${urlcentralcanadaDataDestinationIpAddress.city}, region: ${urlcentralcanadaDataDestinationIpAddress.country}, country: ${urlcentralcanadaDataDestinationIpAddress.country}, postal: ${urlcentralcanadaDataDestinationIpAddress.postal}, timezone: ${urlcentralcanadaDataDestinationIpAddress.timezone}`,
+          },
+        },
+      ],
+    });
+  });
 });
