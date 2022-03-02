@@ -250,13 +250,14 @@ $.when($.get(urleastus2, function (data) {
                     shape: "pin",
                     tooltip: {
                         content: `
-            city:${urlcentralcanadaDataSourceIpAddress.city},
-            region: ${urlcentralcanadaDataSourceIpAddress.country},
-            country: ${urlcentralcanadaDataSourceIpAddress.country},
-            postal: ${urlcentralcanadaDataSourceIpAddress.postal},
-            timezone: ${urlcentralcanadaDataSourceIpAddress.timezone},
-            hostname: ${urlcentralcanadaDataSourceIpAddress.hostname},
-            org: ${urlcentralcanadaDataSourceIpAddress.org}`,
+            city:${urlcentralcanadaDataSourceIpAddress.city}<br>
+            region: ${urlcentralcanadaDataSourceIpAddress.country}<br>
+            country: ${urlcentralcanadaDataSourceIpAddress.country}<br>
+            postal: ${urlcentralcanadaDataSourceIpAddress.postal}<br>
+            timezone: ${urlcentralcanadaDataSourceIpAddress.timezone}<br>
+            hostname: ${urlcentralcanadaDataSourceIpAddress.hostname}<br>
+            org: ${urlcentralcanadaDataSourceIpAddress.org}<br>
+            distance: ${StaticMethods.distance(urlcentralcanadaDataSourceIpAddress.latitude, urlcentralcanadaDataSourceIpAddress.longitude, urlcentralcanadaDataDestinationIpAddress.latitude, urlcentralcanadaDataDestinationIpAddress.longitude)}`,
                     },
                 },
                 {
@@ -267,12 +268,12 @@ $.when($.get(urleastus2, function (data) {
                     shape: "pinTarget",
                     tooltip: {
                         content: `
-            city:${urlcentralcanadaDataDestinationIpAddress.city},
-            region: ${urlcentralcanadaDataDestinationIpAddress.country},
-            country: ${urlcentralcanadaDataDestinationIpAddress.country},
-            postal: ${urlcentralcanadaDataDestinationIpAddress.postal},
-            timezone: ${urlcentralcanadaDataDestinationIpAddress.timezone},
-            hostname: ${urlcentralcanadaDataDestinationIpAddress.hostname},
+            city:${urlcentralcanadaDataDestinationIpAddress.city}<br>
+            region: ${urlcentralcanadaDataDestinationIpAddress.country}<br>
+            country: ${urlcentralcanadaDataDestinationIpAddress.country}<br>
+            postal: ${urlcentralcanadaDataDestinationIpAddress.postal}<br>
+            timezone: ${urlcentralcanadaDataDestinationIpAddress.timezone}<br>
+            hostname: ${urlcentralcanadaDataDestinationIpAddress.hostname}<br>
             org: ${urlcentralcanadaDataDestinationIpAddress.org}`,
                     },
                 },
@@ -284,12 +285,12 @@ $.when($.get(urleastus2, function (data) {
                     shape: "pin",
                     tooltip: {
                         content: `
-            city:${urleastus2DataSourceIpAddress.city},
-            region: ${urleastus2DataSourceIpAddress.country},
-            country: ${urleastus2DataSourceIpAddress.country},
-            postal: ${urleastus2DataSourceIpAddress.postal},
-            timezone: ${urleastus2DataSourceIpAddress.timezone},
-            hostname: ${urleastus2DataSourceIpAddress.hostname},
+            city:${urleastus2DataSourceIpAddress.city}<br>
+            region: ${urleastus2DataSourceIpAddress.country}<br>
+            country: ${urleastus2DataSourceIpAddress.country}<br>
+            postal: ${urleastus2DataSourceIpAddress.postal}<br>
+            timezone: ${urleastus2DataSourceIpAddress.timezone}<br>
+            hostname: ${urleastus2DataSourceIpAddress.hostname}<br>
             org: ${urleastus2DataSourceIpAddress.org}`,
                     },
                 },
@@ -301,12 +302,12 @@ $.when($.get(urleastus2, function (data) {
                     shape: "pinTarget",
                     tooltip: {
                         content: `
-            city:${urleastus2DataDestinationIpAddress.city},
-            region: ${urleastus2DataDestinationIpAddress.country},
-            country: ${urleastus2DataDestinationIpAddress.country},
-            postal: ${urleastus2DataDestinationIpAddress.postal},
-            timezone: ${urleastus2DataDestinationIpAddress.timezone},
-            hostname: ${urleastus2DataDestinationIpAddress.hostname},
+            city:${urleastus2DataDestinationIpAddress.city}<br>
+            region: ${urleastus2DataDestinationIpAddress.country}<br>
+            country: ${urleastus2DataDestinationIpAddress.country}<br>
+            postal: ${urleastus2DataDestinationIpAddress.postal}<br>
+            timezone: ${urleastus2DataDestinationIpAddress.timezone}<br>
+            hostname: ${urleastus2DataDestinationIpAddress.hostname}<br>
             org: ${urleastus2DataDestinationIpAddress.org}`,
                     },
                 },
@@ -318,12 +319,12 @@ $.when($.get(urleastus2, function (data) {
                     shape: "pin",
                     tooltip: {
                         content: `
-            city:${urlnortheuropeDataSourceIpAddress.city},
-            region: ${urlnortheuropeDataSourceIpAddress.country},
-            country: ${urlnortheuropeDataSourceIpAddress.country},
-            postal: ${urlnortheuropeDataSourceIpAddress.postal},
-            timezone: ${urlnortheuropeDataSourceIpAddress.timezone},
-            hostname: ${urlnortheuropeDataSourceIpAddress.hostname},
+            city:${urlnortheuropeDataSourceIpAddress.city}<br>
+            region: ${urlnortheuropeDataSourceIpAddress.country}<br>
+            country: ${urlnortheuropeDataSourceIpAddress.country}<br>
+            postal: ${urlnortheuropeDataSourceIpAddress.postal}<br>
+            timezone: ${urlnortheuropeDataSourceIpAddress.timezone}<br>
+            hostname: ${urlnortheuropeDataSourceIpAddress.hostname}<br>
             org: ${urlnortheuropeDataSourceIpAddress.org}`,
                     },
                 },
@@ -335,12 +336,12 @@ $.when($.get(urleastus2, function (data) {
                     shape: "pinTarget",
                     tooltip: {
                         content: `
-            city:${urlnortheuropeDataDestinationIpAddress.city},
-            region: ${urlnortheuropeDataDestinationIpAddress.country},
-            country: ${urlnortheuropeDataDestinationIpAddress.country},
-            postal: ${urlnortheuropeDataDestinationIpAddress.postal},
-            timezone: ${urlnortheuropeDataDestinationIpAddress.timezone},
-            hostname: ${urlnortheuropeDataDestinationIpAddress.hostname},
+            city:${urlnortheuropeDataDestinationIpAddress.city}<br>
+            region: ${urlnortheuropeDataDestinationIpAddress.country}<br>
+            country: ${urlnortheuropeDataDestinationIpAddress.country}<br>
+            postal: ${urlnortheuropeDataDestinationIpAddress.postal}<br>
+            timezone: ${urlnortheuropeDataDestinationIpAddress.timezone}<br>
+            hostname: ${urlnortheuropeDataDestinationIpAddress.hostname}<br>
             org: ${urlnortheuropeDataDestinationIpAddress.org}`,
                     },
                 },
@@ -352,12 +353,12 @@ $.when($.get(urleastus2, function (data) {
                     shape: "pin",
                     tooltip: {
                         content: `
-            city:${urlwesteuropeDataDataSourceIpAddress.city},
-            region: ${urlwesteuropeDataDataSourceIpAddress.country},
-            country: ${urlwesteuropeDataDataSourceIpAddress.country},
-            postal: ${urlwesteuropeDataDataSourceIpAddress.postal},
-            timezone: ${urlwesteuropeDataDataSourceIpAddress.timezone},
-            hostname: ${urlwesteuropeDataDataSourceIpAddress.hostname},
+            city:${urlwesteuropeDataDataSourceIpAddress.city}<br>
+            region: ${urlwesteuropeDataDataSourceIpAddress.country}<br>
+            country: ${urlwesteuropeDataDataSourceIpAddress.country}<br>
+            postal: ${urlwesteuropeDataDataSourceIpAddress.postal}<br>
+            timezone: ${urlwesteuropeDataDataSourceIpAddress.timezone}<br>
+            hostname: ${urlwesteuropeDataDataSourceIpAddress.hostname}<br>
             org: ${urlwesteuropeDataDataSourceIpAddress.org}`,
                     },
                 },
@@ -369,12 +370,12 @@ $.when($.get(urleastus2, function (data) {
                     shape: "pinTarget",
                     tooltip: {
                         content: `
-            city:${urlwesteuropeDataDataDestinationIpAddress.city},
-            region: ${urlwesteuropeDataDataDestinationIpAddress.country},
-            country: ${urlwesteuropeDataDataDestinationIpAddress.country},
-            postal: ${urlwesteuropeDataDataDestinationIpAddress.postal},
-            timezone: ${urlwesteuropeDataDataDestinationIpAddress.timezone},
-            hostname: ${urlwesteuropeDataDataDestinationIpAddress.hostname},
+            city:${urlwesteuropeDataDataDestinationIpAddress.city}<br>
+            region: ${urlwesteuropeDataDataDestinationIpAddress.country}<br>
+            country: ${urlwesteuropeDataDataDestinationIpAddress.country}<br>
+            postal: ${urlwesteuropeDataDataDestinationIpAddress.postal}<br>
+            timezone: ${urlwesteuropeDataDataDestinationIpAddress.timezone}<br>
+            hostname: ${urlwesteuropeDataDataDestinationIpAddress.hostname}<br>
             org: ${urlwesteuropeDataDataDestinationIpAddress.org}`,
                     },
                 },
