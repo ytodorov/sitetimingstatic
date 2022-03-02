@@ -2,6 +2,7 @@
 var url = document.location.pathname.substring(1);
 url = url.toLowerCase();
 if (document.location.hostname.toLowerCase().includes("127.0.0.1") == false) {
+  debugger;
   if (url.startsWith("https://www.")) {
     url = url.substring("https://www.".length);
   }
