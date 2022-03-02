@@ -83,6 +83,7 @@ function createChart() {
     categoryAxis: {
       labels: {
         rotation: -90,
+        format: "yyyy/MM/dd HH:mm",
       },
       crosshair: {
         visible: true,
@@ -315,12 +316,11 @@ $.when(
           shape: "pin",
           tooltip: {
             content: `
-            city:${urlcentralcanadaDataSourceIpAddress.city}<br>
+            city: ${urlcentralcanadaDataSourceIpAddress.city}<br>
             region: ${urlcentralcanadaDataSourceIpAddress.country}<br>
             country: ${urlcentralcanadaDataSourceIpAddress.country}<br>
             postal: ${urlcentralcanadaDataSourceIpAddress.postal}<br>
             timezone: ${urlcentralcanadaDataSourceIpAddress.timezone}<br>
-            hostname: ${urlcentralcanadaDataSourceIpAddress.hostname}<br>
             org: ${urlcentralcanadaDataSourceIpAddress.org}<br>
             distance: ${StaticMethods.distance(
               urlcentralcanadaDataSourceIpAddress.latitude,
@@ -338,12 +338,11 @@ $.when(
           shape: "pinTarget",
           tooltip: {
             content: `
-            city:${urlcentralcanadaDataDestinationIpAddress.city}<br>
+            city: ${urlcentralcanadaDataDestinationIpAddress.city}<br>
             region: ${urlcentralcanadaDataDestinationIpAddress.country}<br>
             country: ${urlcentralcanadaDataDestinationIpAddress.country}<br>
             postal: ${urlcentralcanadaDataDestinationIpAddress.postal}<br>
             timezone: ${urlcentralcanadaDataDestinationIpAddress.timezone}<br>
-            hostname: ${urlcentralcanadaDataDestinationIpAddress.hostname}<br>
             org: ${urlcentralcanadaDataDestinationIpAddress.org}`,
           },
         },
@@ -355,12 +354,11 @@ $.when(
           shape: "pin",
           tooltip: {
             content: `
-            city:${urleastus2DataSourceIpAddress.city}<br>
+            city: ${urleastus2DataSourceIpAddress.city}<br>
             region: ${urleastus2DataSourceIpAddress.country}<br>
             country: ${urleastus2DataSourceIpAddress.country}<br>
             postal: ${urleastus2DataSourceIpAddress.postal}<br>
             timezone: ${urleastus2DataSourceIpAddress.timezone}<br>
-            hostname: ${urleastus2DataSourceIpAddress.hostname}<br>
             org: ${urleastus2DataSourceIpAddress.org}<br>
             distance: ${StaticMethods.distance(
               urleastus2DataSourceIpAddress.latitude,
@@ -378,12 +376,11 @@ $.when(
           shape: "pinTarget",
           tooltip: {
             content: `
-            city:${urleastus2DataDestinationIpAddress.city}<br>
+            city: ${urleastus2DataDestinationIpAddress.city}<br>
             region: ${urleastus2DataDestinationIpAddress.country}<br>
             country: ${urleastus2DataDestinationIpAddress.country}<br>
             postal: ${urleastus2DataDestinationIpAddress.postal}<br>
             timezone: ${urleastus2DataDestinationIpAddress.timezone}<br>
-            hostname: ${urleastus2DataDestinationIpAddress.hostname}<br>
             org: ${urleastus2DataDestinationIpAddress.org}`,
           },
         },
@@ -395,12 +392,11 @@ $.when(
           shape: "pin",
           tooltip: {
             content: `
-            city:${urlnortheuropeDataSourceIpAddress.city}<br>
+            city: ${urlnortheuropeDataSourceIpAddress.city}<br>
             region: ${urlnortheuropeDataSourceIpAddress.country}<br>
             country: ${urlnortheuropeDataSourceIpAddress.country}<br>
             postal: ${urlnortheuropeDataSourceIpAddress.postal}<br>
             timezone: ${urlnortheuropeDataSourceIpAddress.timezone}<br>
-            hostname: ${urlnortheuropeDataSourceIpAddress.hostname}<br>
             org: ${urlnortheuropeDataSourceIpAddress.org}<br>
             distance: ${StaticMethods.distance(
               urlnortheuropeDataSourceIpAddress.latitude,
@@ -418,12 +414,11 @@ $.when(
           shape: "pinTarget",
           tooltip: {
             content: `
-            city:${urlnortheuropeDataDestinationIpAddress.city}<br>
+            city: ${urlnortheuropeDataDestinationIpAddress.city}<br>
             region: ${urlnortheuropeDataDestinationIpAddress.country}<br>
             country: ${urlnortheuropeDataDestinationIpAddress.country}<br>
             postal: ${urlnortheuropeDataDestinationIpAddress.postal}<br>
             timezone: ${urlnortheuropeDataDestinationIpAddress.timezone}<br>
-            hostname: ${urlnortheuropeDataDestinationIpAddress.hostname}<br>
             org: ${urlnortheuropeDataDestinationIpAddress.org}`,
           },
         },
@@ -435,12 +430,11 @@ $.when(
           shape: "pin",
           tooltip: {
             content: `
-            city:${urlwesteuropeDataDataSourceIpAddress.city}<br>
+            city: ${urlwesteuropeDataDataSourceIpAddress.city}<br>
             region: ${urlwesteuropeDataDataSourceIpAddress.country}<br>
             country: ${urlwesteuropeDataDataSourceIpAddress.country}<br>
             postal: ${urlwesteuropeDataDataSourceIpAddress.postal}<br>
             timezone: ${urlwesteuropeDataDataSourceIpAddress.timezone}<br>
-            hostname: ${urlwesteuropeDataDataSourceIpAddress.hostname}<br>
             org: ${urlwesteuropeDataDataSourceIpAddress.org}<br>
             distance: ${StaticMethods.distance(
               urlwesteuropeDataDataSourceIpAddress.latitude,
@@ -458,12 +452,11 @@ $.when(
           shape: "pinTarget",
           tooltip: {
             content: `
-            city:${urlwesteuropeDataDataDestinationIpAddress.city}<br>
+            city ${urlwesteuropeDataDataDestinationIpAddress.city}<br>
             region: ${urlwesteuropeDataDataDestinationIpAddress.country}<br>
             country: ${urlwesteuropeDataDataDestinationIpAddress.country}<br>
             postal: ${urlwesteuropeDataDataDestinationIpAddress.postal}<br>
             timezone: ${urlwesteuropeDataDataDestinationIpAddress.timezone}<br>
-            hostname: ${urlwesteuropeDataDataDestinationIpAddress.hostname}<br>
             org: ${urlwesteuropeDataDataDestinationIpAddress.org}`,
           },
         },
