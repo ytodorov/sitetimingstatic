@@ -132,11 +132,9 @@ $(".skeletonMarker").each(function (index) {
   });
 });
 
-//let urlwestus3 = `https://st-westus3.azurewebsites.net/probe?url=${url}`;
 let urleastus2 = `https://containerappeastus2.politeflower-c7227859.eastus2.azurecontainerapps.io/probe?url=${url}`;
-//let urlsoutheastasia = `https://st-southeastasia.azurewebsites.net/probe?url=${url}`;
 let urlcentralcanada = `https://containerappcanadacentral.happyrock-5d18c325.canadacentral.azurecontainerapps.io/probe?url=${url}`;
-let urlnortheurope = `https://containerappcanadacentral.happyrock-5d18c325.canadacentral.azurecontainerapps.io/probe?url=${url}`;
+let urlnortheurope = `https://containerappnortheurope.whitedune-748c223c.northeurope.azurecontainerapps.io/probe?url=${url}`;
 let urlwesteurope = `https://containerappwesteurope.nicepond-330ead69.westeurope.azurecontainerapps.io/probe?url=${url}`;
 var urleastus2Data: any;
 var urlcentralcanadaData: any;
