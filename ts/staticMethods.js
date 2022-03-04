@@ -1,7 +1,6 @@
 "use strict";
 class StaticMethods {
     static distance(lat1, lon1, lat2, lon2) {
-        debugger;
         var unit = "K"; // Kilometers
         if (lat1 == lat2 && lon1 == lon2) {
             return "0 km.";

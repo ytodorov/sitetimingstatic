@@ -7,7 +7,6 @@ class StaticMethods {
     lat2: number,
     lon2: number
   ): string {
-    debugger;
     var unit = "K"; // Kilometers
     if (lat1 == lat2 && lon1 == lon2) {
       return "0 km.";
