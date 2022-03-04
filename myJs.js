@@ -1,7 +1,7 @@
 "use strict";
 $(function () {
-    $('#tbCheckWebSite').on("keypress", function (event) {
-        if (event.key == 'Enter') {
+    $("#tbCheckWebSite").on("keypress", function (event) {
+        if (event.key == "Enter") {
             $("#btnCheckWebSite").trigger("click");
         }
     });
@@ -18,7 +18,7 @@ $(function () {
             mainSection.removeClass("loadingMarker");
             $.ajax({
                 type: "POST",
-                url: "https://st-westus3.azurewebsites.net/graphql",
+                url: "https://containerappeastus--yjjmo6x.yellowmoss-bb737f56.eastus.azurecontainerapps.io/graphql",
                 data: `
     {"operationName":null,"variables":{},"query":"{  probes(take: 6) {    id uniqueGuid   sourceIpAddress    destinationIpAddress exceptionMessage    latencyInChrome    siteId    site {      url title    }  }}"}
    `,
@@ -28,7 +28,7 @@ $(function () {
                     $("#sitesRow").html(htmlOutput);
                 },
                 dataType: "json",
-                contentType: "application/json"
+                contentType: "application/json",
             });
         }
     });
@@ -42,7 +42,8 @@ $(function () {
             }
         }
         $("h1").text(url);
-        var urlToGetDataForOneProbe = "https://st-westus3.azurewebsites.net/probe?url=" + url;
+        var urlToGetDataForOneProbe = "https://containerappeastus--yjjmo6x.yellowmoss-bb737f56.eastus.azurecontainerapps.io/probe?url=" +
+            url;
         $("#pageTitle").removeClass("invisible");
         $("#liSiteName").text(url);
         $("#sectionWithSearchTextbox").remove();
@@ -52,7 +53,7 @@ $(function () {
         //   $.get(urlToGetDataForOneProbe, function (data) {
         //     $.ajax({
         //       type: "POST",
-        //       url: "https://st-westus3.azurewebsites.net/graphql",
+        //       url: "https://containerappeastus--yjjmo6x.yellowmoss-bb737f56.eastus.azurecontainerapps.io/graphql",
         //       data: `
         //   {"operationName":null,"variables":{},"query":"{  probes(where: \\"site.url = \\\\\\"${url}\\\\\\"\\") {    id dateCreated sourceIpAddress  destinationIpAddress    latencyInChrome   }}"}
         //  `,
@@ -72,25 +73,23 @@ $(document).ready(function () {
     var currentUrl = document.location.pathname.substring(1);
     currentUrl = "https://google.com";
     var q = `probes(take:100) {    id dateCreated sourceIpAddress  destinationIpAddress    latencyInChrome   }`;
-    var READ_PRODUCTS_QUERY = "query {" +
-        q +
-        "}";
+    var READ_PRODUCTS_QUERY = "query {" + q + "}";
     var dataSource = new kendo.data.DataSource({
         transport: {
             read: {
                 contentType: "application/json",
-                url: "https://st-westus3.azurewebsites.net/graphql",
+                url: "https://containerappeastus--yjjmo6x.yellowmoss-bb737f56.eastus.azurecontainerapps.io/graphql",
                 type: "POST",
                 data: function () {
                     return { query: READ_PRODUCTS_QUERY };
-                }
+                },
             },
             parameterMap: function (options, operation) {
                 return kendo.stringify({
                     query: options.query,
-                    variables: options.variables
+                    variables: options.variables,
                 });
-            }
+            },
         },
         schema: {
             data: function (response) {
@@ -106,11 +105,11 @@ $(document).ready(function () {
                 id: "id",
                 fields: {
                     id: { type: "number", editable: false },
-                    latencyInChrome: { type: "number" }
-                }
-            }
+                    latencyInChrome: { type: "number" },
+                },
+            },
         },
-        pageSize: 20
+        pageSize: 20,
     });
     $("#grid").kendoGrid({
         dataSource: dataSource,
@@ -120,14 +119,16 @@ $(document).ready(function () {
         pageable: true,
         toolbar: ["create"],
         editable: "inline",
-        columns: [{
+        columns: [
+            {
                 field: "id",
-                title: "id"
+                title: "id",
             },
             {
                 field: "latencyInChrome",
-                title: "latencyInChrome"
-            }]
+                title: "latencyInChrome",
+            },
+        ],
     });
 });
 function RenderProbesInGrid(data) {

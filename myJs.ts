@@ -1,7 +1,6 @@
 $(function () {
-
-  $('#tbCheckWebSite').on("keypress", function (event) {
-    if (event.key == 'Enter') {
+  $("#tbCheckWebSite").on("keypress", function (event) {
+    if (event.key == "Enter") {
       $("#btnCheckWebSite").trigger("click");
     }
   });
@@ -15,13 +14,12 @@ $(function () {
   });
 
   $(window).on("scroll", function () {
-
     var mainSection = $("#mainSection");
     if (mainSection.is(":visible") && mainSection.hasClass("loadingMarker")) {
       mainSection.removeClass("loadingMarker");
       $.ajax({
         type: "POST",
-        url: "https://st-westus3.azurewebsites.net/graphql",
+        url: "https://containerappeastus--yjjmo6x.yellowmoss-bb737f56.eastus.azurecontainerapps.io/graphql",
         data: `
     {"operationName":null,"variables":{},"query":"{  probes(take: 6) {    id uniqueGuid   sourceIpAddress    destinationIpAddress exceptionMessage    latencyInChrome    siteId    site {      url title    }  }}"}
    `,
@@ -33,11 +31,10 @@ $(function () {
           $("#sitesRow").html(htmlOutput);
         },
         dataType: "json",
-        contentType: "application/json"
+        contentType: "application/json",
       });
     }
-  }
-  );
+  });
 
   if (document.location.pathname != "/" && document.location.pathname != "") {
     var url = document.location.pathname.substring(1);
@@ -51,7 +48,9 @@ $(function () {
 
     $("h1").text(url);
 
-    var urlToGetDataForOneProbe = "https://st-westus3.azurewebsites.net/probe?url=" + url;
+    var urlToGetDataForOneProbe =
+      "https://containerappeastus--yjjmo6x.yellowmoss-bb737f56.eastus.azurecontainerapps.io/probe?url=" +
+      url;
 
     $("#pageTitle").removeClass("invisible");
     $("#liSiteName").text(url);
@@ -60,101 +59,93 @@ $(function () {
     $("#sectionWithCounter").remove();
     $("#sitesRow").remove();
 
-  //   $.get(urlToGetDataForOneProbe, function (data) {
+    //   $.get(urlToGetDataForOneProbe, function (data) {
 
-  //     $.ajax({
-  //       type: "POST",
-  //       url: "https://st-westus3.azurewebsites.net/graphql",
-  //       data: `
-  //   {"operationName":null,"variables":{},"query":"{  probes(where: \\"site.url = \\\\\\"${url}\\\\\\"\\") {    id dateCreated sourceIpAddress  destinationIpAddress    latencyInChrome   }}"}
-  //  `,
-  //       success: function (probesData) {
-  //         //RenderProbesInGrid(probesData.data.probes);
-  //       },
-  //       dataType: "json",
-  //       contentType: "application/json"
-  //     });
-  //   })
-
-  }
-  else {
-
+    //     $.ajax({
+    //       type: "POST",
+    //       url: "https://containerappeastus--yjjmo6x.yellowmoss-bb737f56.eastus.azurecontainerapps.io/graphql",
+    //       data: `
+    //   {"operationName":null,"variables":{},"query":"{  probes(where: \\"site.url = \\\\\\"${url}\\\\\\"\\") {    id dateCreated sourceIpAddress  destinationIpAddress    latencyInChrome   }}"}
+    //  `,
+    //       success: function (probesData) {
+    //         //RenderProbesInGrid(probesData.data.probes);
+    //       },
+    //       dataType: "json",
+    //       contentType: "application/json"
+    //     });
+    //   })
+  } else {
     $("#mainBreadcrumb").hide();
-
   }
 });
 
+$(document).ready(function () {
+  var currentUrl = document.location.pathname.substring(1);
+  currentUrl = "https://google.com";
+  var q = `probes(take:100) {    id dateCreated sourceIpAddress  destinationIpAddress    latencyInChrome   }`;
+  var READ_PRODUCTS_QUERY = "query {" + q + "}";
 
-        $(document).ready(function() {
-
-
-          var currentUrl = document.location.pathname.substring(1);
-          currentUrl = "https://google.com"
-          var q = `probes(take:100) {    id dateCreated sourceIpAddress  destinationIpAddress    latencyInChrome   }`;
-          var READ_PRODUCTS_QUERY = "query {" +
-                     q +
-                  "}";
-                  
-          
-
-            var dataSource = new kendo.data.DataSource({
-                transport: {                   
-                    read: {
-                        contentType: "application/json",
-                        url: "https://st-westus3.azurewebsites.net/graphql",
-                        type: "POST",
-                        data: function() {
-                            return { query: READ_PRODUCTS_QUERY };
-                        }
-                    },                   
-                    parameterMap: function(options:any, operation) {
-                        return  kendo.stringify({
-                            query: options.query,
-                            variables: options.variables
-                        });
-                    }
-                },
-                schema: {
-                    data: function(response:any) {
-                        var data = response.data;
-
-                        if (data.probes) { return data.probes; }
-                    },
-                    total: function(response:any) {
-                        return response.data.probes.length;
-                    },
-                    model: {
-                        id: "id",
-                        fields: {
-                            id: { type: "number", editable: false },             
-                            latencyInChrome: {type: "number"}                              
-                        }
-                    }
-                },
-                pageSize: 20
-            });
-
-            $("#grid").kendoGrid({
-                dataSource: dataSource,
-                height: 550,
-                groupable: true,
-                sortable: true,
-                pageable: true,
-                toolbar: ["create"],
-                editable: "inline",
-                columns: [{
-                    field: "id",
-                    title: "id"
-                },
-                {
-                    field: "latencyInChrome",
-                    title: "latencyInChrome"
-                }]
-            });
+  var dataSource = new kendo.data.DataSource({
+    transport: {
+      read: {
+        contentType: "application/json",
+        url: "https://containerappeastus--yjjmo6x.yellowmoss-bb737f56.eastus.azurecontainerapps.io/graphql",
+        type: "POST",
+        data: function () {
+          return { query: READ_PRODUCTS_QUERY };
+        },
+      },
+      parameterMap: function (options: any, operation) {
+        return kendo.stringify({
+          query: options.query,
+          variables: options.variables,
         });
+      },
+    },
+    schema: {
+      data: function (response: any) {
+        var data = response.data;
+
+        if (data.probes) {
+          return data.probes;
+        }
+      },
+      total: function (response: any) {
+        return response.data.probes.length;
+      },
+      model: {
+        id: "id",
+        fields: {
+          id: { type: "number", editable: false },
+          latencyInChrome: { type: "number" },
+        },
+      },
+    },
+    pageSize: 20,
+  });
+
+  $("#grid").kendoGrid({
+    dataSource: dataSource,
+    height: 550,
+    groupable: true,
+    sortable: true,
+    pageable: true,
+    toolbar: ["create"],
+    editable: "inline",
+    columns: [
+      {
+        field: "id",
+        title: "id",
+      },
+      {
+        field: "latencyInChrome",
+        title: "latencyInChrome",
+      },
+    ],
+  });
+});
 
 function RenderProbesInGrid(data: any): void {
-
   var htmlToRender = `<table class="table">
   <thead>
     <tr>     
@@ -165,7 +156,6 @@ function RenderProbesInGrid(data: any): void {
     </tr>
   </thead>
   <tbody>`;
-
 
   var template = ($ as any).templates("#templateProbeRow");
   var htmlOutput = template.render(data);

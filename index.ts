@@ -101,7 +101,7 @@ $(function () {
     transport: {
       read: {
         contentType: "application/json",
-        url: "https://st-westus3.azurewebsites.net/graphql",
+        url: "https://containerappeastus--yjjmo6x.yellowmoss-bb737f56.eastus.azurecontainerapps.io/graphql",
         type: "POST",
         data: function () {
           return { query: READ_PRODUCTS_QUERY };
