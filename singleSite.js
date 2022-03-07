@@ -68,7 +68,7 @@ function createChart() {
             transport: {
                 read: {
                     url: `https://containerappeastus--yjjmo6x.yellowmoss-bb737f56.eastus.azurecontainerapps.io/graphql?query={probes(take:20,where:"site.url=\\\"${url}\\\""){id, latencyInChrome dateCreated dOMContentLoadedEventInChrome sourceIpAddress}}`,
-                    dataType: "json",
+                    dataType: "jsonp",
                 },
             },
             sort: {
@@ -397,5 +397,6 @@ $.when($.get(urleastus2, function (data) {
                 },
             ],
         });
+        $(".k-i-marker-pin-target").css("color", "green");
     });
 });

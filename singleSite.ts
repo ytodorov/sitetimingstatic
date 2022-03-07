@@ -2,7 +2,6 @@
 var url = document.location.pathname.substring(1);
 url = url.toLowerCase();
 if (document.location.hostname.toLowerCase().includes("127.0.0.1") == false) {
-  
   if (url.startsWith("https://www.")) {
     url = url.substring("https://www.".length);
     document.location = "/" + url;
@@ -72,7 +71,7 @@ function createChart() {
       transport: {
         read: {
           url: `https://containerappeastus--yjjmo6x.yellowmoss-bb737f56.eastus.azurecontainerapps.io/graphql?query={probes(take:20,where:"site.url=\\\"${url}\\\""){id, latencyInChrome dateCreated dOMContentLoadedEventInChrome sourceIpAddress}}`,
-          dataType: "json",
+          dataType: "jsonp",
         },
       },
       sort: {
@@ -483,5 +482,7 @@ $.when(
         },
       ],
     });
+
+    $(".k-i-marker-pin-target").css("color", "green");
   });
 });

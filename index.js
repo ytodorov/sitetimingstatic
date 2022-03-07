@@ -56,7 +56,7 @@ $(function () {
                 var siteContains = $("#sites").val();
                 $.ajax({
                     url: `https://containerappeastus--yjjmo6x.yellowmoss-bb737f56.eastus.azurecontainerapps.io/graphql?query={sites(take:100,where: "url.contains(\\\"${siteContains}\\\")"){url}}`,
-                    dataType: "json",
+                    dataType: "jsonp",
                     success: function (result) {
                         // notify the data source that the request succeeded
                         options.success(result);
