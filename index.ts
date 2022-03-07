@@ -62,7 +62,7 @@ $(function () {
 
         $.ajax({
           url: `https://containerappeastus--yjjmo6x.yellowmoss-bb737f56.eastus.azurecontainerapps.io/graphql?query={sites(take:100,where: "url.contains(\\\"${siteContains}\\\")"){url}}`,
-          dataType: "jsonp", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
+          dataType: "json", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
           success: function (result) {
             // notify the data source that the request succeeded
             options.success(result);

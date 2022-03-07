@@ -30,7 +30,7 @@ $(function () {
 
           $("#sitesRow").html(htmlOutput);
         },
-        dataType: "jsonp",
+        dataType: "json",
         contentType: "application/json",
       });
     }
@@ -70,7 +70,7 @@ $(function () {
     //       success: function (probesData) {
     //         //RenderProbesInGrid(probesData.data.probes);
     //       },
-    //       dataType: "jsonp",
+    //       dataType: "json",
     //       contentType: "application/json"
     //     });
     //   })
