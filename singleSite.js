@@ -67,7 +67,7 @@ function createChart() {
             },
             transport: {
                 read: {
-                    url: `https://containerappeastus--yjjmo6x.yellowmoss-bb737f56.eastus.azurecontainerapps.io/graphql?query={probes(take:20,where:"site.url=\\\"http://${url}\\\""){id, latencyInChrome dateCreated dOMContentLoadedEventInChrome sourceIpAddress}}`,
+                    url: `https://containerappeastus.yellowmoss-bb737f56.eastus.azurecontainerapps.io/graphql?query={probes(take:20,where:"site.url=\\\"http://${url}\\\""){id, latencyInChrome dateCreated dOMContentLoadedEventInChrome sourceIpAddress}}`,
                     dataType: "json",
                 },
             },

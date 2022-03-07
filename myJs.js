@@ -18,7 +18,7 @@ $(function () {
             mainSection.removeClass("loadingMarker");
             $.ajax({
                 type: "POST",
-                url: "https://containerappeastus--yjjmo6x.yellowmoss-bb737f56.eastus.azurecontainerapps.io/graphql",
+                url: "https://containerappeastus.yellowmoss-bb737f56.eastus.azurecontainerapps.io/graphql",
                 data: `
     {"operationName":null,"variables":{},"query":"{  probes(take: 6) {    id uniqueGuid   sourceIpAddress    destinationIpAddress exceptionMessage    latencyInChrome    siteId    site {      url title    }  }}"}
    `,
@@ -42,7 +42,7 @@ $(function () {
             }
         }
         $("h1").text(url);
-        var urlToGetDataForOneProbe = "https://containerappeastus--yjjmo6x.yellowmoss-bb737f56.eastus.azurecontainerapps.io/probe?url=" +
+        var urlToGetDataForOneProbe = "https://containerappeastus.yellowmoss-bb737f56.eastus.azurecontainerapps.io/probe?url=" +
             url;
         $("#pageTitle").removeClass("invisible");
         $("#liSiteName").text(url);
@@ -53,7 +53,7 @@ $(function () {
         //   $.get(urlToGetDataForOneProbe, function (data) {
         //     $.ajax({
         //       type: "POST",
-        //       url: "https://containerappeastus--yjjmo6x.yellowmoss-bb737f56.eastus.azurecontainerapps.io/graphql",
+        //       url: "https://containerappeastus.yellowmoss-bb737f56.eastus.azurecontainerapps.io/graphql",
         //       data: `
         //   {"operationName":null,"variables":{},"query":"{  probes(where: \\"site.url = \\\\\\"${url}\\\\\\"\\") {    id dateCreated sourceIpAddress  destinationIpAddress    latencyInChrome   }}"}
         //  `,
@@ -78,7 +78,7 @@ $(document).ready(function () {
         transport: {
             read: {
                 contentType: "application/json",
-                url: "https://containerappeastus--yjjmo6x.yellowmoss-bb737f56.eastus.azurecontainerapps.io/graphql",
+                url: "https://containerappeastus.yellowmoss-bb737f56.eastus.azurecontainerapps.io/graphql",
                 type: "POST",
                 data: function () {
                     return { query: READ_PRODUCTS_QUERY };
