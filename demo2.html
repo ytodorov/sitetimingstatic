@@ -1,51 +1,73 @@
-<!DOCTYPE html>
-<html>
+<script>
+    function run() {
+        const url = setUpQuery();
+        fetch(url)
+            .then(response => response.json())
+            .then(json => {
+                // See https://developers.google.com/speed/docs/insights/v5/reference/pagespeedapi/runpagespeed#response
+                // to learn more about each of the properties in the response object.
+                showInitialContent(json.id);
+                const cruxMetrics = {
+                    "First Contentful Paint": json.loadingExperience.metrics.FIRST_CONTENTFUL_PAINT_MS.category,
+                    "First Input Delay": json.loadingExperience.metrics.FIRST_INPUT_DELAY_MS.category
+                };
+                showCruxContent(cruxMetrics);
+                const lighthouse = json.lighthouseResult;
+                const lighthouseMetrics = {
+                    'First Contentful Paint': lighthouse.audits['first-contentful-paint'].displayValue,
+                    'Speed Index': lighthouse.audits['speed-index'].displayValue,
+                    'Time To Interactive': lighthouse.audits['interactive'].displayValue,
+                    'First Meaningful Paint': lighthouse.audits['first-meaningful-paint'].displayValue,
+                    'First CPU Idle': lighthouse.audits['first-cpu-idle'].displayValue,
+                    'Estimated Input Latency': lighthouse.audits['estimated-input-latency'].displayValue
+                };
+                showLighthouseContent(lighthouseMetrics);
+            });
+    }
 
-    <head>
-        <title>Simple Markers</title>
-        <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-        <style>
-            /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-            #map {
-                height: 100%;
-            }
+    function setUpQuery() {
+        const api = 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed';
+        const parameters = {
+            url: encodeURIComponent('https://developers.google.com?key=AIzaSyCW580PtFXfJjBDDbFl9YuMxW_yC7N3WEw')
+        };
+        let query = `${api}?`;
+        for (key in parameters) {
+            query += `${key}=${parameters[key]}`;
+        }
+        return query;
+    }
 
-            /* Optional: Makes the sample page fill the window. */
-            html,
-            body {
-                height: 100%;
-                margin: 0;
-                padding: 0;
-            }
+    function showInitialContent(id) {
+        document.body.innerHTML = '';
+        const title = document.createElement('h1');
+        title.textContent = 'PageSpeed Insights API Demo';
+        document.body.appendChild(title);
+        const page = document.createElement('p');
+        page.textContent = `Page tested: ${id}`;
+        document.body.appendChild(page);
+    }
 
-        </style>
+    function showCruxContent(cruxMetrics) {
+        const cruxHeader = document.createElement('h2');
+        cruxHeader.textContent = "Chrome User Experience Report Results";
+        document.body.appendChild(cruxHeader);
+        for (key in cruxMetrics) {
+            const p = document.createElement('p');
+            p.textContent = `${key}: ${cruxMetrics[key]}`;
+            document.body.appendChild(p);
+        }
+    }
 
-    </head>
+    function showLighthouseContent(lighthouseMetrics) {
+        const lighthouseHeader = document.createElement('h2');
+        lighthouseHeader.textContent = "Lighthouse Results";
+        document.body.appendChild(lighthouseHeader);
+        for (key in lighthouseMetrics) {
+            const p = document.createElement('p');
+            p.textContent = `${key}: ${lighthouseMetrics[key]}`;
+            document.body.appendChild(p);
+        }
+    }
 
-    <body>
-        <div id="map"></div>
-
-        <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-        <script
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCW580PtFXfJjBDDbFl9YuMxW_yC7N3WEw&callback=initMap&v=weekly"
-            async></script>
-        <script>
-            function initMap() {
-                const myLatLng = { lat: -25.363, lng: 131.044 };
-                const map = new google.maps.Map(document.getElementById("map"), {
-                    zoom: 4,
-                    center: myLatLng,
-                });
-
-                new google.maps.Marker({
-                    position: myLatLng,
-                    map,
-                    title: "Hello World!",
-                });
-            }
-
-        </script>
-    </body>
-
-</html>
+    run();
+</script>
