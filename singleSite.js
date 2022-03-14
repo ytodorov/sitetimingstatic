@@ -58,67 +58,131 @@ $("#breadcrumb").kendoBreadcrumb({
 //    size: 'large'
 //}).data("kendoLoader");
 function createChart() {
-    var ip = $("#chart").attr("data-ip");
-    $("#chart").kendoChart({
-        dataSource: {
-            schema: {
-                data: function (response) {
-                    return response.data.probes;
+    debugger;
+    $("[data-type=chart]").each(function () {
+        debugger;
+        var current = $(this);
+        var ip = current.attr("data-ip");
+        $("[data-type=chart]").kendoChart({
+            dataSource: {
+                schema: {
+                    data: function (response) {
+                        return response.data.probes;
+                    },
+                },
+                transport: {
+                    read: {
+                        url: `https://containerappeastus.yellowmoss-bb737f56.eastus.azurecontainerapps.io/graphql?query={probes(take:20,where:"site.url=\\\"http://${url}\\\" && SourceIpAddress=\\\"${ip}\\\" "){id, latencyInChrome dateCreated dateCreatedFormatted dOMContentLoadedEventInChrome sourceIpAddress distanceBetweenIpAddresses }}`,
+                        dataType: "json",
+                    },
+                },
+                sort: {
+                    field: "id",
+                    dir: "asc",
                 },
             },
-            transport: {
-                read: {
-                    url: `https://containerappeastus.yellowmoss-bb737f56.eastus.azurecontainerapps.io/graphql?query={probes(take:20,where:"site.url=\\\"http://${url}\\\" && SourceIpAddress=\\\"${ip}\\\" "){id, latencyInChrome dateCreated dOMContentLoadedEventInChrome sourceIpAddress distanceBetweenIpAddresses }}`,
-                    dataType: "json",
+            title: {
+                text: `Latency of ${url}`,
+            },
+            legend: {
+                position: "top",
+            },
+            seriesDefaults: {
+                type: "line",
+            },
+            series: [
+                {
+                    field: "latencyInChrome",
+                    categoryField: "dateCreatedFormatted",
+                    name: "latency",
+                },
+                {
+                    field: "dOMContentLoadedEventInChrome",
+                    categoryField: "dateCreatedFormatted",
+                    name: "dom loaded",
+                },
+            ],
+            categoryAxis: {
+                labels: {
+                    visible: true,
+                    rotation: -45,
+                },
+                crosshair: {
+                    visible: true,
                 },
             },
-            sort: {
-                field: "id",
-                dir: "asc",
+            valueAxis: {
+                labels: {
+                    format: "N0",
+                },
             },
-        },
-        title: {
-            text: `Latency of ${url}`,
-        },
-        legend: {
-            position: "top",
-        },
-        seriesDefaults: {
-            type: "line",
-        },
-        series: [
-            {
-                field: "latencyInChrome",
-                categoryField: "dateCreatedFormatted",
-                name: "latency",
-            },
-            {
-                field: "dOMContentLoadedEventInChrome",
-                categoryField: "dateCreatedFormatted",
-                name: "dom loaded",
-            },
-        ],
-        categoryAxis: {
-            labels: {
-                visible: false,
-                rotation: -45,
-                format: "yyyy/MM/dd",
-            },
-            crosshair: {
+            tooltip: {
                 visible: true,
-            },
-        },
-        valueAxis: {
-            labels: {
+                shared: true,
                 format: "N0",
             },
-        },
-        tooltip: {
-            visible: true,
-            shared: true,
-            format: "N0",
-        },
+        });
     });
+    // $("[data-type=chart]").kendoChart({
+    //   dataSource: {
+    //     schema: {
+    //       data: function (response: any) {
+    //         return response.data.probes;
+    //       },
+    //     },
+    //     transport: {
+    //       read: {
+    //         url: `https://containerappeastus.yellowmoss-bb737f56.eastus.azurecontainerapps.io/graphql?query={probes(take:20,where:"site.url=\\\"http://${url}\\\" && SourceIpAddress=\\\"${ip}\\\" "){id, latencyInChrome dateCreated dOMContentLoadedEventInChrome sourceIpAddress distanceBetweenIpAddresses }}`,
+    //         dataType: "json",
+    //       },
+    //     },
+    //     sort: {
+    //       field: "id",
+    //       dir: "asc",
+    //     },
+    //   },
+    //   title: {
+    //     text: `Latency of ${url}`,
+    //   },
+    //   legend: {
+    //     position: "top",
+    //   },
+    //   seriesDefaults: {
+    //     type: "line",
+    //   },
+    //   series: [
+    //     {
+    //       field: "latencyInChrome",
+    //       categoryField: "dateCreatedFormatted",
+    //       name: "latency",
+    //     },
+    //     {
+    //       field: "dOMContentLoadedEventInChrome",
+    //       categoryField: "dateCreatedFormatted",
+    //       name: "dom loaded",
+    //     },
+    //   ],
+    //   categoryAxis: {
+    //     labels: {
+    //       visible: false,
+    //       rotation: -45,
+    //       format: "yyyy/MM/dd",
+    //     },
+    //     crosshair: {
+    //       visible: true,
+    //     },
+    //   },
+    //   valueAxis: {
+    //     labels: {
+    //       format: "N0",
+    //     },
+    //   },
+    //   tooltip: {
+    //     visible: true,
+    //     shared: true,
+    //     format: "N0",
+    //   },
+    // });
 }
 $(document).ready(createChart);
 $(window).resize(function () {
@@ -165,6 +229,7 @@ $.when($.get(urleastus2, function (data) {
           </div>
         <img class="k-card-image" onerror="if (this.src != 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg') this.src = 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg';" src="https://sitetiming.blob.core.windows.net/images/short50_${data.uniqueGuid}.jpeg?sv=2020-08-04&st=2012-01-27T12%3A30%3A00Z&se=2032-01-28T12%3A30%3A00Z&sr=c&sp=rl&sig=jvKd8yqdiz42u28l4oPYHVFWUSCaeLYmeKMMCgwtn1Y%3D" />
         <div class="k-card-body">
+        <div data-type="chart" data-ip="${data.sourceIpAddress}"></div>
             <h6 class="k-card-subtitle">Latency: ${data.latencyInChrome}</h6>
             <h6 class="k-card-subtitle">DOM Loaded: ${data.domContentLoadedEventInChrome}</h6>
             <h6 class="k-card-subtitle">DestinationIpAddress: ${data.destinationIpAddress}</h6>
@@ -181,6 +246,7 @@ $.when($.get(urleastus2, function (data) {
           </div>
         <img class="k-card-image" onerror="if (this.src != 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg') this.src = 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg';" src="https://sitetiming.blob.core.windows.net/images/short50_${data.uniqueGuid}.jpeg?sv=2020-08-04&st=2012-01-27T12%3A30%3A00Z&se=2032-01-28T12%3A30%3A00Z&sr=c&sp=rl&sig=jvKd8yqdiz42u28l4oPYHVFWUSCaeLYmeKMMCgwtn1Y%3D" />
         <div class="k-card-body">
+        <div data-type="chart" data-ip="${data.sourceIpAddress}"></div>
             <h6 class="k-card-subtitle">Latency: ${data.latencyInChrome}</h6>
             <h6 class="k-card-subtitle">DOM Loaded: ${data.domContentLoadedEventInChrome}</h6>
             <h6 class="k-card-subtitle">DestinationIpAddress: ${data.destinationIpAddress}</h6>
@@ -196,6 +262,7 @@ $.when($.get(urleastus2, function (data) {
           </div>
         <img class="k-card-image" onerror="if (this.src != 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg') this.src = 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg';" src="https://sitetiming.blob.core.windows.net/images/short50_${data.uniqueGuid}.jpeg?sv=2020-08-04&st=2012-01-27T12%3A30%3A00Z&se=2032-01-28T12%3A30%3A00Z&sr=c&sp=rl&sig=jvKd8yqdiz42u28l4oPYHVFWUSCaeLYmeKMMCgwtn1Y%3D" />
         <div class="k-card-body">
+        <div data-type="chart" data-ip="${data.sourceIpAddress}"></div>
             <h6 class="k-card-subtitle">Latency: ${data.latencyInChrome}</h6>
             <h6 class="k-card-subtitle">DOM Loaded: ${data.domContentLoadedEventInChrome}</h6>
             <h6 class="k-card-subtitle">DestinationIpAddress: ${data.destinationIpAddress}</h6>
@@ -212,7 +279,7 @@ $.when($.get(urleastus2, function (data) {
           </div>
         <img class="k-card-image" onerror="if (this.src != 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg') this.src = 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg';" src="https://sitetiming.blob.core.windows.net/images/short50_${data.uniqueGuid}.jpeg?sv=2020-08-04&st=2012-01-27T12%3A30%3A00Z&se=2032-01-28T12%3A30%3A00Z&sr=c&sp=rl&sig=jvKd8yqdiz42u28l4oPYHVFWUSCaeLYmeKMMCgwtn1Y%3D" />
         <div class="k-card-body">
-        <div id="chart" data-ip="${data.sourceIpAddress}"></div>
+        <div data-type="chart" data-ip="${data.sourceIpAddress}"></div>
             <h6 class="k-card-subtitle">Latency: ${data.latencyInChrome}</h6>
             <h6 class="k-card-subtitle">DOM Loaded: ${data.domContentLoadedEventInChrome}</h6>
             <h6 class="k-card-subtitle">SourceIpAddress: ${data.sourceIpAddress}</h6>
@@ -224,186 +291,242 @@ $.when($.get(urleastus2, function (data) {
     var kendoChart = $("#chart").data("kendoChart");
     kendoChart === null || kendoChart === void 0 ? void 0 : kendoChart.dataSource.read();
     console.log("done");
-    var urlcentralcanadaDataSourceIpAddress;
-    var urlcentralcanadaDataDestinationIpAddress;
-    var urleastus2DataSourceIpAddress;
-    var urleastus2DataDestinationIpAddress;
-    var urlnortheuropeDataSourceIpAddress;
-    var urlnortheuropeDataDestinationIpAddress;
-    var urlwesteuropeDataDataSourceIpAddress;
-    var urlwesteuropeDataDataDestinationIpAddress;
-    $.when($.getJSON(`https://containerappcanadacentral.happyrock-5d18c325.canadacentral.azurecontainerapps.io/ip?ip=${urlcentralcanadaData.sourceIpAddress}`, function f(res) {
-        console.log(res);
-        urlcentralcanadaDataSourceIpAddress = new IpInfo(res);
-    }), $.getJSON(`https://containerappcanadacentral.happyrock-5d18c325.canadacentral.azurecontainerapps.io/ip?ip=${urlcentralcanadaData.destinationIpAddress}`, function f(res) {
-        console.log(res);
-        urlcentralcanadaDataDestinationIpAddress = new IpInfo(res);
-    }), $.getJSON(`https://containerappeastus2.politeflower-c7227859.eastus2.azurecontainerapps.io/ip?ip=${urleastus2Data.sourceIpAddress}`, function f(res) {
-        console.log(res);
-        urleastus2DataSourceIpAddress = new IpInfo(res);
-    }), $.getJSON(`https://containerappeastus2.politeflower-c7227859.eastus2.azurecontainerapps.io/ip?ip=${urleastus2Data.destinationIpAddress}`, function f(res) {
-        console.log(res);
-        urleastus2DataDestinationIpAddress = new IpInfo(res);
-    }), $.getJSON(`https://containerappnortheurope.whitedune-748c223c.northeurope.azurecontainerapps.io/ip?ip=${urlnortheuropeData.sourceIpAddress}`, function f(res) {
-        console.log(res);
-        urlnortheuropeDataSourceIpAddress = new IpInfo(res);
-    }), $.getJSON(`https://containerappnortheurope.whitedune-748c223c.northeurope.azurecontainerapps.io/ip?ip=${urlnortheuropeData.destinationIpAddress}`, function f(res) {
-        console.log(res);
-        urlnortheuropeDataDestinationIpAddress = new IpInfo(res);
-    }), $.getJSON(`https://containerappwesteurope.nicepond-330ead69.westeurope.azurecontainerapps.io/ip?ip=${urlwesteuropeData.sourceIpAddress}`, function f(res) {
-        console.log(res);
-        urlwesteuropeDataDataSourceIpAddress = new IpInfo(res);
-    }), $.getJSON(`https://containerappwesteurope.nicepond-330ead69.westeurope.azurecontainerapps.io/ip?ip=${urlwesteuropeData.destinationIpAddress}`, function f(res) {
-        console.log(res);
-        urlwesteuropeDataDataDestinationIpAddress = new IpInfo(res);
-    })).done(function () {
-        $("#map").kendoMap({
-            center: [30.268107, -37.744821],
-            zoom: 2,
-            layers: [
-                {
-                    type: "tile",
-                    urlTemplate: "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                    subdomains: ["a", "b", "c"],
-                    attribution: "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>",
-                },
-            ],
-            markers: [
-                {
-                    location: [
-                        urlcentralcanadaDataSourceIpAddress.latitude,
-                        urlcentralcanadaDataSourceIpAddress.longitude,
-                    ],
-                    shape: "pin",
-                    tooltip: {
-                        content: `
-            city: ${urlcentralcanadaDataSourceIpAddress.city}<br>
-            region: ${urlcentralcanadaDataSourceIpAddress.country}<br>
-            country: ${urlcentralcanadaDataSourceIpAddress.country}<br>
-            postal: ${urlcentralcanadaDataSourceIpAddress.postal}<br>
-            timezone: ${urlcentralcanadaDataSourceIpAddress.timezone}<br>
-            org: ${urlcentralcanadaDataSourceIpAddress.org}<br>
-            distance: ${StaticMethods.distance(urlcentralcanadaDataSourceIpAddress.latitude, urlcentralcanadaDataSourceIpAddress.longitude, urlcentralcanadaDataDestinationIpAddress.latitude, urlcentralcanadaDataDestinationIpAddress.longitude)}`,
-                    },
-                },
-                {
-                    location: [
-                        urlcentralcanadaDataDestinationIpAddress.latitude,
-                        urlcentralcanadaDataDestinationIpAddress.longitude,
-                    ],
-                    shape: "pinTarget",
-                    tooltip: {
-                        content: `
-            city: ${urlcentralcanadaDataDestinationIpAddress.city}<br>
-            region: ${urlcentralcanadaDataDestinationIpAddress.country}<br>
-            country: ${urlcentralcanadaDataDestinationIpAddress.country}<br>
-            postal: ${urlcentralcanadaDataDestinationIpAddress.postal}<br>
-            timezone: ${urlcentralcanadaDataDestinationIpAddress.timezone}<br>
-            org: ${urlcentralcanadaDataDestinationIpAddress.org}`,
-                    },
-                },
-                {
-                    location: [
-                        urleastus2DataSourceIpAddress.latitude,
-                        urleastus2DataSourceIpAddress.longitude,
-                    ],
-                    shape: "pin",
-                    tooltip: {
-                        content: `
-            city: ${urleastus2DataSourceIpAddress.city}<br>
-            region: ${urleastus2DataSourceIpAddress.country}<br>
-            country: ${urleastus2DataSourceIpAddress.country}<br>
-            postal: ${urleastus2DataSourceIpAddress.postal}<br>
-            timezone: ${urleastus2DataSourceIpAddress.timezone}<br>
-            org: ${urleastus2DataSourceIpAddress.org}<br>
-            distance: ${StaticMethods.distance(urleastus2DataSourceIpAddress.latitude, urleastus2DataSourceIpAddress.longitude, urleastus2DataDestinationIpAddress.latitude, urleastus2DataDestinationIpAddress.longitude)}`,
-                    },
-                },
-                {
-                    location: [
-                        urleastus2DataDestinationIpAddress.latitude,
-                        urleastus2DataDestinationIpAddress.longitude,
-                    ],
-                    shape: "pinTarget",
-                    tooltip: {
-                        content: `
-            city: ${urleastus2DataDestinationIpAddress.city}<br>
-            region: ${urleastus2DataDestinationIpAddress.country}<br>
-            country: ${urleastus2DataDestinationIpAddress.country}<br>
-            postal: ${urleastus2DataDestinationIpAddress.postal}<br>
-            timezone: ${urleastus2DataDestinationIpAddress.timezone}<br>
-            org: ${urleastus2DataDestinationIpAddress.org}`,
-                    },
-                },
-                {
-                    location: [
-                        urlnortheuropeDataSourceIpAddress.latitude,
-                        urlnortheuropeDataSourceIpAddress.longitude,
-                    ],
-                    shape: "pin",
-                    tooltip: {
-                        content: `
-            city: ${urlnortheuropeDataSourceIpAddress.city}<br>
-            region: ${urlnortheuropeDataSourceIpAddress.country}<br>
-            country: ${urlnortheuropeDataSourceIpAddress.country}<br>
-            postal: ${urlnortheuropeDataSourceIpAddress.postal}<br>
-            timezone: ${urlnortheuropeDataSourceIpAddress.timezone}<br>
-            org: ${urlnortheuropeDataSourceIpAddress.org}<br>
-            distance: ${StaticMethods.distance(urlnortheuropeDataSourceIpAddress.latitude, urlnortheuropeDataSourceIpAddress.longitude, urlnortheuropeDataDestinationIpAddress.latitude, urlnortheuropeDataDestinationIpAddress.longitude)}`,
-                    },
-                },
-                {
-                    location: [
-                        urlnortheuropeDataDestinationIpAddress.latitude,
-                        urlnortheuropeDataDestinationIpAddress.longitude,
-                    ],
-                    shape: "pinTarget",
-                    tooltip: {
-                        content: `
-            city: ${urlnortheuropeDataDestinationIpAddress.city}<br>
-            region: ${urlnortheuropeDataDestinationIpAddress.country}<br>
-            country: ${urlnortheuropeDataDestinationIpAddress.country}<br>
-            postal: ${urlnortheuropeDataDestinationIpAddress.postal}<br>
-            timezone: ${urlnortheuropeDataDestinationIpAddress.timezone}<br>
-            org: ${urlnortheuropeDataDestinationIpAddress.org}`,
-                    },
-                },
-                {
-                    location: [
-                        urlwesteuropeDataDataSourceIpAddress.latitude,
-                        urlwesteuropeDataDataSourceIpAddress.longitude,
-                    ],
-                    shape: "pin",
-                    tooltip: {
-                        content: `
-            city: ${urlwesteuropeDataDataSourceIpAddress.city}<br>
-            region: ${urlwesteuropeDataDataSourceIpAddress.country}<br>
-            country: ${urlwesteuropeDataDataSourceIpAddress.country}<br>
-            postal: ${urlwesteuropeDataDataSourceIpAddress.postal}<br>
-            timezone: ${urlwesteuropeDataDataSourceIpAddress.timezone}<br>
-            org: ${urlwesteuropeDataDataSourceIpAddress.org}<br>
-            distance: ${StaticMethods.distance(urlwesteuropeDataDataSourceIpAddress.latitude, urlwesteuropeDataDataSourceIpAddress.longitude, urlwesteuropeDataDataDestinationIpAddress.latitude, urlwesteuropeDataDataDestinationIpAddress.longitude)}`,
-                    },
-                },
-                {
-                    location: [
-                        urlwesteuropeDataDataDestinationIpAddress.latitude,
-                        urlwesteuropeDataDataDestinationIpAddress.longitude,
-                    ],
-                    shape: "pinTarget",
-                    tooltip: {
-                        content: `
-            city ${urlwesteuropeDataDataDestinationIpAddress.city}<br>
-            region: ${urlwesteuropeDataDataDestinationIpAddress.country}<br>
-            country: ${urlwesteuropeDataDataDestinationIpAddress.country}<br>
-            postal: ${urlwesteuropeDataDataDestinationIpAddress.postal}<br>
-            timezone: ${urlwesteuropeDataDataDestinationIpAddress.timezone}<br>
-            org: ${urlwesteuropeDataDataDestinationIpAddress.org}`,
-                    },
-                },
-            ],
-        });
-        $(".k-i-marker-pin-target").css("color", "green");
-        createChart();
-    });
+    // var urlcentralcanadaDataSourceIpAddress: IpInfo;
+    // var urlcentralcanadaDataDestinationIpAddress: IpInfo;
+    // var urleastus2DataSourceIpAddress: IpInfo;
+    // var urleastus2DataDestinationIpAddress: IpInfo;
+    // var urlnortheuropeDataSourceIpAddress: IpInfo;
+    // var urlnortheuropeDataDestinationIpAddress: IpInfo;
+    // var urlwesteuropeDataDataSourceIpAddress: IpInfo;
+    // var urlwesteuropeDataDataDestinationIpAddress: IpInfo;
+    // $.when(
+    //   $.getJSON(
+    //     `https://containerappcanadacentral.happyrock-5d18c325.canadacentral.azurecontainerapps.io/ip?ip=${urlcentralcanadaData.sourceIpAddress}`,
+    //     function f(res) {
+    //       console.log(res);
+    //       urlcentralcanadaDataSourceIpAddress = new IpInfo(res);
+    //     }
+    //   ),
+    //   $.getJSON(
+    //     `https://containerappcanadacentral.happyrock-5d18c325.canadacentral.azurecontainerapps.io/ip?ip=${urlcentralcanadaData.destinationIpAddress}`,
+    //     function f(res) {
+    //       console.log(res);
+    //       urlcentralcanadaDataDestinationIpAddress = new IpInfo(res);
+    //     }
+    //   ),
+    //   $.getJSON(
+    //     `https://containerappeastus2.politeflower-c7227859.eastus2.azurecontainerapps.io/ip?ip=${urleastus2Data.sourceIpAddress}`,
+    //     function f(res) {
+    //       console.log(res);
+    //       urleastus2DataSourceIpAddress = new IpInfo(res);
+    //     }
+    //   ),
+    //   $.getJSON(
+    //     `https://containerappeastus2.politeflower-c7227859.eastus2.azurecontainerapps.io/ip?ip=${urleastus2Data.destinationIpAddress}`,
+    //     function f(res) {
+    //       console.log(res);
+    //       urleastus2DataDestinationIpAddress = new IpInfo(res);
+    //     }
+    //   ),
+    //   $.getJSON(
+    //     `https://containerappnortheurope.whitedune-748c223c.northeurope.azurecontainerapps.io/ip?ip=${urlnortheuropeData.sourceIpAddress}`,
+    //     function f(res) {
+    //       console.log(res);
+    //       urlnortheuropeDataSourceIpAddress = new IpInfo(res);
+    //     }
+    //   ),
+    //   $.getJSON(
+    //     `https://containerappnortheurope.whitedune-748c223c.northeurope.azurecontainerapps.io/ip?ip=${urlnortheuropeData.destinationIpAddress}`,
+    //     function f(res) {
+    //       console.log(res);
+    //       urlnortheuropeDataDestinationIpAddress = new IpInfo(res);
+    //     }
+    //   ),
+    //   $.getJSON(
+    //     `https://containerappwesteurope.nicepond-330ead69.westeurope.azurecontainerapps.io/ip?ip=${urlwesteuropeData.sourceIpAddress}`,
+    //     function f(res) {
+    //       console.log(res);
+    //       urlwesteuropeDataDataSourceIpAddress = new IpInfo(res);
+    //     }
+    //   ),
+    //   $.getJSON(
+    //     `https://containerappwesteurope.nicepond-330ead69.westeurope.azurecontainerapps.io/ip?ip=${urlwesteuropeData.destinationIpAddress}`,
+    //     function f(res) {
+    //       console.log(res);
+    //       urlwesteuropeDataDataDestinationIpAddress = new IpInfo(res);
+    //     }
+    //   )
+    // )
+    //.done(function () {
+    // $("#map").kendoMap({
+    //   center: [30.268107, -37.744821],
+    //   zoom: 2,
+    //   layers: [
+    //     {
+    //       type: "tile",
+    //       urlTemplate:
+    //         "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+    //       subdomains: ["a", "b", "c"],
+    //       attribution:
+    //         "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>",
+    //     },
+    //   ],
+    //   markers: [
+    //     {
+    //       location: [
+    //         urlcentralcanadaData.SourceIpAddressLatitude,
+    //         urlcentralcanadaData.SourceIpAddressLongitude,
+    //       ],
+    //       shape: "pin",
+    //       tooltip: {
+    //         content: `
+    //         city: ${urlcentralcanadaDataSourceIpAddress.city}<br>
+    //         region: ${urlcentralcanadaDataSourceIpAddress.country}<br>
+    //         country: ${urlcentralcanadaDataSourceIpAddress.country}<br>
+    //         postal: ${urlcentralcanadaDataSourceIpAddress.postal}<br>
+    //         timezone: ${urlcentralcanadaDataSourceIpAddress.timezone}<br>
+    //         org: ${urlcentralcanadaDataSourceIpAddress.org}<br>
+    //         distance: ${urlcentralcanadaDataSourceIpAddress.org}<br>
+    //         distance: ${StaticMethods.distance(
+    //           urlcentralcanadaDataSourceIpAddress.latitude,
+    //           urlcentralcanadaDataSourceIpAddress.longitude,
+    //           urlcentralcanadaDataDestinationIpAddress.latitude,
+    //           urlcentralcanadaDataDestinationIpAddress.longitude
+    //         )}`,
+    //       },
+    //     },
+    //     {
+    //       location: [
+    //         urlcentralcanadaDataDestinationIpAddress.latitude,
+    //         urlcentralcanadaDataDestinationIpAddress.longitude,
+    //       ],
+    //       shape: "pinTarget",
+    //       tooltip: {
+    //         content: `
+    //         city: ${urlcentralcanadaDataDestinationIpAddress.city}<br>
+    //         region: ${urlcentralcanadaDataDestinationIpAddress.country}<br>
+    //         country: ${urlcentralcanadaDataDestinationIpAddress.country}<br>
+    //         postal: ${urlcentralcanadaDataDestinationIpAddress.postal}<br>
+    //         timezone: ${urlcentralcanadaDataDestinationIpAddress.timezone}<br>
+    //         org: ${urlcentralcanadaDataDestinationIpAddress.org}`,
+    //       },
+    //     },
+    //     {
+    //       location: [
+    //         urleastus2DataSourceIpAddress.latitude,
+    //         urleastus2DataSourceIpAddress.longitude,
+    //       ],
+    //       shape: "pin",
+    //       tooltip: {
+    //         content: `
+    //         city: ${urleastus2DataSourceIpAddress.city}<br>
+    //         region: ${urleastus2DataSourceIpAddress.country}<br>
+    //         country: ${urleastus2DataSourceIpAddress.country}<br>
+    //         postal: ${urleastus2DataSourceIpAddress.postal}<br>
+    //         timezone: ${urleastus2DataSourceIpAddress.timezone}<br>
+    //         org: ${urleastus2DataSourceIpAddress.org}<br>
+    //         distance: ${StaticMethods.distance(
+    //           urleastus2DataSourceIpAddress.latitude,
+    //           urleastus2DataSourceIpAddress.longitude,
+    //           urleastus2DataDestinationIpAddress.latitude,
+    //           urleastus2DataDestinationIpAddress.longitude
+    //         )}`,
+    //       },
+    //     },
+    //     {
+    //       location: [
+    //         urleastus2DataDestinationIpAddress.latitude,
+    //         urleastus2DataDestinationIpAddress.longitude,
+    //       ],
+    //       shape: "pinTarget",
+    //       tooltip: {
+    //         content: `
+    //         city: ${urleastus2DataDestinationIpAddress.city}<br>
+    //         region: ${urleastus2DataDestinationIpAddress.country}<br>
+    //         country: ${urleastus2DataDestinationIpAddress.country}<br>
+    //         postal: ${urleastus2DataDestinationIpAddress.postal}<br>
+    //         timezone: ${urleastus2DataDestinationIpAddress.timezone}<br>
+    //         org: ${urleastus2DataDestinationIpAddress.org}`,
+    //       },
+    //     },
+    //     {
+    //       location: [
+    //         urlnortheuropeDataSourceIpAddress.latitude,
+    //         urlnortheuropeDataSourceIpAddress.longitude,
+    //       ],
+    //       shape: "pin",
+    //       tooltip: {
+    //         content: `
+    //         city: ${urlnortheuropeDataSourceIpAddress.city}<br>
+    //         region: ${urlnortheuropeDataSourceIpAddress.country}<br>
+    //         country: ${urlnortheuropeDataSourceIpAddress.country}<br>
+    //         postal: ${urlnortheuropeDataSourceIpAddress.postal}<br>
+    //         timezone: ${urlnortheuropeDataSourceIpAddress.timezone}<br>
+    //         org: ${urlnortheuropeDataSourceIpAddress.org}<br>
+    //         distance: ${StaticMethods.distance(
+    //           urlnortheuropeDataSourceIpAddress.latitude,
+    //           urlnortheuropeDataSourceIpAddress.longitude,
+    //           urlnortheuropeDataDestinationIpAddress.latitude,
+    //           urlnortheuropeDataDestinationIpAddress.longitude
+    //         )}`,
+    //       },
+    //     },
+    //     {
+    //       location: [
+    //         urlnortheuropeDataDestinationIpAddress.latitude,
+    //         urlnortheuropeDataDestinationIpAddress.longitude,
+    //       ],
+    //       shape: "pinTarget",
+    //       tooltip: {
+    //         content: `
+    //         city: ${urlnortheuropeDataDestinationIpAddress.city}<br>
+    //         region: ${urlnortheuropeDataDestinationIpAddress.country}<br>
+    //         country: ${urlnortheuropeDataDestinationIpAddress.country}<br>
+    //         postal: ${urlnortheuropeDataDestinationIpAddress.postal}<br>
+    //         timezone: ${urlnortheuropeDataDestinationIpAddress.timezone}<br>
+    //         org: ${urlnortheuropeDataDestinationIpAddress.org}`,
+    //       },
+    //     },
+    //     {
+    //       location: [
+    //         urlwesteuropeDataDataSourceIpAddress.latitude,
+    //         urlwesteuropeDataDataSourceIpAddress.longitude,
+    //       ],
+    //       shape: "pin",
+    //       tooltip: {
+    //         content: `
+    //         city: ${urlwesteuropeDataDataSourceIpAddress.city}<br>
+    //         region: ${urlwesteuropeDataDataSourceIpAddress.country}<br>
+    //         country: ${urlwesteuropeDataDataSourceIpAddress.country}<br>
+    //         postal: ${urlwesteuropeDataDataSourceIpAddress.postal}<br>
+    //         timezone: ${urlwesteuropeDataDataSourceIpAddress.timezone}<br>
+    //         org: ${urlwesteuropeDataDataSourceIpAddress.org}<br>
+    //         distance: ${StaticMethods.distance(
+    //           urlwesteuropeDataDataSourceIpAddress.latitude,
+    //           urlwesteuropeDataDataSourceIpAddress.longitude,
+    //           urlwesteuropeDataDataDestinationIpAddress.latitude,
+    //           urlwesteuropeDataDataDestinationIpAddress.longitude
+    //         )}`,
+    //       },
+    //     },
+    //     {
+    //       location: [
+    //         urlwesteuropeDataDataDestinationIpAddress.latitude,
+    //         urlwesteuropeDataDataDestinationIpAddress.longitude,
+    //       ],
+    //       shape: "pinTarget",
+    //       tooltip: {
+    //         content: `
+    //         city ${urlwesteuropeDataDataDestinationIpAddress.city}<br>
+    //         region: ${urlwesteuropeDataDataDestinationIpAddress.country}<br>
+    //         country: ${urlwesteuropeDataDataDestinationIpAddress.country}<br>
+    //         postal: ${urlwesteuropeDataDataDestinationIpAddress.postal}<br>
+    //         timezone: ${urlwesteuropeDataDataDestinationIpAddress.timezone}<br>
+    //         org: ${urlwesteuropeDataDataDestinationIpAddress.org}`,
+    //       },
+    //     },
+    //   ],
+    // });
+    //$(".k-i-marker-pin-target").css("color", "green");
+    createChart();
 });
