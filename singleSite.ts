@@ -61,6 +61,7 @@ $("title").text(`SiteTiming - ${url}`);
 //}).data("kendoLoader");
 
 function createChart() {
+  var ip = $("#chart").attr("data-ip");
   $("#chart").kendoChart({
     dataSource: {
       schema: {
@@ -70,7 +71,7 @@ function createChart() {
       },
       transport: {
         read: {
-          url: `https://containerappeastus.yellowmoss-bb737f56.eastus.azurecontainerapps.io/graphql?query={probes(take:20,where:"site.url=\\\"http://${url}\\\""){id, latencyInChrome dateCreated dOMContentLoadedEventInChrome sourceIpAddress}}`,
+          url: `https://containerappeastus.yellowmoss-bb737f56.eastus.azurecontainerapps.io/graphql?query={probes(take:20,where:"site.url=\\\"http://${url}\\\" && SourceIpAddress=\\\"${ip}\\\" "){id, latencyInChrome dateCreated dOMContentLoadedEventInChrome sourceIpAddress distanceBetweenIpAddresses }}`,
           dataType: "json",
         },
       },
@@ -91,19 +92,20 @@ function createChart() {
     series: [
       {
         field: "latencyInChrome",
-        categoryField: "dateCreated",
+        categoryField: "dateCreatedFormatted",
         name: "latency",
       },
       {
         field: "dOMContentLoadedEventInChrome",
-        categoryField: "dateCreated",
+        categoryField: "dateCreatedFormatted",
         name: "dom loaded",
       },
     ],
     categoryAxis: {
       labels: {
-        rotation: -90,
-        format: "yyyy/MM/dd HH:mm",
+        visible: false,
+        rotation: -45,
+        format: "yyyy/MM/dd",
       },
       crosshair: {
         visible: true,
@@ -175,6 +177,7 @@ $.when(
             <h6 class="k-card-subtitle">Latency: ${data.latencyInChrome}</h6>
             <h6 class="k-card-subtitle">DOM Loaded: ${data.domContentLoadedEventInChrome}</h6>
             <h6 class="k-card-subtitle">DestinationIpAddress: ${data.destinationIpAddress}</h6>
+            <h6 class="k-card-subtitle">Distance: ${data.distanceBetweenIpAddresses}</h6>
             <h6 class="k-card-subtitle">${data.exceptionMessage}</h6>
         </div>
     </div>`
@@ -220,20 +223,21 @@ $.when(
   $.get(urlnortheurope, function (data) {
     urlnortheuropeData = data;
     $("#northeurope").remove();
-    $("#cards").prepend(
-      ` <div class="k-card">
+    $("#cards").prepend(` 
+      <div class="k-card">
              <div class="k-card-header">
                     <h5 class="k-card-title">North Europe</h5>
           </div>
         <img class="k-card-image" onerror="if (this.src != 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg') this.src = 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg';" src="https://sitetiming.blob.core.windows.net/images/short50_${data.uniqueGuid}.jpeg?sv=2020-08-04&st=2012-01-27T12%3A30%3A00Z&se=2032-01-28T12%3A30%3A00Z&sr=c&sp=rl&sig=jvKd8yqdiz42u28l4oPYHVFWUSCaeLYmeKMMCgwtn1Y%3D" />
         <div class="k-card-body">
+        <div id="chart" data-ip="${data.sourceIpAddress}"></div>
             <h6 class="k-card-subtitle">Latency: ${data.latencyInChrome}</h6>
             <h6 class="k-card-subtitle">DOM Loaded: ${data.domContentLoadedEventInChrome}</h6>
+            <h6 class="k-card-subtitle">SourceIpAddress: ${data.sourceIpAddress}</h6>
             <h6 class="k-card-subtitle">DestinationIpAddress: ${data.destinationIpAddress}</h6>
             <h6 class="k-card-subtitle">${data.exceptionMessage}</h6>
         </div>
-    </div>`
-    );
+    </div>`);
   })
 ).done(function () {
   var kendoChart = $("#chart").data("kendoChart");
@@ -484,5 +488,6 @@ $.when(
     });
 
     $(".k-i-marker-pin-target").css("color", "green");
+    createChart();
   });
 });
