@@ -65,7 +65,7 @@ function createChart() {
     var currentChart = $(this);
 
     var ip = currentChart.attr("data-ip");
-    ip = "20.54.123.54";
+    //ip = "20.54.123.54";
     var andString = "&&";
     var serverUrl = StaticMethods.getRandomServerUrlNoEndingSlash();
     var urlQuery = `${serverUrl}/graphql?query={probes(take:10, where:"SourceIpAddress=\\\"${ip}\\\" and Site.Url=\\\"http://${url}\\\""){id dateCreated dateCreatedFormatted latencyInChrome dOMContentLoadedEventInChrome}}`;
