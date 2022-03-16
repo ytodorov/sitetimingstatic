@@ -192,17 +192,22 @@ $.when(
             }</h6>
             <h6 class="k-card-subtitle">SourceIpAddress: ${
               data.sourceIpAddress
-            }(${data.sourceIpAddressCity},${data.sourceIpAddressCountry}</h6>
+            }(${data.sourceIpAddressCity},${data.sourceIpAddressCountry})</h6>
             <h6 class="k-card-subtitle">DestinationIpAddress: ${
               data.destinationIpAddress
             }(${data.destinationIpAddressCity},${
         data.destinationIpAddressCountry
       })</h6>
+             <h6 class="k-card-subtitle">Org: ${
+               data.destinationIpAddressOrg
+             }</h6>
             <h6 class="k-card-subtitle">Distance b/w IPs: ${
               data.distanceBetweenIpAddresses
             }</h6>
             <h6 class="k-card-subtitle">${
-              data.exceptionMessage == "null" ? "" : data.exceptionMessage
+              data.exceptionMessage?.toString() == "null"
+                ? ""
+                : data.exceptionMessage
             }</h6>
         </div>
     </div>`
@@ -221,24 +226,29 @@ $.when(
           data.uniqueGuid
         }.jpeg?sv=2020-08-04&st=2012-01-27T12%3A30%3A00Z&se=2032-01-28T12%3A30%3A00Z&sr=c&sp=rl&sig=jvKd8yqdiz42u28l4oPYHVFWUSCaeLYmeKMMCgwtn1Y%3D" />
         <div class="k-card-body">
-        <div data-type="chart" data-ip="${data.sourceIpAddress}"></div>
+  <div data-type="chart" data-ip="${data.sourceIpAddress}"></div>
             <h6 class="k-card-subtitle">Latency: ${data.latencyInChrome}</h6>
             <h6 class="k-card-subtitle">DOM Loaded: ${
               data.domContentLoadedEventInChrome
             }</h6>
             <h6 class="k-card-subtitle">SourceIpAddress: ${
               data.sourceIpAddress
-            }(${data.sourceIpAddressCity},${data.sourceIpAddressCountry}</h6>
+            }(${data.sourceIpAddressCity},${data.sourceIpAddressCountry})</h6>
             <h6 class="k-card-subtitle">DestinationIpAddress: ${
               data.destinationIpAddress
             }(${data.destinationIpAddressCity},${
         data.destinationIpAddressCountry
       })</h6>
+             <h6 class="k-card-subtitle">Org: ${
+               data.destinationIpAddressOrg
+             }</h6>
             <h6 class="k-card-subtitle">Distance b/w IPs: ${
               data.distanceBetweenIpAddresses
             }</h6>
             <h6 class="k-card-subtitle">${
-              data.exceptionMessage == "null" ? "" : data.exceptionMessage
+              data.exceptionMessage?.toString() == "null"
+                ? ""
+                : data.exceptionMessage
             }</h6>
         </div>
     </div>`
@@ -263,17 +273,22 @@ $.when(
             }</h6>
             <h6 class="k-card-subtitle">SourceIpAddress: ${
               data.sourceIpAddress
-            }(${data.sourceIpAddressCity},${data.sourceIpAddressCountry}</h6>
+            }(${data.sourceIpAddressCity},${data.sourceIpAddressCountry})</h6>
             <h6 class="k-card-subtitle">DestinationIpAddress: ${
               data.destinationIpAddress
             }(${data.destinationIpAddressCity},${
         data.destinationIpAddressCountry
       })</h6>
+             <h6 class="k-card-subtitle">Org: ${
+               data.destinationIpAddressOrg
+             }</h6>
             <h6 class="k-card-subtitle">Distance b/w IPs: ${
               data.distanceBetweenIpAddresses
             }</h6>
             <h6 class="k-card-subtitle">${
-              data.exceptionMessage == "null" ? "" : data.exceptionMessage
+              data.exceptionMessage?.toString() == "null"
+                ? ""
+                : data.exceptionMessage
             }</h6>
         </div>
     </div>`
@@ -298,15 +313,20 @@ $.when(
             }</h6>
             <h6 class="k-card-subtitle">SourceIpAddress: ${
               data.sourceIpAddress
-            }(${data.sourceIpAddressCity},${data.sourceIpAddressCountry}</h6>
+            }(${data.sourceIpAddressCity},${data.sourceIpAddressCountry})</h6>
             <h6 class="k-card-subtitle">DestinationIpAddress: ${
               data.destinationIpAddress
             }(${data.destinationIpAddressCity},${data.destinationIpAddressCountry})</h6>
+             <h6 class="k-card-subtitle">Org: ${
+               data.destinationIpAddressOrg
+             }</h6>
             <h6 class="k-card-subtitle">Distance b/w IPs: ${
               data.distanceBetweenIpAddresses
             }</h6>
             <h6 class="k-card-subtitle">${
-              data.exceptionMessage == "null" ? "" : data.exceptionMessage
+              data.exceptionMessage?.toString() == "null"
+                ? ""
+                : data.exceptionMessage
             }</h6>
         </div>
     </div>`);
