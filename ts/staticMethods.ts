@@ -34,4 +34,18 @@ class StaticMethods {
       return distString;
     }
   }
+
+  static getRandomServerUrlNoEndingSlash(): string {
+    const siteUrls = [
+      "https://containerappcanadacentral.happyrock-5d18c325.canadacentral.azurecontainerapps.io",
+      "https://containerappeastus2.politeflower-c7227859.eastus2.azurecontainerapps.io",
+      "https://containerappnortheurope.whitedune-748c223c.northeurope.azurecontainerapps.io",
+      "https://containerappwesteurope.nicepond-330ead69.westeurope.azurecontainerapps.io",
+      "https://containerappeastus.yellowmoss-bb737f56.eastus.azurecontainerapps.io",
+    ];
+
+    const random = Math.floor(Math.random() * siteUrls.length);
+    const result = siteUrls[random];
+    return result;
+  }
 }

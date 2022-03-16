@@ -58,12 +58,14 @@ $("#breadcrumb").kendoBreadcrumb({
 //    size: 'large'
 //}).data("kendoLoader");
 function createChart() {
-    debugger;
     $("[data-type=chart]").each(function () {
-        debugger;
-        var current = $(this);
-        var ip = current.attr("data-ip");
-        $("[data-type=chart]").kendoChart({
+        var currentChart = $(this);
+        var ip = currentChart.attr("data-ip");
+        ip = "20.54.123.54";
+        var andString = "&&";
+        var serverUrl = StaticMethods.getRandomServerUrlNoEndingSlash();
+        var urlQuery = `${serverUrl}/graphql?query={probes(take:10, where:"SourceIpAddress=\\\"${ip}\\\" and Site.Url=\\\"http://${url}\\\""){id dateCreated dateCreatedFormatted latencyInChrome dOMContentLoadedEventInChrome}}`;
+        currentChart.kendoChart({
             dataSource: {
                 schema: {
                     data: function (response) {
@@ -72,7 +74,7 @@ function createChart() {
                 },
                 transport: {
                     read: {
-                        url: `https://containerappeastus.yellowmoss-bb737f56.eastus.azurecontainerapps.io/graphql?query={probes(take:20,where:"site.url=\\\"http://${url}\\\" && SourceIpAddress=\\\"${ip}\\\" "){id, latencyInChrome dateCreated dateCreatedFormatted dOMContentLoadedEventInChrome sourceIpAddress distanceBetweenIpAddresses }}`,
+                        url: urlQuery,
                         dataType: "json",
                     },
                 },
@@ -105,7 +107,7 @@ function createChart() {
             categoryAxis: {
                 labels: {
                     visible: true,
-                    rotation: -45,
+                    rotation: -90,
                 },
                 crosshair: {
                     visible: true,
@@ -123,68 +125,8 @@ function createChart() {
             },
         });
     });
-    // $("[data-type=chart]").kendoChart({
-    //   dataSource: {
-    //     schema: {
-    //       data: function (response: any) {
-    //         return response.data.probes;
-    //       },
-    //     },
-    //     transport: {
-    //       read: {
-    //         url: `https://containerappeastus.yellowmoss-bb737f56.eastus.azurecontainerapps.io/graphql?query={probes(take:20,where:"site.url=\\\"http://${url}\\\" && SourceIpAddress=\\\"${ip}\\\" "){id, latencyInChrome dateCreated dOMContentLoadedEventInChrome sourceIpAddress distanceBetweenIpAddresses }}`,
-    //         dataType: "json",
-    //       },
-    //     },
-    //     sort: {
-    //       field: "id",
-    //       dir: "asc",
-    //     },
-    //   },
-    //   title: {
-    //     text: `Latency of ${url}`,
-    //   },
-    //   legend: {
-    //     position: "top",
-    //   },
-    //   seriesDefaults: {
-    //     type: "line",
-    //   },
-    //   series: [
-    //     {
-    //       field: "latencyInChrome",
-    //       categoryField: "dateCreatedFormatted",
-    //       name: "latency",
-    //     },
-    //     {
-    //       field: "dOMContentLoadedEventInChrome",
-    //       categoryField: "dateCreatedFormatted",
-    //       name: "dom loaded",
-    //     },
-    //   ],
-    //   categoryAxis: {
-    //     labels: {
-    //       visible: false,
-    //       rotation: -45,
-    //       format: "yyyy/MM/dd",
-    //     },
-    //     crosshair: {
-    //       visible: true,
-    //     },
-    //   },
-    //   valueAxis: {
-    //     labels: {
-    //       format: "N0",
-    //     },
-    //   },
-    //   tooltip: {
-    //     visible: true,
-    //     shared: true,
-    //     format: "N0",
-    //   },
-    // });
 }
-$(document).ready(createChart);
+// $(document).ready(createChart);
 $(window).resize(function () {
     var kendoChart = $("#chart").data("kendoChart");
     if (kendoChart) {
@@ -288,9 +230,9 @@ $.when($.get(urleastus2, function (data) {
         </div>
     </div>`);
 })).done(function () {
-    var kendoChart = $("#chart").data("kendoChart");
-    kendoChart === null || kendoChart === void 0 ? void 0 : kendoChart.dataSource.read();
-    console.log("done");
+    // var kendoChart = $("#chart").data("kendoChart");
+    // kendoChart?.dataSource.read();
+    // console.log("done");
     // var urlcentralcanadaDataSourceIpAddress: IpInfo;
     // var urlcentralcanadaDataDestinationIpAddress: IpInfo;
     // var urleastus2DataSourceIpAddress: IpInfo;
