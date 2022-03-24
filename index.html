@@ -10,13 +10,6 @@
 
         <meta name="viewport" content="width=device-width, maximum-scale=5, initial-scale=1">
 
-        <style>
-            html {
-                font-size: 16px;
-                font-family: Arial, Helvetica, sans-serif;
-            }
-
-        </style>
         <link rel="shortcut icon" href="/favicon.ico">
 
         <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.1.119/styles/kendo.default-main.min.css" />
@@ -25,22 +18,26 @@
             integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <style>
             html {
-                font-size: 16px;
+                font-size: 14px;
                 font-family: Arial, Helvetica, sans-serif;
             }
 
         </style>
-        <script src="/js/jquery.min.js"></script>
+        <!-- <script src="/js/jquery.min.js"></script>
         <script src="/js/kendo.core.min.js"></script>
         <script src="/js/kendo.data.min.js"></script>
 
-        <!-- autocomplete -->
+       
         <script src="/js/kendo.popup.min.js"></script>
         <script src="/js/kendo.list.min.js"></script>
         <script src="/js/kendo.autocomplete.min.js"></script>
 
-        <script src="/js/kendo.breadcrumb.min.js"></script>
+        <script src="/js/kendo.breadcrumb.min.js"></script>-->
 
+
+
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/kendo.all.min.js"></script>
         <!-- grid -->
         <!-- <script src="/js/kendo.columnsorter.min.js"></script> -->
         <!-- <script src="/js/kendo.userevents.min.js"></script>
@@ -99,18 +96,28 @@
                 </div>
             </div>
         </section>
-        <section>
+        <!-- <section>
             <img class="img-fluid" alt="Measure latency and load time from four locations across the world in
                 a single click." title="Measure latency and load time from four locations across the world in
                 a single click." src="images/locations.png">
-        </section>
+        </section> -->
         <section>
             <div id="grid"></div>
+        </section>
+        <section>
+            <div class="px-4 pt-5 my-5 text-center">
+                <h3 class="display-6 fw-bold">Top Websites</h3>
+            </div>
+            <div id="charts">
+
+            </div>
         </section>
         <footer>
             <a target="_blank" title="https://www.facebook.com/Sitetiming-112192978028139"
                 href="https://www.facebook.com/Sitetiming-112192978028139"><span class="k-icon k-i-facebook"></span></a>
         </footer>
+        <script src="/ts/staticMethods.js">
+        </script>
         <script src="/index.js">
         </script>
     </body>
