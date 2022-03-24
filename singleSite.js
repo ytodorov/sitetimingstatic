@@ -64,8 +64,8 @@ function createChart() {
         //ip = "20.54.123.54";
         var andString = "&&";
         var serverUrl = StaticMethods.getRandomServerUrlNoEndingSlash();
-        ip = "20.54.123.54";
-        url = "google.com";
+        //ip = "20.54.123.54";
+        //url = "google.com";
         var urlQuery = `${serverUrl}/graphql?query={probes(take:10, where:"SourceIpAddress=\\\"${ip}\\\" and Site.Url=\\\"http://${url}\\\""){id dateCreated dateCreatedFormatted latencyInChrome dOMContentLoadedEventInChrome}}`;
         currentChart.kendoChart({
             dataSource: {
