@@ -354,7 +354,7 @@ $.when(
           postal: ${urlcentralcanadaData.sourceIpAddressPostal}<br>
           timezone: ${urlcentralcanadaData.sourceIpAddressTimezone}<br>
           org: ${urlcentralcanadaData.sourceIpAddressOrg}<br>
-          distance: ${urlcentralcanadaData.sistanceBetweenIpAddresses}<br>`,
+          distance: ${urlcentralcanadaData.distanceBetweenIpAddresses}<br>`,
         },
       },
       {
@@ -371,6 +371,105 @@ $.when(
           postal: ${urlcentralcanadaData.destinationIpAddressPostal}<br>
           timezone: ${urlcentralcanadaData.destinationIpAddressTimezone}<br>
           org: ${urlcentralcanadaData.destinationIpAddressOrg}`,
+        },
+      },
+      {
+        location: [
+          urleastus2Data.sourceIpAddressLatitude,
+          urleastus2Data.sourceIpAddressLongitude,
+        ],
+        shape: "pin",
+        tooltip: {
+          content: `
+          city: ${urleastus2Data.sourceIpAddressCity}<br>
+          region: ${urleastus2Data.sourceIpAddressRegion}<br>
+          country: ${urleastus2Data.sourceIpAddressCountry}<br>
+          postal: ${urleastus2Data.sourceIpAddressPostal}<br>
+          timezone: ${urleastus2Data.sourceIpAddressTimezone}<br>
+          org: ${urleastus2Data.sourceIpAddressOrg}<br>
+          distance: ${urleastus2Data.distanceBetweenIpAddresses}<br>`,
+        },
+      },
+      {
+        location: [
+          urleastus2Data.destinationIpAddressLatitude,
+          urleastus2Data.destinationIpAddressLongitude,
+        ],
+        shape: "pinTarget",
+        tooltip: {
+          content: `
+          city: ${urleastus2Data.destinationIpAddressCity}<br>
+          region: ${urleastus2Data.destinationIpAddressRegion}<br>
+          country: ${urleastus2Data.destinationIpAddressCountry}<br>
+          postal: ${urleastus2Data.destinationIpAddressPostal}<br>
+          timezone: ${urleastus2Data.destinationIpAddressTimezone}<br>
+          org: ${urleastus2Data.destinationIpAddressOrg}`,
+        },
+      },
+      {
+        location: [
+          urlwesteuropeData.sourceIpAddressLatitude,
+          urlwesteuropeData.sourceIpAddressLongitude,
+        ],
+        shape: "pin",
+        tooltip: {
+          content: `
+          city: ${urlwesteuropeData.sourceIpAddressCity}<br>
+          region: ${urlwesteuropeData.sourceIpAddressRegion}<br>
+          country: ${urlwesteuropeData.sourceIpAddressCountry}<br>
+          postal: ${urlwesteuropeData.sourceIpAddressPostal}<br>
+          timezone: ${urlwesteuropeData.sourceIpAddressTimezone}<br>
+          org: ${urlwesteuropeData.sourceIpAddressOrg}<br>
+          distance: ${urlwesteuropeData.distanceBetweenIpAddresses}<br>`,
+        },
+      },
+      {
+        location: [
+          urlwesteuropeData.destinationIpAddressLatitude,
+          urlwesteuropeData.destinationIpAddressLongitude,
+        ],
+        shape: "pinTarget",
+        tooltip: {
+          content: `
+          city: ${urlwesteuropeData.destinationIpAddressCity}<br>
+          region: ${urlwesteuropeData.destinationIpAddressRegion}<br>
+          country: ${urlwesteuropeData.destinationIpAddressCountry}<br>
+          postal: ${urlwesteuropeData.destinationIpAddressPostal}<br>
+          timezone: ${urlwesteuropeData.destinationIpAddressTimezone}<br>
+          org: ${urlwesteuropeData.destinationIpAddressOrg}`,
+        },
+      },
+      {
+        location: [
+          urlnortheuropeData.sourceIpAddressLatitude,
+          urlnortheuropeData.sourceIpAddressLongitude,
+        ],
+        shape: "pin",
+        tooltip: {
+          content: `
+          city: ${urlnortheuropeData.sourceIpAddressCity}<br>
+          region: ${urlnortheuropeData.sourceIpAddressRegion}<br>
+          country: ${urlnortheuropeData.sourceIpAddressCountry}<br>
+          postal: ${urlnortheuropeData.sourceIpAddressPostal}<br>
+          timezone: ${urlnortheuropeData.sourceIpAddressTimezone}<br>
+          org: ${urlnortheuropeData.sourceIpAddressOrg}<br>
+          distance: ${urlnortheuropeData.distanceBetweenIpAddresses}<br>`,
+        },
+      },
+      {
+        location: [
+          urlnortheuropeData.destinationIpAddressLatitude,
+          urlnortheuropeData.destinationIpAddressLongitude,
+        ],
+        shape: "pinTarget",
+        tooltip: {
+          content: `
+          city: ${urlnortheuropeData.destinationIpAddressCity}<br>
+          region: ${urlnortheuropeData.destinationIpAddressRegion}<br>
+          country: ${urlnortheuropeData.destinationIpAddressCountry}<br>
+          postal: ${urlnortheuropeData.destinationIpAddressPostal}<br>
+          timezone: ${urlnortheuropeData.destinationIpAddressTimezone}<br>
+          org: ${urlnortheuropeData.destinationIpAddressOrg}`,
         },
       },
     ],
