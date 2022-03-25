@@ -23,10 +23,6 @@ if (document.location.hostname.toLowerCase().includes("127.0.0.1") == false) {
         url = url.substring("www.".length);
         document.location = "/" + url;
     }
-    // if (!url.startsWith("http://") && !url.startsWith("https://")) {
-    //   url = `http://${url}`;
-    //   document.location = "/" + url;
-    // }
 }
 $("title").text(`SiteTiming - ${url}`);
 $("#breadcrumb").kendoBreadcrumb({
@@ -53,10 +49,6 @@ $("#breadcrumb").kendoBreadcrumb({
         },
     ],
 });
-//var largeLoader = $('#loader-large').kendoLoader({visible:true,
-//    type: "pulsing",
-//    size: 'large'
-//}).data("kendoLoader");
 function createChart() {
     $("[data-type=chart]").each(function () {
         var currentChart = $(this);
@@ -254,245 +246,53 @@ $.when($.get(urleastus2, function (data) {
         </div>
     </div>`);
 })).done(function () {
-    // var kendoChart = $("#chart").data("kendoChart");
-    // kendoChart?.dataSource.read();
-    // console.log("done");
-    // var urlcentralcanadaDataSourceIpAddress: IpInfo;
-    // var urlcentralcanadaDataDestinationIpAddress: IpInfo;
-    // var urleastus2DataSourceIpAddress: IpInfo;
-    // var urleastus2DataDestinationIpAddress: IpInfo;
-    // var urlnortheuropeDataSourceIpAddress: IpInfo;
-    // var urlnortheuropeDataDestinationIpAddress: IpInfo;
-    // var urlwesteuropeDataDataSourceIpAddress: IpInfo;
-    // var urlwesteuropeDataDataDestinationIpAddress: IpInfo;
-    // $.when(
-    //   $.getJSON(
-    //     `https://containerappcanadacentral.happyrock-5d18c325.canadacentral.azurecontainerapps.io/ip?ip=${urlcentralcanadaData.sourceIpAddress}`,
-    //     function f(res) {
-    //       console.log(res);
-    //       urlcentralcanadaDataSourceIpAddress = new IpInfo(res);
-    //     }
-    //   ),
-    //   $.getJSON(
-    //     `https://containerappcanadacentral.happyrock-5d18c325.canadacentral.azurecontainerapps.io/ip?ip=${urlcentralcanadaData.destinationIpAddress}`,
-    //     function f(res) {
-    //       console.log(res);
-    //       urlcentralcanadaDataDestinationIpAddress = new IpInfo(res);
-    //     }
-    //   ),
-    //   $.getJSON(
-    //     `https://containerappeastus2.politeflower-c7227859.eastus2.azurecontainerapps.io/ip?ip=${urleastus2Data.sourceIpAddress}`,
-    //     function f(res) {
-    //       console.log(res);
-    //       urleastus2DataSourceIpAddress = new IpInfo(res);
-    //     }
-    //   ),
-    //   $.getJSON(
-    //     `https://containerappeastus2.politeflower-c7227859.eastus2.azurecontainerapps.io/ip?ip=${urleastus2Data.destinationIpAddress}`,
-    //     function f(res) {
-    //       console.log(res);
-    //       urleastus2DataDestinationIpAddress = new IpInfo(res);
-    //     }
-    //   ),
-    //   $.getJSON(
-    //     `https://containerappnortheurope.whitedune-748c223c.northeurope.azurecontainerapps.io/ip?ip=${urlnortheuropeData.sourceIpAddress}`,
-    //     function f(res) {
-    //       console.log(res);
-    //       urlnortheuropeDataSourceIpAddress = new IpInfo(res);
-    //     }
-    //   ),
-    //   $.getJSON(
-    //     `https://containerappnortheurope.whitedune-748c223c.northeurope.azurecontainerapps.io/ip?ip=${urlnortheuropeData.destinationIpAddress}`,
-    //     function f(res) {
-    //       console.log(res);
-    //       urlnortheuropeDataDestinationIpAddress = new IpInfo(res);
-    //     }
-    //   ),
-    //   $.getJSON(
-    //     `https://containerappwesteurope.nicepond-330ead69.westeurope.azurecontainerapps.io/ip?ip=${urlwesteuropeData.sourceIpAddress}`,
-    //     function f(res) {
-    //       console.log(res);
-    //       urlwesteuropeDataDataSourceIpAddress = new IpInfo(res);
-    //     }
-    //   ),
-    //   $.getJSON(
-    //     `https://containerappwesteurope.nicepond-330ead69.westeurope.azurecontainerapps.io/ip?ip=${urlwesteuropeData.destinationIpAddress}`,
-    //     function f(res) {
-    //       console.log(res);
-    //       urlwesteuropeDataDataDestinationIpAddress = new IpInfo(res);
-    //     }
-    //   )
-    // )
-    //.done(function () {
-    // $("#map").kendoMap({
-    //   center: [30.268107, -37.744821],
-    //   zoom: 2,
-    //   layers: [
-    //     {
-    //       type: "tile",
-    //       urlTemplate:
-    //         "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-    //       subdomains: ["a", "b", "c"],
-    //       attribution:
-    //         "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>",
-    //     },
-    //   ],
-    //   markers: [
-    //     {
-    //       location: [
-    //         urlcentralcanadaData.SourceIpAddressLatitude,
-    //         urlcentralcanadaData.SourceIpAddressLongitude,
-    //       ],
-    //       shape: "pin",
-    //       tooltip: {
-    //         content: `
-    //         city: ${urlcentralcanadaDataSourceIpAddress.city}<br>
-    //         region: ${urlcentralcanadaDataSourceIpAddress.country}<br>
-    //         country: ${urlcentralcanadaDataSourceIpAddress.country}<br>
-    //         postal: ${urlcentralcanadaDataSourceIpAddress.postal}<br>
-    //         timezone: ${urlcentralcanadaDataSourceIpAddress.timezone}<br>
-    //         org: ${urlcentralcanadaDataSourceIpAddress.org}<br>
-    //         distance: ${urlcentralcanadaDataSourceIpAddress.org}<br>
-    //         distance: ${StaticMethods.distance(
-    //           urlcentralcanadaDataSourceIpAddress.latitude,
-    //           urlcentralcanadaDataSourceIpAddress.longitude,
-    //           urlcentralcanadaDataDestinationIpAddress.latitude,
-    //           urlcentralcanadaDataDestinationIpAddress.longitude
-    //         )}`,
-    //       },
-    //     },
-    //     {
-    //       location: [
-    //         urlcentralcanadaDataDestinationIpAddress.latitude,
-    //         urlcentralcanadaDataDestinationIpAddress.longitude,
-    //       ],
-    //       shape: "pinTarget",
-    //       tooltip: {
-    //         content: `
-    //         city: ${urlcentralcanadaDataDestinationIpAddress.city}<br>
-    //         region: ${urlcentralcanadaDataDestinationIpAddress.country}<br>
-    //         country: ${urlcentralcanadaDataDestinationIpAddress.country}<br>
-    //         postal: ${urlcentralcanadaDataDestinationIpAddress.postal}<br>
-    //         timezone: ${urlcentralcanadaDataDestinationIpAddress.timezone}<br>
-    //         org: ${urlcentralcanadaDataDestinationIpAddress.org}`,
-    //       },
-    //     },
-    //     {
-    //       location: [
-    //         urleastus2DataSourceIpAddress.latitude,
-    //         urleastus2DataSourceIpAddress.longitude,
-    //       ],
-    //       shape: "pin",
-    //       tooltip: {
-    //         content: `
-    //         city: ${urleastus2DataSourceIpAddress.city}<br>
-    //         region: ${urleastus2DataSourceIpAddress.country}<br>
-    //         country: ${urleastus2DataSourceIpAddress.country}<br>
-    //         postal: ${urleastus2DataSourceIpAddress.postal}<br>
-    //         timezone: ${urleastus2DataSourceIpAddress.timezone}<br>
-    //         org: ${urleastus2DataSourceIpAddress.org}<br>
-    //         distance: ${StaticMethods.distance(
-    //           urleastus2DataSourceIpAddress.latitude,
-    //           urleastus2DataSourceIpAddress.longitude,
-    //           urleastus2DataDestinationIpAddress.latitude,
-    //           urleastus2DataDestinationIpAddress.longitude
-    //         )}`,
-    //       },
-    //     },
-    //     {
-    //       location: [
-    //         urleastus2DataDestinationIpAddress.latitude,
-    //         urleastus2DataDestinationIpAddress.longitude,
-    //       ],
-    //       shape: "pinTarget",
-    //       tooltip: {
-    //         content: `
-    //         city: ${urleastus2DataDestinationIpAddress.city}<br>
-    //         region: ${urleastus2DataDestinationIpAddress.country}<br>
-    //         country: ${urleastus2DataDestinationIpAddress.country}<br>
-    //         postal: ${urleastus2DataDestinationIpAddress.postal}<br>
-    //         timezone: ${urleastus2DataDestinationIpAddress.timezone}<br>
-    //         org: ${urleastus2DataDestinationIpAddress.org}`,
-    //       },
-    //     },
-    //     {
-    //       location: [
-    //         urlnortheuropeDataSourceIpAddress.latitude,
-    //         urlnortheuropeDataSourceIpAddress.longitude,
-    //       ],
-    //       shape: "pin",
-    //       tooltip: {
-    //         content: `
-    //         city: ${urlnortheuropeDataSourceIpAddress.city}<br>
-    //         region: ${urlnortheuropeDataSourceIpAddress.country}<br>
-    //         country: ${urlnortheuropeDataSourceIpAddress.country}<br>
-    //         postal: ${urlnortheuropeDataSourceIpAddress.postal}<br>
-    //         timezone: ${urlnortheuropeDataSourceIpAddress.timezone}<br>
-    //         org: ${urlnortheuropeDataSourceIpAddress.org}<br>
-    //         distance: ${StaticMethods.distance(
-    //           urlnortheuropeDataSourceIpAddress.latitude,
-    //           urlnortheuropeDataSourceIpAddress.longitude,
-    //           urlnortheuropeDataDestinationIpAddress.latitude,
-    //           urlnortheuropeDataDestinationIpAddress.longitude
-    //         )}`,
-    //       },
-    //     },
-    //     {
-    //       location: [
-    //         urlnortheuropeDataDestinationIpAddress.latitude,
-    //         urlnortheuropeDataDestinationIpAddress.longitude,
-    //       ],
-    //       shape: "pinTarget",
-    //       tooltip: {
-    //         content: `
-    //         city: ${urlnortheuropeDataDestinationIpAddress.city}<br>
-    //         region: ${urlnortheuropeDataDestinationIpAddress.country}<br>
-    //         country: ${urlnortheuropeDataDestinationIpAddress.country}<br>
-    //         postal: ${urlnortheuropeDataDestinationIpAddress.postal}<br>
-    //         timezone: ${urlnortheuropeDataDestinationIpAddress.timezone}<br>
-    //         org: ${urlnortheuropeDataDestinationIpAddress.org}`,
-    //       },
-    //     },
-    //     {
-    //       location: [
-    //         urlwesteuropeDataDataSourceIpAddress.latitude,
-    //         urlwesteuropeDataDataSourceIpAddress.longitude,
-    //       ],
-    //       shape: "pin",
-    //       tooltip: {
-    //         content: `
-    //         city: ${urlwesteuropeDataDataSourceIpAddress.city}<br>
-    //         region: ${urlwesteuropeDataDataSourceIpAddress.country}<br>
-    //         country: ${urlwesteuropeDataDataSourceIpAddress.country}<br>
-    //         postal: ${urlwesteuropeDataDataSourceIpAddress.postal}<br>
-    //         timezone: ${urlwesteuropeDataDataSourceIpAddress.timezone}<br>
-    //         org: ${urlwesteuropeDataDataSourceIpAddress.org}<br>
-    //         distance: ${StaticMethods.distance(
-    //           urlwesteuropeDataDataSourceIpAddress.latitude,
-    //           urlwesteuropeDataDataSourceIpAddress.longitude,
-    //           urlwesteuropeDataDataDestinationIpAddress.latitude,
-    //           urlwesteuropeDataDataDestinationIpAddress.longitude
-    //         )}`,
-    //       },
-    //     },
-    //     {
-    //       location: [
-    //         urlwesteuropeDataDataDestinationIpAddress.latitude,
-    //         urlwesteuropeDataDataDestinationIpAddress.longitude,
-    //       ],
-    //       shape: "pinTarget",
-    //       tooltip: {
-    //         content: `
-    //         city ${urlwesteuropeDataDataDestinationIpAddress.city}<br>
-    //         region: ${urlwesteuropeDataDataDestinationIpAddress.country}<br>
-    //         country: ${urlwesteuropeDataDataDestinationIpAddress.country}<br>
-    //         postal: ${urlwesteuropeDataDataDestinationIpAddress.postal}<br>
-    //         timezone: ${urlwesteuropeDataDataDestinationIpAddress.timezone}<br>
-    //         org: ${urlwesteuropeDataDataDestinationIpAddress.org}`,
-    //       },
-    //     },
-    //   ],
-    // });
-    //$(".k-i-marker-pin-target").css("color", "green");
+    $("#map").kendoMap({
+        center: [30.268107, -37.744821],
+        zoom: 2,
+        layers: [
+            {
+                type: "tile",
+                urlTemplate: "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                subdomains: ["a", "b", "c"],
+                attribution: "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>",
+            },
+        ],
+        markers: [
+            {
+                location: [
+                    urlcentralcanadaData.SourceIpAddressLatitude,
+                    urlcentralcanadaData.SourceIpAddressLongitude,
+                ],
+                shape: "pin",
+                tooltip: {
+                    content: `
+          city: ${urlcentralcanadaData.SourceIpAddressCity}<br>
+          region: ${urlcentralcanadaData.SourceIpAddressRegion}<br>
+          country: ${urlcentralcanadaData.SourceIpAddressCountry}<br>
+          postal: ${urlcentralcanadaData.SourceIpAddressPostal}<br>
+          timezone: ${urlcentralcanadaData.SourceIpAddressTimezone}<br>
+          org: ${urlcentralcanadaData.SourceIpAddressOrg}<br>
+          distance: ${urlcentralcanadaData.DistanceBetweenIpAddresses}<br>`,
+                },
+            },
+            {
+                location: [
+                    urlcentralcanadaData.DestinationIpAddressLatitude,
+                    urlcentralcanadaData.DestinationIpAddressLongitude,
+                ],
+                shape: "pinTarget",
+                tooltip: {
+                    content: `
+          city: ${urlcentralcanadaData.DestinationIpAddressCity}<br>
+          region: ${urlcentralcanadaData.DestinationIpAddressRegion}<br>
+          country: ${urlcentralcanadaData.DestinationIpAddressCountry}<br>
+          postal: ${urlcentralcanadaData.DestinationIpAddressPostal}<br>
+          timezone: ${urlcentralcanadaData.DestinationIpAddressTimezone}<br>
+          org: ${urlcentralcanadaData.DestinationIpAddressOrg}`,
+                },
+            },
+        ],
+    });
+    $(".k-i-marker-pin-target").css("color", "green");
     createChart();
 });
