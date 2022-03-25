@@ -246,6 +246,7 @@ $.when($.get(urleastus2, function (data) {
         </div>
     </div>`);
 })).done(function () {
+    debugger;
     $("#map").kendoMap({
         center: [30.268107, -37.744821],
         zoom: 2,
@@ -260,35 +261,35 @@ $.when($.get(urleastus2, function (data) {
         markers: [
             {
                 location: [
-                    urlcentralcanadaData.SourceIpAddressLatitude,
-                    urlcentralcanadaData.SourceIpAddressLongitude,
+                    urlcentralcanadaData.sourceIpAddressLatitude,
+                    urlcentralcanadaData.sourceIpAddressLongitude,
                 ],
                 shape: "pin",
                 tooltip: {
                     content: `
-          city: ${urlcentralcanadaData.SourceIpAddressCity}<br>
-          region: ${urlcentralcanadaData.SourceIpAddressRegion}<br>
-          country: ${urlcentralcanadaData.SourceIpAddressCountry}<br>
-          postal: ${urlcentralcanadaData.SourceIpAddressPostal}<br>
-          timezone: ${urlcentralcanadaData.SourceIpAddressTimezone}<br>
-          org: ${urlcentralcanadaData.SourceIpAddressOrg}<br>
-          distance: ${urlcentralcanadaData.DistanceBetweenIpAddresses}<br>`,
+          city: ${urlcentralcanadaData.sourceIpAddressCity}<br>
+          region: ${urlcentralcanadaData.sourceIpAddressRegion}<br>
+          country: ${urlcentralcanadaData.sourceIpAddressCountry}<br>
+          postal: ${urlcentralcanadaData.sourceIpAddressPostal}<br>
+          timezone: ${urlcentralcanadaData.sourceIpAddressTimezone}<br>
+          org: ${urlcentralcanadaData.sourceIpAddressOrg}<br>
+          distance: ${urlcentralcanadaData.sistanceBetweenIpAddresses}<br>`,
                 },
             },
             {
                 location: [
-                    urlcentralcanadaData.DestinationIpAddressLatitude,
-                    urlcentralcanadaData.DestinationIpAddressLongitude,
+                    urlcentralcanadaData.destinationIpAddressLatitude,
+                    urlcentralcanadaData.destinationIpAddressLongitude,
                 ],
                 shape: "pinTarget",
                 tooltip: {
                     content: `
-          city: ${urlcentralcanadaData.DestinationIpAddressCity}<br>
-          region: ${urlcentralcanadaData.DestinationIpAddressRegion}<br>
-          country: ${urlcentralcanadaData.DestinationIpAddressCountry}<br>
-          postal: ${urlcentralcanadaData.DestinationIpAddressPostal}<br>
-          timezone: ${urlcentralcanadaData.DestinationIpAddressTimezone}<br>
-          org: ${urlcentralcanadaData.DestinationIpAddressOrg}`,
+          city: ${urlcentralcanadaData.destinationIpAddressCity}<br>
+          region: ${urlcentralcanadaData.destinationIpAddressRegion}<br>
+          country: ${urlcentralcanadaData.destinationIpAddressCountry}<br>
+          postal: ${urlcentralcanadaData.destinationIpAddressPostal}<br>
+          timezone: ${urlcentralcanadaData.destinationIpAddressTimezone}<br>
+          org: ${urlcentralcanadaData.destinationIpAddressOrg}`,
                 },
             },
         ],
