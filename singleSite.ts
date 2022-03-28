@@ -24,122 +24,121 @@ if (document.location.hostname.toLowerCase().includes("127.0.0.1") == false) {
   }
 }
 
-$("title").text(`SiteTiming - ${url}`);
+$(function () {
+  $("title").text(`SiteTiming - ${url}`);
 
-($("#breadcrumb") as any).kendoBreadcrumb({
-  navigational: true,
-  items: [
-    {
-      type: "rootitem",
-      href: "/",
-      text: "SiteTiming",
-      showText: true,
-      showIcon: false,
-    },
-    {
-      type: "item",
-      href: "/sites",
-      text: "Sites",
-      showText: true,
-    },
-    {
-      type: "item",
-      href: `${url}`,
-      text: `${url}`,
-      showText: true,
-    },
-  ],
-});
+  ($("#breadcrumb") as any).kendoBreadcrumb({
+    navigational: true,
+    items: [
+      {
+        type: "rootitem",
+        href: "/",
+        text: "SiteTiming",
+        showText: true,
+        showIcon: false,
+      },
+      {
+        type: "item",
+        href: "/sites",
+        text: "Sites",
+        showText: true,
+      },
+      {
+        type: "item",
+        href: `${url}`,
+        text: `${url}`,
+        showText: true,
+      },
+    ],
+  });
 
-function createChart() {
-  $("[data-type=chart]").each(function () {
-    var currentChart = $(this);
+  function createChart() {
+    $("[data-type=chart]").each(function () {
+      var currentChart = $(this);
 
-    var ip = currentChart.attr("data-ip");
-    //ip = "20.54.123.54";
-    var andString = "&&";
-    var serverUrl = StaticMethods.getRandomServerUrlNoEndingSlash();
-    //ip = "20.54.123.54";
-    //url = "google.com";
-    var urlQuery = `${serverUrl}/graphql?query={probes(take:10, where:"SourceIpAddress=\\\"${ip}\\\" and Site.Url=\\\"http://${url}\\\""){id dateCreated dateCreatedFormatted latencyInChrome dOMContentLoadedEventInChrome}}`;
+      var ip = currentChart.attr("data-ip");
+      //ip = "20.54.123.54";
+      var andString = "&&";
+      var serverUrl = StaticMethods.getRandomServerUrlNoEndingSlash();
+      //ip = "20.54.123.54";
+      //url = "google.com";
+      var urlQuery = `${serverUrl}/graphql?query={probes(take:10, where:"SourceIpAddress=\\\"${ip}\\\" and Site.Url=\\\"http://${url}\\\""){id dateCreated dateCreatedFormatted latencyInChrome dOMContentLoadedEventInChrome}}`;
 
-    currentChart.kendoChart({
-      dataSource: {
-        schema: {
-          data: function (response: any) {
-            return response.data.probes;
+      currentChart.kendoChart({
+        dataSource: {
+          schema: {
+            data: function (response: any) {
+              return response.data.probes;
+            },
+          },
+          transport: {
+            read: {
+              url: urlQuery,
+
+              dataType: "json",
+            },
+          },
+          sort: {
+            field: "id",
+            dir: "asc",
           },
         },
-        transport: {
-          read: {
-            url: urlQuery,
-
-            dataType: "json",
+        title: {
+          text: `Latency of ${url}`,
+        },
+        legend: {
+          position: "top",
+        },
+        seriesDefaults: {
+          type: "line",
+        },
+        series: [
+          {
+            field: "latencyInChrome",
+            categoryField: "dateCreatedFormatted",
+            name: "latency",
+          },
+          {
+            field: "dOMContentLoadedEventInChrome",
+            categoryField: "dateCreatedFormatted",
+            name: "dom loaded",
+          },
+        ],
+        categoryAxis: {
+          labels: {
+            visible: true,
+            rotation: -90,
+          },
+          crosshair: {
+            visible: true,
           },
         },
-        sort: {
-          field: "id",
-          dir: "asc",
+        valueAxis: {
+          labels: {
+            format: "N0",
+          },
         },
-      },
-      title: {
-        text: `Latency of ${url}`,
-      },
-      legend: {
-        position: "top",
-      },
-      seriesDefaults: {
-        type: "line",
-      },
-      series: [
-        {
-          field: "latencyInChrome",
-          categoryField: "dateCreatedFormatted",
-          name: "latency",
-        },
-        {
-          field: "dOMContentLoadedEventInChrome",
-          categoryField: "dateCreatedFormatted",
-          name: "dom loaded",
-        },
-      ],
-      categoryAxis: {
-        labels: {
+        tooltip: {
           visible: true,
-          rotation: -90,
-        },
-        crosshair: {
-          visible: true,
-        },
-      },
-      valueAxis: {
-        labels: {
+          shared: true,
           format: "N0",
         },
-      },
-      tooltip: {
-        visible: true,
-        shared: true,
-        format: "N0",
-      },
+      });
     });
-  });
-}
-
-// $(document).ready(createChart);
-
-$(window).resize(function () {
-  var kendoChart = $("#chart").data("kendoChart");
-  if (kendoChart) {
-    kendoChart.refresh();
   }
-});
 
-$(".skeletonMarker").each(function (index) {
-  var text = $(this).attr("data-location");
-  $(this).kendoSkeletonContainer({
-    animation: "pulse",
-    template: `<div class="k-card">      
+  $(window).on("resize", function () {
+    var kendoChart = $("#chart").data("kendoChart");
+    if (kendoChart) {
+      kendoChart.refresh();
+    }
+  });
+
+  $(".skeletonMarker").each(function (index) {
+    var text = $(this).attr("data-location");
+    $(this).kendoSkeletonContainer({
+      animation: "pulse",
+      template: `<div class="k-card">      
                                     <div class="k-card-header">
                                            ${text}
                                     </div>                  
@@ -154,23 +153,23 @@ $(".skeletonMarker").each(function (index) {
                         <span data-shape-text></span>
                     </div>
                         </div>`,
+    });
   });
-});
 
-let urleastus2 = `https://containerappeastus2.politeflower-c7227859.eastus2.azurecontainerapps.io/probe?url=${url}`;
-let urlcentralcanada = `https://containerappcanadacentral.happyrock-5d18c325.canadacentral.azurecontainerapps.io/probe?url=${url}`;
-let urlnortheurope = `https://containerappnortheurope.whitedune-748c223c.northeurope.azurecontainerapps.io/probe?url=${url}`;
-let urlwesteurope = `https://containerappwesteurope.nicepond-330ead69.westeurope.azurecontainerapps.io/probe?url=${url}`;
-var urleastus2Data: any;
-var urlcentralcanadaData: any;
-var urlwesteuropeData: any;
-var urlnortheuropeData: any;
-$.when(
-  $.get(urleastus2, function (data) {
-    urleastus2Data = data;
-    $("#eastus2").remove();
-    $("#cards").prepend(
-      ` <div class="k-card">
+  let urleastus2 = `https://containerappeastus2.politeflower-c7227859.eastus2.azurecontainerapps.io/probe?url=${url}`;
+  let urlcentralcanada = `https://containerappcanadacentral.happyrock-5d18c325.canadacentral.azurecontainerapps.io/probe?url=${url}`;
+  let urlnortheurope = `https://containerappnortheurope.whitedune-748c223c.northeurope.azurecontainerapps.io/probe?url=${url}`;
+  let urlwesteurope = `https://containerappwesteurope.nicepond-330ead69.westeurope.azurecontainerapps.io/probe?url=${url}`;
+  var urleastus2Data: any;
+  var urlcentralcanadaData: any;
+  var urlwesteuropeData: any;
+  var urlnortheuropeData: any;
+  $.when(
+    $.get(urleastus2, function (data) {
+      urleastus2Data = data;
+      $("#eastus2").remove();
+      $("#cards").prepend(
+        ` <div class="k-card">
            <div class="k-card-header">
                     <h5 class="k-card-title">East US</h5>
           </div>
@@ -189,8 +188,8 @@ $.when(
             <h6 class="k-card-subtitle">DestinationIpAddress: ${
               data.destinationIpAddress
             }(${data.destinationIpAddressCity},${
-        data.destinationIpAddressCountry
-      })</h6>
+          data.destinationIpAddressCountry
+        })</h6>
              <h6 class="k-card-subtitle">Org: ${
                data.destinationIpAddressOrg
              }</h6>
@@ -204,14 +203,14 @@ $.when(
             }</h6>
         </div>
     </div>`
-    );
-  }),
+      );
+    }),
 
-  $.get(urlcentralcanada, function (data) {
-    urlcentralcanadaData = data;
-    $("#centralcanada").remove();
-    $("#cards").prepend(
-      ` <div class="k-card">
+    $.get(urlcentralcanada, function (data) {
+      urlcentralcanadaData = data;
+      $("#centralcanada").remove();
+      $("#cards").prepend(
+        ` <div class="k-card">
              <div class="k-card-header">
                     <h5 class="k-card-title">Central Canada</h5>
           </div>
@@ -230,8 +229,8 @@ $.when(
             <h6 class="k-card-subtitle">DestinationIpAddress: ${
               data.destinationIpAddress
             }(${data.destinationIpAddressCity},${
-        data.destinationIpAddressCountry
-      })</h6>
+          data.destinationIpAddressCountry
+        })</h6>
              <h6 class="k-card-subtitle">Org: ${
                data.destinationIpAddressOrg
              }</h6>
@@ -245,13 +244,13 @@ $.when(
             }</h6>
         </div>
     </div>`
-    );
-  }),
-  $.get(urlwesteurope, function (data) {
-    urlwesteuropeData = data;
-    $("#westeurope").remove();
-    $("#cards").prepend(
-      ` <div class="k-card">
+      );
+    }),
+    $.get(urlwesteurope, function (data) {
+      urlwesteuropeData = data;
+      $("#westeurope").remove();
+      $("#cards").prepend(
+        ` <div class="k-card">
              <div class="k-card-header">
                     <h5 class="k-card-title">West Europe</h5>
           </div>
@@ -270,8 +269,8 @@ $.when(
             <h6 class="k-card-subtitle">DestinationIpAddress: ${
               data.destinationIpAddress
             }(${data.destinationIpAddressCity},${
-        data.destinationIpAddressCountry
-      })</h6>
+          data.destinationIpAddressCountry
+        })</h6>
              <h6 class="k-card-subtitle">Org: ${
                data.destinationIpAddressOrg
              }</h6>
@@ -285,12 +284,12 @@ $.when(
             }</h6>
         </div>
     </div>`
-    );
-  }),
-  $.get(urlnortheurope, function (data) {
-    urlnortheuropeData = data;
-    $("#northeurope").remove();
-    $("#cards").prepend(` 
+      );
+    }),
+    $.get(urlnortheurope, function (data) {
+      urlnortheuropeData = data;
+      $("#northeurope").remove();
+      $("#cards").prepend(` 
       <div class="k-card">
              <div class="k-card-header">
                     <h5 class="k-card-title">North Europe</h5>
@@ -323,31 +322,30 @@ $.when(
             }</h6>
         </div>
     </div>`);
-  })
-).done(function () {
-  debugger;
-  $("#map").kendoMap({
-    center: [30.268107, -37.744821],
-    zoom: 2,
-    layers: [
-      {
-        type: "tile",
-        urlTemplate:
-          "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-        subdomains: ["a", "b", "c"],
-        attribution:
-          "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>",
-      },
-    ],
-    markers: [
-      {
-        location: [
-          urlcentralcanadaData.sourceIpAddressLatitude,
-          urlcentralcanadaData.sourceIpAddressLongitude,
-        ],
-        shape: "pin",
-        tooltip: {
-          content: `
+    })
+  ).done(function () {
+    $("#map").kendoMap({
+      center: [30.268107, -37.744821],
+      zoom: 2,
+      layers: [
+        {
+          type: "tile",
+          urlTemplate:
+            "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+          subdomains: ["a", "b", "c"],
+          attribution:
+            "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>",
+        },
+      ],
+      markers: [
+        {
+          location: [
+            urlcentralcanadaData.sourceIpAddressLatitude,
+            urlcentralcanadaData.sourceIpAddressLongitude,
+          ],
+          shape: "pin",
+          tooltip: {
+            content: `
           city: ${urlcentralcanadaData.sourceIpAddressCity}<br>
           region: ${urlcentralcanadaData.sourceIpAddressRegion}<br>
           country: ${urlcentralcanadaData.sourceIpAddressCountry}<br>
@@ -355,32 +353,32 @@ $.when(
           timezone: ${urlcentralcanadaData.sourceIpAddressTimezone}<br>
           org: ${urlcentralcanadaData.sourceIpAddressOrg}<br>
           distance: ${urlcentralcanadaData.distanceBetweenIpAddresses}<br>`,
+          },
         },
-      },
-      {
-        location: [
-          urlcentralcanadaData.destinationIpAddressLatitude,
-          urlcentralcanadaData.destinationIpAddressLongitude,
-        ],
-        shape: "pinTarget",
-        tooltip: {
-          content: `
+        {
+          location: [
+            urlcentralcanadaData.destinationIpAddressLatitude,
+            urlcentralcanadaData.destinationIpAddressLongitude,
+          ],
+          shape: "pinTarget",
+          tooltip: {
+            content: `
           city: ${urlcentralcanadaData.destinationIpAddressCity}<br>
           region: ${urlcentralcanadaData.destinationIpAddressRegion}<br>
           country: ${urlcentralcanadaData.destinationIpAddressCountry}<br>
           postal: ${urlcentralcanadaData.destinationIpAddressPostal}<br>
           timezone: ${urlcentralcanadaData.destinationIpAddressTimezone}<br>
           org: ${urlcentralcanadaData.destinationIpAddressOrg}`,
+          },
         },
-      },
-      {
-        location: [
-          urleastus2Data.sourceIpAddressLatitude,
-          urleastus2Data.sourceIpAddressLongitude,
-        ],
-        shape: "pin",
-        tooltip: {
-          content: `
+        {
+          location: [
+            urleastus2Data.sourceIpAddressLatitude,
+            urleastus2Data.sourceIpAddressLongitude,
+          ],
+          shape: "pin",
+          tooltip: {
+            content: `
           city: ${urleastus2Data.sourceIpAddressCity}<br>
           region: ${urleastus2Data.sourceIpAddressRegion}<br>
           country: ${urleastus2Data.sourceIpAddressCountry}<br>
@@ -388,32 +386,32 @@ $.when(
           timezone: ${urleastus2Data.sourceIpAddressTimezone}<br>
           org: ${urleastus2Data.sourceIpAddressOrg}<br>
           distance: ${urleastus2Data.distanceBetweenIpAddresses}<br>`,
+          },
         },
-      },
-      {
-        location: [
-          urleastus2Data.destinationIpAddressLatitude,
-          urleastus2Data.destinationIpAddressLongitude,
-        ],
-        shape: "pinTarget",
-        tooltip: {
-          content: `
+        {
+          location: [
+            urleastus2Data.destinationIpAddressLatitude,
+            urleastus2Data.destinationIpAddressLongitude,
+          ],
+          shape: "pinTarget",
+          tooltip: {
+            content: `
           city: ${urleastus2Data.destinationIpAddressCity}<br>
           region: ${urleastus2Data.destinationIpAddressRegion}<br>
           country: ${urleastus2Data.destinationIpAddressCountry}<br>
           postal: ${urleastus2Data.destinationIpAddressPostal}<br>
           timezone: ${urleastus2Data.destinationIpAddressTimezone}<br>
           org: ${urleastus2Data.destinationIpAddressOrg}`,
+          },
         },
-      },
-      {
-        location: [
-          urlwesteuropeData.sourceIpAddressLatitude,
-          urlwesteuropeData.sourceIpAddressLongitude,
-        ],
-        shape: "pin",
-        tooltip: {
-          content: `
+        {
+          location: [
+            urlwesteuropeData.sourceIpAddressLatitude,
+            urlwesteuropeData.sourceIpAddressLongitude,
+          ],
+          shape: "pin",
+          tooltip: {
+            content: `
           city: ${urlwesteuropeData.sourceIpAddressCity}<br>
           region: ${urlwesteuropeData.sourceIpAddressRegion}<br>
           country: ${urlwesteuropeData.sourceIpAddressCountry}<br>
@@ -421,32 +419,32 @@ $.when(
           timezone: ${urlwesteuropeData.sourceIpAddressTimezone}<br>
           org: ${urlwesteuropeData.sourceIpAddressOrg}<br>
           distance: ${urlwesteuropeData.distanceBetweenIpAddresses}<br>`,
+          },
         },
-      },
-      {
-        location: [
-          urlwesteuropeData.destinationIpAddressLatitude,
-          urlwesteuropeData.destinationIpAddressLongitude,
-        ],
-        shape: "pinTarget",
-        tooltip: {
-          content: `
+        {
+          location: [
+            urlwesteuropeData.destinationIpAddressLatitude,
+            urlwesteuropeData.destinationIpAddressLongitude,
+          ],
+          shape: "pinTarget",
+          tooltip: {
+            content: `
           city: ${urlwesteuropeData.destinationIpAddressCity}<br>
           region: ${urlwesteuropeData.destinationIpAddressRegion}<br>
           country: ${urlwesteuropeData.destinationIpAddressCountry}<br>
           postal: ${urlwesteuropeData.destinationIpAddressPostal}<br>
           timezone: ${urlwesteuropeData.destinationIpAddressTimezone}<br>
           org: ${urlwesteuropeData.destinationIpAddressOrg}`,
+          },
         },
-      },
-      {
-        location: [
-          urlnortheuropeData.sourceIpAddressLatitude,
-          urlnortheuropeData.sourceIpAddressLongitude,
-        ],
-        shape: "pin",
-        tooltip: {
-          content: `
+        {
+          location: [
+            urlnortheuropeData.sourceIpAddressLatitude,
+            urlnortheuropeData.sourceIpAddressLongitude,
+          ],
+          shape: "pin",
+          tooltip: {
+            content: `
           city: ${urlnortheuropeData.sourceIpAddressCity}<br>
           region: ${urlnortheuropeData.sourceIpAddressRegion}<br>
           country: ${urlnortheuropeData.sourceIpAddressCountry}<br>
@@ -454,27 +452,28 @@ $.when(
           timezone: ${urlnortheuropeData.sourceIpAddressTimezone}<br>
           org: ${urlnortheuropeData.sourceIpAddressOrg}<br>
           distance: ${urlnortheuropeData.distanceBetweenIpAddresses}<br>`,
+          },
         },
-      },
-      {
-        location: [
-          urlnortheuropeData.destinationIpAddressLatitude,
-          urlnortheuropeData.destinationIpAddressLongitude,
-        ],
-        shape: "pinTarget",
-        tooltip: {
-          content: `
+        {
+          location: [
+            urlnortheuropeData.destinationIpAddressLatitude,
+            urlnortheuropeData.destinationIpAddressLongitude,
+          ],
+          shape: "pinTarget",
+          tooltip: {
+            content: `
           city: ${urlnortheuropeData.destinationIpAddressCity}<br>
           region: ${urlnortheuropeData.destinationIpAddressRegion}<br>
           country: ${urlnortheuropeData.destinationIpAddressCountry}<br>
           postal: ${urlnortheuropeData.destinationIpAddressPostal}<br>
           timezone: ${urlnortheuropeData.destinationIpAddressTimezone}<br>
           org: ${urlnortheuropeData.destinationIpAddressOrg}`,
+          },
         },
-      },
-    ],
-  });
+      ],
+    });
 
-  $(".k-i-marker-pin-target").css("color", "green");
-  createChart();
+    $(".k-i-marker-pin-target").css("color", "green");
+    createChart();
+  });
 });
