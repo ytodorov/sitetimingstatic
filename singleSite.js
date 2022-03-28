@@ -50,6 +50,32 @@ $(function () {
             },
         ],
     });
+    function createGrid() {
+        $("[data-type=grid]").each(function () {
+            debugger;
+            var currentGrid = $(this);
+            var probeId = currentGrid.attr("data-probeId");
+            if (probeId) {
+                var dataSource = getDatasource(probeId);
+                currentGrid.kendoGrid({
+                    dataSource: dataSource,
+                    groupable: false,
+                    sortable: false,
+                    pageable: false,
+                    columns: [
+                        {
+                            field: "type",
+                            title: "type",
+                        },
+                        {
+                            field: "text",
+                            title: "text",
+                        },
+                    ],
+                });
+            }
+        });
+    }
     function createChart() {
         $("[data-type=chart]").each(function () {
             var currentChart = $(this);
@@ -223,7 +249,6 @@ $(function () {
         </div>
     </div>`);
     }), $.get(urlnortheurope, function (data) {
-        var _a;
         urlnortheuropeData = data;
         $("#northeurope").remove();
         $("#cards").prepend(` 
@@ -234,15 +259,14 @@ $(function () {
         <img class="k-card-image" onerror="if (this.src != 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg') this.src = 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg';" src="https://sitetiming.blob.core.windows.net/images/short50_${data.uniqueGuid}.jpeg?sv=2020-08-04&st=2012-01-27T12%3A30%3A00Z&se=2032-01-28T12%3A30%3A00Z&sr=c&sp=rl&sig=jvKd8yqdiz42u28l4oPYHVFWUSCaeLYmeKMMCgwtn1Y%3D" />
         <div class="k-card-body">
         <div data-type="chart" data-ip="${data.sourceIpAddress}"></div>
+        <div data-type="grid" data-probeId="${data.id}"></div>
             <h6 class="k-card-subtitle">Latency: ${data.latencyInChrome}</h6>
             <h6 class="k-card-subtitle">DOM Loaded: ${data.domContentLoadedEventInChrome}</h6>
             <h6 class="k-card-subtitle">SourceIpAddress: ${data.sourceIpAddress}(${data.sourceIpAddressCity},${data.sourceIpAddressCountry})</h6>
             <h6 class="k-card-subtitle">DestinationIpAddress: ${data.destinationIpAddress}(${data.destinationIpAddressCity},${data.destinationIpAddressCountry})</h6>
              <h6 class="k-card-subtitle">Org: ${data.destinationIpAddressOrg}</h6>
             <h6 class="k-card-subtitle">Distance b/w IPs: ${data.distanceBetweenIpAddresses}</h6>
-            <h6 class="k-card-subtitle">${((_a = data.exceptionMessage) === null || _a === void 0 ? void 0 : _a.toString()) == "null"
-            ? ""
-            : data.exceptionMessage}</h6>
+            <h6 class="k-card-subtitle">${data.exceptionMessage ? "" : data.exceptionMessage}</h6>
         </div>
     </div>`);
     })).done(function () {
@@ -394,5 +418,52 @@ $(function () {
         });
         $(".k-i-marker-pin-target").css("color", "green");
         createChart();
+        createGrid();
     });
 });
+function getDatasource(probeId) {
+    var probeIdInt = Number.parseInt(probeId);
+    var serverUrl = StaticMethods.getRandomServerUrlNoEndingSlash();
+    let READ_PRODUCTS_QUERY = "query {" +
+        `consoleMessages(take: 100, where: "probeId=${probeIdInt}"){type text probeId}` +
+        "}";
+    let dataSource = new kendo.data.DataSource({
+        transport: {
+            read: {
+                contentType: "application/json",
+                url: `${serverUrl}/graphql`,
+                type: "POST",
+                data: function () {
+                    return { query: READ_PRODUCTS_QUERY };
+                },
+            },
+            parameterMap: function (options) {
+                return kendo.stringify({
+                    query: options.query,
+                    variables: options.variables,
+                });
+            },
+        },
+        schema: {
+            data: function (response) {
+                var data = response.data;
+                if (data.consoleMessages) {
+                    return data.consoleMessages;
+                }
+            },
+            total: function (response) {
+                return response.data.consoleMessages.length;
+            },
+            model: {
+                id: "id",
+                fields: {
+                    id: { type: "number", editable: false },
+                    text: { type: "string" },
+                    type: { type: "string" },
+                },
+            },
+        },
+        pageSize: 10,
+    });
+    return dataSource;
+}

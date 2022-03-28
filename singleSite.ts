@@ -52,6 +52,34 @@ $(function () {
     ],
   });
 
+  function createGrid() {
+    $("[data-type=grid]").each(function () {
+      debugger;
+      var currentGrid = $(this);
+      var probeId = currentGrid.attr("data-probeId");
+      if (probeId) {
+        var dataSource = getDatasource(probeId);
+
+        currentGrid.kendoGrid({
+          dataSource: dataSource,
+          groupable: false,
+          sortable: false,
+          pageable: false,
+          columns: [
+            {
+              field: "type",
+              title: "type",
+            },
+            {
+              field: "text",
+              title: "text",
+            },
+          ],
+        });
+      }
+    });
+  }
+
   function createChart() {
     $("[data-type=chart]").each(function () {
       var currentChart = $(this);
@@ -299,6 +327,7 @@ $(function () {
         }.jpeg?sv=2020-08-04&st=2012-01-27T12%3A30%3A00Z&se=2032-01-28T12%3A30%3A00Z&sr=c&sp=rl&sig=jvKd8yqdiz42u28l4oPYHVFWUSCaeLYmeKMMCgwtn1Y%3D" />
         <div class="k-card-body">
         <div data-type="chart" data-ip="${data.sourceIpAddress}"></div>
+        <div data-type="grid" data-probeId="${data.id}"></div>
             <h6 class="k-card-subtitle">Latency: ${data.latencyInChrome}</h6>
             <h6 class="k-card-subtitle">DOM Loaded: ${
               data.domContentLoadedEventInChrome
@@ -316,9 +345,7 @@ $(function () {
               data.distanceBetweenIpAddresses
             }</h6>
             <h6 class="k-card-subtitle">${
-              data.exceptionMessage?.toString() == "null"
-                ? ""
-                : data.exceptionMessage
+              data.exceptionMessage ? "" : data.exceptionMessage
             }</h6>
         </div>
     </div>`);
@@ -475,5 +502,57 @@ $(function () {
 
     $(".k-i-marker-pin-target").css("color", "green");
     createChart();
+    createGrid();
   });
 });
+
+function getDatasource(probeId: string): kendo.data.DataSource {
+  var probeIdInt = Number.parseInt(probeId);
+  var serverUrl = StaticMethods.getRandomServerUrlNoEndingSlash();
+  let READ_PRODUCTS_QUERY =
+    "query {" +
+    `consoleMessages(take: 100, where: "probeId=${probeIdInt}"){type text probeId}` +
+    "}";
+
+  let dataSource = new kendo.data.DataSource({
+    transport: {
+      read: {
+        contentType: "application/json",
+        url: `${serverUrl}/graphql`,
+        type: "POST",
+        data: function () {
+          return { query: READ_PRODUCTS_QUERY };
+        },
+      },
+      parameterMap: function (options: any) {
+        return kendo.stringify({
+          query: options.query,
+          variables: options.variables,
+        });
+      },
+    },
+    schema: {
+      data: function (response: any) {
+        var data = response.data;
+
+        if (data.consoleMessages) {
+          return data.consoleMessages;
+        }
+      },
+      total: function (response: any) {
+        return response.data.consoleMessages.length;
+      },
+      model: {
+        id: "id",
+        fields: {
+          id: { type: "number", editable: false },
+          text: { type: "string" },
+          type: { type: "string" },
+        },
+      },
+    },
+    pageSize: 10,
+  });
+
+  return dataSource;
+}

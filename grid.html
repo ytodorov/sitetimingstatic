@@ -28,14 +28,14 @@
       <script>
         let READ_PRODUCTS_QUERY =
           "query {" +
-          'probes(take:10, order: "id desc") { uniqueGuid, latencyInChrome, dOMContentLoadedEventInChrome, sourceIpAddress, siteId site{url}}' +
+          'consoleMessages(take: 100, where: "probeId=1024"){type text probeId}' +
           "}";
 
         let dataSource = new kendo.data.DataSource({
           transport: {
             read: {
               contentType: "application/json",
-              url: "https://containerappeastus.yellowmoss-bb737f56.eastus.azurecontainerapps.io/graphql",
+              url: "https://containerappwesteurope.nicepond-330ead69.westeurope.azurecontainerapps.io/graphql",
               type: "POST",
               data: function () {
                 return { query: READ_PRODUCTS_QUERY };
@@ -52,22 +52,19 @@
             data: function (response) {
               var data = response.data;
 
-              if (data.probes) {
-                return data.probes;
+              if (data.consoleMessages) {
+                return data.consoleMessages;
               }
             },
             total: function (response) {
-              return response.data.probes.length;
+              return response.data.consoleMessages.length;
             },
             model: {
               id: "id",
               fields: {
                 id: { type: "number", editable: false },
-                latencyInChrome: { type: "number", editable: false },
-                dOMContentLoadedEventInChrome: { type: "number", editable: false },
-                sourceIpAddress: { type: "string" },
-
-                uniqueGuid: { type: "string" },
+                text: { type: "string" },
+                type: { type: "string" },
               },
             },
           },
@@ -83,12 +80,12 @@
           },
           columns: [
             {
-              title: "Url",
-              template: `<a target="_blank" href="https://www.sitetiming.com/#: site.url #">#: site.url #</a>`,
+              field: "type",
+              title: "type",
             },
             {
-              field: "latencyInChrome",
-              title: "Latency",
+              field: "text",
+              title: "text",
             },
           ],
         });
