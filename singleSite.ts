@@ -27,6 +27,10 @@ if (document.location.hostname.toLowerCase().includes("127.0.0.1") == false) {
 $(function () {
   $("title").text(`SiteTiming - ${url}`);
 
+  $("#panelbar").kendoPanelBar({
+    expandMode: "multi",
+  });
+
   ($("#breadcrumb") as any).kendoBreadcrumb({
     navigational: true,
     items: [
@@ -196,12 +200,9 @@ $(function () {
     $.get(urleastus2, function (data) {
       urleastus2Data = data;
       $("#eastus2").remove();
-      $("#cards").prepend(
+      $("#divEastUS").prepend(
         ` <div class="k-card">
-           <div class="k-card-header">
-                    <h5 class="k-card-title">East US</h5>
-          </div>
-        <img class="k-card-image" onerror="if (this.src != 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg') this.src = 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg';" src="https://sitetiming.blob.core.windows.net/images/short50_${
+        <img class="rounded mx-auto d-block" onerror="if (this.src != 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg') this.src = 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg';" src="https://sitetiming.blob.core.windows.net/images/short50_${
           data.uniqueGuid
         }.jpeg?sv=2020-08-04&st=2012-01-27T12%3A30%3A00Z&se=2032-01-28T12%3A30%3A00Z&sr=c&sp=rl&sig=jvKd8yqdiz42u28l4oPYHVFWUSCaeLYmeKMMCgwtn1Y%3D" />
         <div class="k-card-body">
@@ -238,12 +239,9 @@ $(function () {
     $.get(urlcentralcanada, function (data) {
       urlcentralcanadaData = data;
       $("#centralcanada").remove();
-      $("#cards").prepend(
-        ` <div class="k-card">
-             <div class="k-card-header">
-                    <h5 class="k-card-title">Central Canada</h5>
-          </div>
-        <img class="k-card-image" onerror="if (this.src != 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg') this.src = 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg';" src="https://sitetiming.blob.core.windows.net/images/short50_${
+      $("#divCentralCanada").prepend(
+        ` <div class="k-card">             
+        <img class="rounded mx-auto d-block" onerror="if (this.src != 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg') this.src = 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg';" src="https://sitetiming.blob.core.windows.net/images/short50_${
           data.uniqueGuid
         }.jpeg?sv=2020-08-04&st=2012-01-27T12%3A30%3A00Z&se=2032-01-28T12%3A30%3A00Z&sr=c&sp=rl&sig=jvKd8yqdiz42u28l4oPYHVFWUSCaeLYmeKMMCgwtn1Y%3D" />
         <div class="k-card-body">
@@ -279,12 +277,9 @@ $(function () {
     $.get(urlwesteurope, function (data) {
       urlwesteuropeData = data;
       $("#westeurope").remove();
-      $("#cards").prepend(
-        ` <div class="k-card">
-             <div class="k-card-header">
-                    <h5 class="k-card-title">West Europe</h5>
-          </div>
-        <img class="k-card-image" onerror="if (this.src != 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg') this.src = 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg';" src="https://sitetiming.blob.core.windows.net/images/short50_${
+      $("#divWestEurope").prepend(
+        ` <div class="k-card">            
+        <img class="rounded mx-auto d-block" onerror="if (this.src != 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg') this.src = 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg';" src="https://sitetiming.blob.core.windows.net/images/short50_${
           data.uniqueGuid
         }.jpeg?sv=2020-08-04&st=2012-01-27T12%3A30%3A00Z&se=2032-01-28T12%3A30%3A00Z&sr=c&sp=rl&sig=jvKd8yqdiz42u28l4oPYHVFWUSCaeLYmeKMMCgwtn1Y%3D" />
         <div class="k-card-body">
@@ -320,12 +315,9 @@ $(function () {
     $.get(urlnortheurope, function (data) {
       urlnortheuropeData = data;
       $("#northeurope").remove();
-      $("#cards").prepend(` 
-      <div class="k-card">
-             <div class="k-card-header">
-                    <h5 class="k-card-title">North Europe</h5>
-          </div>
-        <img class="k-card-image" onerror="if (this.src != 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg') this.src = 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg';" src="https://sitetiming.blob.core.windows.net/images/short50_${
+      $("#divNorthEurope").prepend(` 
+      <div class="k-card">            
+        <img class="rounded mx-auto d-block" onerror="if (this.src != 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg') this.src = 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg';" src="https://sitetiming.blob.core.windows.net/images/short50_${
           data.uniqueGuid
         }.jpeg?sv=2020-08-04&st=2012-01-27T12%3A30%3A00Z&se=2032-01-28T12%3A30%3A00Z&sr=c&sp=rl&sig=jvKd8yqdiz42u28l4oPYHVFWUSCaeLYmeKMMCgwtn1Y%3D" />
         <div class="k-card-body">

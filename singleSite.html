@@ -33,13 +33,49 @@
 
 
     <div id="cards" class="cards-container">
+
+      <ul id="panelbar">
+        <li class="k-state-active">
+          Central Canada
+          <ul>
+            <div class="skeletonMarker" id="centralcanada" data-location="Central Canada"></div>
+            <div id="divCentralCanada"></div>
+          </ul>
+        </li>
+        <li class="k-state-active">
+          North Europe
+          <ul>
+            <div class="skeletonMarker" id="northeurope" data-location="North Europe"></div>
+            <div id="divNorthEurope"></div>
+          </ul>
+        </li>
+        <li class="k-state-active">
+          West Europe
+          <ul>
+            <div class="skeletonMarker" id="westeurope" data-location="West Europe"></div>
+            <div id="divWestEurope"></div>
+          </ul>
+        </li>
+        <li class="k-state-active">
+          East US
+          <ul>
+            <div class="skeletonMarker" id="eastus2" data-location="East US"></div>
+            <div id="divEastUS"></div>
+          </ul>
+        </li>
+
+      </ul>
+
+    </div>
+    <!--
+    <div id="cards" class="cards-container">
       <div class="skeletonMarker" id="centralcanada" data-location="Central Canada"></div>
       <div class="skeletonMarker" id="northeurope" data-location="North Europe"></div>
       <div class="skeletonMarker" id="westeurope" data-location="West Europe"></div>
       <div class="skeletonMarker" id="eastus2" data-location="East US"></div>
     </div>
 
-    <!-- <div class="k-map" style="height: 0px;">
+     <div class="k-map" style="height: 0px;">
       Destination: <span class="k-marker k-icon k-i-marker-pin-target" data-role="tooltip" style="color: green;">
       </span>
 
@@ -56,16 +92,18 @@
       }
 
       .k-card {
-        width: 285px;
-        margin: 1%;
+        width: 100%;
       }
 
       .k-card-footer {
         text-align: center;
       }
 
-      .k-card-action>.k-button {
+
+
+      #panelbar {
         width: 100%;
+        margin: 0 auto;
       }
 
     </style>
