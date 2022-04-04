@@ -26,6 +26,7 @@ if (document.location.hostname.toLowerCase().includes("127.0.0.1") == false) {
 }
 $(function () {
     $("title").text(`SiteTiming - ${url}`);
+    $("#panelbar").removeClass("d-none");
     $("#panelbar").kendoPanelBar({
         expandMode: "multi",
     });
@@ -55,7 +56,6 @@ $(function () {
     });
     function createGrid() {
         $("[data-type=grid]").each(function () {
-            debugger;
             var currentGrid = $(this);
             var probeId = currentGrid.attr("data-probeId");
             if (probeId) {
@@ -161,9 +161,6 @@ $(function () {
         $(this).kendoSkeletonContainer({
             animation: "pulse",
             template: `<div class="k-card">      
-                                    <div class="k-card-header">
-                                           ${text}
-                                    </div>                  
                             <span data-shape-rectangle style="width: 340px; height: 100%;"></span>
                             <div class="k-card-body">
                                 <span data-shape-text></span>
@@ -186,83 +183,21 @@ $(function () {
     var urlwesteuropeData;
     var urlnortheuropeData;
     $.when($.get(urleastus2, function (data) {
-        var _a;
         urleastus2Data = data;
         $("#eastus2").remove();
-        $("#divEastUS").prepend(` <div class="k-card">
-        <img class="rounded mx-auto d-block" onerror="if (this.src != 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg') this.src = 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg';" src="https://sitetiming.blob.core.windows.net/images/short50_${data.uniqueGuid}.jpeg?sv=2020-08-04&st=2012-01-27T12%3A30%3A00Z&se=2032-01-28T12%3A30%3A00Z&sr=c&sp=rl&sig=jvKd8yqdiz42u28l4oPYHVFWUSCaeLYmeKMMCgwtn1Y%3D" />
-        <div class="k-card-body">
-       <div data-type="chart" data-ip="${data.sourceIpAddress}"></div>
-        <div data-type="grid" data-probeId="${data.id}"></div>
-            <h6 class="k-card-subtitle">Latency: ${data.latencyInChrome}</h6>
-            <h6 class="k-card-subtitle">DOM Loaded: ${data.domContentLoadedEventInChrome}</h6>
-            <h6 class="k-card-subtitle">SourceIpAddress: ${data.sourceIpAddress}(${data.sourceIpAddressCity},${data.sourceIpAddressCountry})</h6>
-            <h6 class="k-card-subtitle">DestinationIpAddress: ${data.destinationIpAddress}(${data.destinationIpAddressCity},${data.destinationIpAddressCountry})</h6>
-             <h6 class="k-card-subtitle">Org: ${data.destinationIpAddressOrg}</h6>
-            <h6 class="k-card-subtitle">Distance b/w IPs: ${data.distanceBetweenIpAddresses}</h6>
-            <h6 class="k-card-subtitle">${((_a = data.exceptionMessage) === null || _a === void 0 ? void 0 : _a.toString()) == "null"
-            ? ""
-            : data.exceptionMessage}</h6>
-        </div>
-    </div>`);
+        $("#divEastUS").prepend(getStringHtmlForSite(data));
     }), $.get(urlcentralcanada, function (data) {
-        var _a;
         urlcentralcanadaData = data;
         $("#centralcanada").remove();
-        $("#divCentralCanada").prepend(` <div class="k-card">             
-        <img class="rounded mx-auto d-block" onerror="if (this.src != 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg') this.src = 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg';" src="https://sitetiming.blob.core.windows.net/images/short50_${data.uniqueGuid}.jpeg?sv=2020-08-04&st=2012-01-27T12%3A30%3A00Z&se=2032-01-28T12%3A30%3A00Z&sr=c&sp=rl&sig=jvKd8yqdiz42u28l4oPYHVFWUSCaeLYmeKMMCgwtn1Y%3D" />
-        <div class="k-card-body">
-  <div data-type="chart" data-ip="${data.sourceIpAddress}"></div>
-   <div data-type="grid" data-probeId="${data.id}"></div>
-            <h6 class="k-card-subtitle">Latency: ${data.latencyInChrome}</h6>
-            <h6 class="k-card-subtitle">DOM Loaded: ${data.domContentLoadedEventInChrome}</h6>
-            <h6 class="k-card-subtitle">SourceIpAddress: ${data.sourceIpAddress}(${data.sourceIpAddressCity},${data.sourceIpAddressCountry})</h6>
-            <h6 class="k-card-subtitle">DestinationIpAddress: ${data.destinationIpAddress}(${data.destinationIpAddressCity},${data.destinationIpAddressCountry})</h6>
-             <h6 class="k-card-subtitle">Org: ${data.destinationIpAddressOrg}</h6>
-            <h6 class="k-card-subtitle">Distance b/w IPs: ${data.distanceBetweenIpAddresses}</h6>
-            <h6 class="k-card-subtitle">${((_a = data.exceptionMessage) === null || _a === void 0 ? void 0 : _a.toString()) == "null"
-            ? ""
-            : data.exceptionMessage}</h6>
-        </div>
-    </div>`);
+        $("#divCentralCanada").prepend(getStringHtmlForSite(data));
     }), $.get(urlwesteurope, function (data) {
-        var _a;
         urlwesteuropeData = data;
         $("#westeurope").remove();
-        $("#divWestEurope").prepend(` <div class="k-card">            
-        <img class="rounded mx-auto d-block" onerror="if (this.src != 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg') this.src = 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg';" src="https://sitetiming.blob.core.windows.net/images/short50_${data.uniqueGuid}.jpeg?sv=2020-08-04&st=2012-01-27T12%3A30%3A00Z&se=2032-01-28T12%3A30%3A00Z&sr=c&sp=rl&sig=jvKd8yqdiz42u28l4oPYHVFWUSCaeLYmeKMMCgwtn1Y%3D" />
-        <div class="k-card-body">
-        <div data-type="chart" data-ip="${data.sourceIpAddress}"></div>
-         <div data-type="grid" data-probeId="${data.id}"></div>
-            <h6 class="k-card-subtitle">Latency: ${data.latencyInChrome}</h6>
-            <h6 class="k-card-subtitle">DOM Loaded: ${data.domContentLoadedEventInChrome}</h6>
-            <h6 class="k-card-subtitle">SourceIpAddress: ${data.sourceIpAddress}(${data.sourceIpAddressCity},${data.sourceIpAddressCountry})</h6>
-            <h6 class="k-card-subtitle">DestinationIpAddress: ${data.destinationIpAddress}(${data.destinationIpAddressCity},${data.destinationIpAddressCountry})</h6>
-             <h6 class="k-card-subtitle">Org: ${data.destinationIpAddressOrg}</h6>
-            <h6 class="k-card-subtitle">Distance b/w IPs: ${data.distanceBetweenIpAddresses}</h6>
-            <h6 class="k-card-subtitle">${((_a = data.exceptionMessage) === null || _a === void 0 ? void 0 : _a.toString()) == "null"
-            ? ""
-            : data.exceptionMessage}</h6>
-        </div>
-    </div>`);
+        $("#divWestEurope").prepend(getStringHtmlForSite(data));
     }), $.get(urlnortheurope, function (data) {
         urlnortheuropeData = data;
         $("#northeurope").remove();
-        $("#divNorthEurope").prepend(` 
-      <div class="k-card">            
-        <img class="rounded mx-auto d-block" onerror="if (this.src != 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg') this.src = 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg';" src="https://sitetiming.blob.core.windows.net/images/short50_${data.uniqueGuid}.jpeg?sv=2020-08-04&st=2012-01-27T12%3A30%3A00Z&se=2032-01-28T12%3A30%3A00Z&sr=c&sp=rl&sig=jvKd8yqdiz42u28l4oPYHVFWUSCaeLYmeKMMCgwtn1Y%3D" />
-        <div class="k-card-body">
-        <div data-type="chart" data-ip="${data.sourceIpAddress}"></div>
-        <div data-type="grid" data-probeId="${data.id}"></div>
-            <h6 class="k-card-subtitle">Latency: ${data.latencyInChrome}</h6>
-            <h6 class="k-card-subtitle">DOM Loaded: ${data.domContentLoadedEventInChrome}</h6>
-            <h6 class="k-card-subtitle">SourceIpAddress: ${data.sourceIpAddress}(${data.sourceIpAddressCity},${data.sourceIpAddressCountry})</h6>
-            <h6 class="k-card-subtitle">DestinationIpAddress: ${data.destinationIpAddress}(${data.destinationIpAddressCity},${data.destinationIpAddressCountry})</h6>
-             <h6 class="k-card-subtitle">Org: ${data.destinationIpAddressOrg}</h6>
-            <h6 class="k-card-subtitle">Distance b/w IPs: ${data.distanceBetweenIpAddresses}</h6>
-            <h6 class="k-card-subtitle">${data.exceptionMessage ? "" : data.exceptionMessage}</h6>
-        </div>
-    </div>`);
+        $("#divNorthEurope").prepend(getStringHtmlForSite(data));
     })).done(function () {
         $("#map").kendoMap({
             center: [30.268107, -37.744821],
@@ -276,138 +211,14 @@ $(function () {
                 },
             ],
             markers: [
-                {
-                    location: [
-                        urlcentralcanadaData.sourceIpAddressLatitude,
-                        urlcentralcanadaData.sourceIpAddressLongitude,
-                    ],
-                    shape: "pin",
-                    tooltip: {
-                        content: `
-          city: ${urlcentralcanadaData.sourceIpAddressCity}<br>
-          region: ${urlcentralcanadaData.sourceIpAddressRegion}<br>
-          country: ${urlcentralcanadaData.sourceIpAddressCountry}<br>
-          postal: ${urlcentralcanadaData.sourceIpAddressPostal}<br>
-          timezone: ${urlcentralcanadaData.sourceIpAddressTimezone}<br>
-          org: ${urlcentralcanadaData.sourceIpAddressOrg}<br>
-          distance: ${urlcentralcanadaData.distanceBetweenIpAddresses}<br>`,
-                    },
-                },
-                {
-                    location: [
-                        urlcentralcanadaData.destinationIpAddressLatitude,
-                        urlcentralcanadaData.destinationIpAddressLongitude,
-                    ],
-                    shape: "pinTarget",
-                    tooltip: {
-                        content: `
-          city: ${urlcentralcanadaData.destinationIpAddressCity}<br>
-          region: ${urlcentralcanadaData.destinationIpAddressRegion}<br>
-          country: ${urlcentralcanadaData.destinationIpAddressCountry}<br>
-          postal: ${urlcentralcanadaData.destinationIpAddressPostal}<br>
-          timezone: ${urlcentralcanadaData.destinationIpAddressTimezone}<br>
-          org: ${urlcentralcanadaData.destinationIpAddressOrg}`,
-                    },
-                },
-                {
-                    location: [
-                        urleastus2Data.sourceIpAddressLatitude,
-                        urleastus2Data.sourceIpAddressLongitude,
-                    ],
-                    shape: "pin",
-                    tooltip: {
-                        content: `
-          city: ${urleastus2Data.sourceIpAddressCity}<br>
-          region: ${urleastus2Data.sourceIpAddressRegion}<br>
-          country: ${urleastus2Data.sourceIpAddressCountry}<br>
-          postal: ${urleastus2Data.sourceIpAddressPostal}<br>
-          timezone: ${urleastus2Data.sourceIpAddressTimezone}<br>
-          org: ${urleastus2Data.sourceIpAddressOrg}<br>
-          distance: ${urleastus2Data.distanceBetweenIpAddresses}<br>`,
-                    },
-                },
-                {
-                    location: [
-                        urleastus2Data.destinationIpAddressLatitude,
-                        urleastus2Data.destinationIpAddressLongitude,
-                    ],
-                    shape: "pinTarget",
-                    tooltip: {
-                        content: `
-          city: ${urleastus2Data.destinationIpAddressCity}<br>
-          region: ${urleastus2Data.destinationIpAddressRegion}<br>
-          country: ${urleastus2Data.destinationIpAddressCountry}<br>
-          postal: ${urleastus2Data.destinationIpAddressPostal}<br>
-          timezone: ${urleastus2Data.destinationIpAddressTimezone}<br>
-          org: ${urleastus2Data.destinationIpAddressOrg}`,
-                    },
-                },
-                {
-                    location: [
-                        urlwesteuropeData.sourceIpAddressLatitude,
-                        urlwesteuropeData.sourceIpAddressLongitude,
-                    ],
-                    shape: "pin",
-                    tooltip: {
-                        content: `
-          city: ${urlwesteuropeData.sourceIpAddressCity}<br>
-          region: ${urlwesteuropeData.sourceIpAddressRegion}<br>
-          country: ${urlwesteuropeData.sourceIpAddressCountry}<br>
-          postal: ${urlwesteuropeData.sourceIpAddressPostal}<br>
-          timezone: ${urlwesteuropeData.sourceIpAddressTimezone}<br>
-          org: ${urlwesteuropeData.sourceIpAddressOrg}<br>
-          distance: ${urlwesteuropeData.distanceBetweenIpAddresses}<br>`,
-                    },
-                },
-                {
-                    location: [
-                        urlwesteuropeData.destinationIpAddressLatitude,
-                        urlwesteuropeData.destinationIpAddressLongitude,
-                    ],
-                    shape: "pinTarget",
-                    tooltip: {
-                        content: `
-          city: ${urlwesteuropeData.destinationIpAddressCity}<br>
-          region: ${urlwesteuropeData.destinationIpAddressRegion}<br>
-          country: ${urlwesteuropeData.destinationIpAddressCountry}<br>
-          postal: ${urlwesteuropeData.destinationIpAddressPostal}<br>
-          timezone: ${urlwesteuropeData.destinationIpAddressTimezone}<br>
-          org: ${urlwesteuropeData.destinationIpAddressOrg}`,
-                    },
-                },
-                {
-                    location: [
-                        urlnortheuropeData.sourceIpAddressLatitude,
-                        urlnortheuropeData.sourceIpAddressLongitude,
-                    ],
-                    shape: "pin",
-                    tooltip: {
-                        content: `
-          city: ${urlnortheuropeData.sourceIpAddressCity}<br>
-          region: ${urlnortheuropeData.sourceIpAddressRegion}<br>
-          country: ${urlnortheuropeData.sourceIpAddressCountry}<br>
-          postal: ${urlnortheuropeData.sourceIpAddressPostal}<br>
-          timezone: ${urlnortheuropeData.sourceIpAddressTimezone}<br>
-          org: ${urlnortheuropeData.sourceIpAddressOrg}<br>
-          distance: ${urlnortheuropeData.distanceBetweenIpAddresses}<br>`,
-                    },
-                },
-                {
-                    location: [
-                        urlnortheuropeData.destinationIpAddressLatitude,
-                        urlnortheuropeData.destinationIpAddressLongitude,
-                    ],
-                    shape: "pinTarget",
-                    tooltip: {
-                        content: `
-          city: ${urlnortheuropeData.destinationIpAddressCity}<br>
-          region: ${urlnortheuropeData.destinationIpAddressRegion}<br>
-          country: ${urlnortheuropeData.destinationIpAddressCountry}<br>
-          postal: ${urlnortheuropeData.destinationIpAddressPostal}<br>
-          timezone: ${urlnortheuropeData.destinationIpAddressTimezone}<br>
-          org: ${urlnortheuropeData.destinationIpAddressOrg}`,
-                    },
-                },
+                getLocationData(urlcentralcanadaData, true),
+                getLocationData(urlcentralcanadaData, false),
+                getLocationData(urleastus2Data, true),
+                getLocationData(urleastus2Data, false),
+                getLocationData(urlwesteuropeData, true),
+                getLocationData(urlwesteuropeData, false),
+                getLocationData(urlnortheuropeData, true),
+                getLocationData(urlnortheuropeData, false),
             ],
         });
         $(".k-i-marker-pin-target").css("color", "green");
@@ -460,4 +271,77 @@ function getDatasource(probeId) {
         pageSize: 10,
     });
     return dataSource;
+}
+function getStringHtmlForSite(data) {
+    var result = ` 
+<div class="row">
+      <div class="col-12 text-center">
+        <div>
+      <img class="max-image-size" onerror="if (this.src != 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg') this.src = 'https://static8.depositphotos.com/1010782/858/v/600/depositphotos_8584590-stock-illustration-website-maintenance-message.jpg';" src="https://sitetiming.blob.core.windows.net/images/short50_${data.uniqueGuid}.jpeg?sv=2020-08-04&st=2012-01-27T12%3A30%3A00Z&se=2032-01-28T12%3A30%3A00Z&sr=c&sp=rl&sig=jvKd8yqdiz42u28l4oPYHVFWUSCaeLYmeKMMCgwtn1Y%3D" />
+        </div>
+      </div>
+      <div class="col-12">
+      
+      <div data-type="chart" data-ip="${data.sourceIpAddress}"></div>
+
+      </div>
+      <div class="col-12">
+
+      <div data-type="grid" data-probeId="${data.id}"></div>
+
+      </div>
+      <div class="col-12">
+
+       <div>
+        <h6 class="k-card-subtitle">Latency: ${data.latencyInChrome}</h6>
+      
+            <h6 class="k-card-subtitle">DOM Loaded: ${data.domContentLoadedEventInChrome}</h6>
+            <h6 class="k-card-subtitle">SourceIpAddress: ${data.sourceIpAddress}(${data.sourceIpAddressCity},${data.sourceIpAddressCountry})</h6>
+            <h6 class="k-card-subtitle">DestinationIpAddress: ${data.destinationIpAddress}(${data.destinationIpAddressCity},${data.destinationIpAddressCountry})</h6>
+             <h6 class="k-card-subtitle">Org: ${data.destinationIpAddressOrg}</h6>
+            <h6 class="k-card-subtitle">Distance b/w IPs: ${data.distanceBetweenIpAddresses}</h6>
+            <h6 class="k-card-subtitle">${data.exceptionMessage ? "" : data.exceptionMessage}</h6>
+      </div>
+
+      </div>
+    </div>`;
+    return result;
+}
+function getLocationData(data, isSourceData) {
+    var result;
+    if (isSourceData) {
+        result = {
+            location: [data.sourceIpAddressLatitude, data.sourceIpAddressLongitude],
+            shape: "pin",
+            tooltip: {
+                content: `
+          city: ${data.sourceIpAddressCity}<br>
+          region: ${data.sourceIpAddressRegion}<br>
+          country: ${data.sourceIpAddressCountry}<br>
+          postal: ${data.sourceIpAddressPostal}<br>
+          timezone: ${data.sourceIpAddressTimezone}<br>
+          org: ${data.sourceIpAddressOrg}<br>
+          distance: ${data.distanceBetweenIpAddresses}<br>`,
+            },
+        };
+    }
+    else {
+        result = {
+            location: [
+                data.destinationIpAddressLatitude,
+                data.destinationIpAddressLongitude,
+            ],
+            shape: "pinTarget",
+            tooltip: {
+                content: `
+          city: ${data.destinationIpAddressCity}<br>
+          region: ${data.destinationIpAddressRegion}<br>
+          country: ${data.destinationIpAddressCountry}<br>
+          postal: ${data.destinationIpAddressPostal}<br>
+          timezone: ${data.destinationIpAddressTimezone}<br>
+          org: ${data.destinationIpAddressOrg}`,
+            },
+        };
+    }
+    return result;
 }

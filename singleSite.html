@@ -34,7 +34,7 @@
 
     <div id="cards" class="cards-container">
 
-      <ul id="panelbar">
+      <ul id="panelbar" class="d-none">
         <li class="k-state-active">
           Central Canada
           <ul>
@@ -59,7 +59,7 @@
         <li class="k-state-active">
           East US
           <ul>
-            <div class="skeletonMarker" id="eastus2" data-location="East US"></div>
+            <div class="skeletonMarker cente" id="eastus2" data-location="East US"></div>
             <div id="divEastUS"></div>
           </ul>
         </li>
@@ -67,6 +67,8 @@
       </ul>
 
     </div>
+
+
     <!--
     <div id="cards" class="cards-container">
       <div class="skeletonMarker" id="centralcanada" data-location="Central Canada"></div>
@@ -85,6 +87,11 @@
     </div>
 
     <style>
+      .max-image-size {
+        max-width: 400px;
+        max-height: 400px;
+      }
+
       .cards-container {
         display: flex;
         flex-wrap: wrap;
