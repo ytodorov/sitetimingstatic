@@ -77,6 +77,10 @@ $(function () {
               field: "text",
               title: "text",
             },
+            {
+              field: "location",
+              title: "location",
+            },
           ],
         });
       }
@@ -251,7 +255,7 @@ function getDatasource(probeId: string): kendo.data.DataSource {
   var serverUrl = StaticMethods.getRandomServerUrlNoEndingSlash();
   let READ_PRODUCTS_QUERY =
     "query {" +
-    `consoleMessages(take: 100, where: "probeId=${probeIdInt}"){type text probeId}` +
+    `consoleMessages(take: 100, where: "probeId=${probeIdInt}"){type text probeId location}` +
     "}";
 
   let dataSource = new kendo.data.DataSource({
